@@ -1,9 +1,8 @@
 package buildSrc
 
+import com.android.build.gradle.BaseExtension
 import com.android.build.gradle.internal.dsl.DefaultConfig
 import org.gradle.api.Project
-
-import com.android.build.gradle.BaseExtension
 
 fun Project.productFlavorsConfig(defaultConfigExtensions: (DefaultConfig.() -> Unit)? = null) {
     android.run {

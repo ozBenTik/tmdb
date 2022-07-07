@@ -14,6 +14,6 @@ object ServicesModule {
 
     @Singleton
     @Provides
-    fun provideMoviesService(retrofit: Retrofit) = retrofit.create(MoviesService::class.java)
+    fun provideMoviesService(retrofit: Retrofit): MoviesService? = retrofit.create(MoviesService::class.java)
 
 }

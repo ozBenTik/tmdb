@@ -1,5 +1,3 @@
-import buildSrc.Modules.MODEL
-
 plugins {
     id ("ui-library-plugin")
 }

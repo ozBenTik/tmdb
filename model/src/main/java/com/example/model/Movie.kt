@@ -1,7 +1,9 @@
 package com.example.model
 
+import androidx.room.Entity
 import com.google.gson.annotations.SerializedName
 
+@Entity
 data class Movie(
     @SerializedName("poster_path")
     val posterPath: String? = null,

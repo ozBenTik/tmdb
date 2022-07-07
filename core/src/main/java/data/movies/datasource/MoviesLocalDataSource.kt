@@ -2,13 +2,13 @@ package data.movies.datasource
 
 import com.example.model.Movie
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.*
-import util.safeApiCall
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import javax.inject.Inject
-import kotlin.math.max
 
 class MoviesLocalDataSource @Inject constructor() {
 
+    // NowPlaying with shared flow
     private var _nowPlaying = MutableSharedFlow<Map<Int, List<Movie>>>()
     val nowPlaying = _nowPlaying.asSharedFlow()
 
@@ -19,4 +19,6 @@ class MoviesLocalDataSource @Inject constructor() {
         }
         _nowPlaying.tryEmit(mapOf(page to movies))
     }
+
+
 }

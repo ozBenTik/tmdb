@@ -1,13 +1,12 @@
 package buildSrc.plugins
-import buildSrc.*
 
-import org.gradle.api.Plugin
-import org.gradle.api.Project
-
-import com.android.build.gradle.BaseExtension
-import org.gradle.kotlin.dsl.dependencies
 import buildSrc.AndroidConfig
 import buildSrc.Libs
+import buildSrc.productFlavorsConfig
+import com.android.build.gradle.BaseExtension
+import org.gradle.api.Plugin
+import org.gradle.api.Project
+import org.gradle.kotlin.dsl.dependencies
 
 class ModelLibraryPlugin : Plugin<Project> {
 
@@ -62,6 +61,7 @@ class ModelLibraryPlugin : Plugin<Project> {
         dependencies {
             "implementation"(Libs.Google.gson)
             "implementation"(Libs.Threeten.threeten)
+            "implementation"(Libs.AndroidX.Room.roomKtx)
         }
     }
 }

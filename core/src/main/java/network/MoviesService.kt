@@ -18,4 +18,5 @@ interface MoviesService {
 
     @GET("movie/top_rated")
     fun getTopRated(@Query("page") page: Int): Call<MoviesResponse>
+
 }

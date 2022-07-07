@@ -1,12 +1,12 @@
 package buildSrc.plugins
-import buildSrc.*
 
-import org.gradle.api.Plugin
-import com.android.build.gradle.BaseExtension
-import org.gradle.api.Project
-import org.gradle.kotlin.dsl.dependencies
 import buildSrc.AndroidConfig
 import buildSrc.Libs
+import buildSrc.productFlavorsConfig
+import com.android.build.gradle.BaseExtension
+import org.gradle.api.Plugin
+import org.gradle.api.Project
+import org.gradle.kotlin.dsl.dependencies
 
 class ApplicationPlugin : Plugin<Project> {
 

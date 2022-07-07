@@ -50,6 +50,4 @@ class NetworkModule @Inject constructor(){
             HttpLoggingInterceptor.Level.NONE
         }
     }
-
-
 }
