@@ -1,6 +1,6 @@
 package di
 
-import com.example.core.BuildConfig
+import androidx.viewbinding.BuildConfig
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
