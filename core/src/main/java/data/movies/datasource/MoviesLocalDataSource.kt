@@ -14,12 +14,45 @@ class MoviesLocalDataSource @Inject constructor(
     private var _nowPlaying = MutableSharedFlow<Map<Int, List<Movie>>>()
     val nowPlaying = _nowPlaying.asSharedFlow()
 
+    private var _upcoming = MutableSharedFlow<Map<Int, List<Movie>>>()
+    val upcoming = _upcoming.asSharedFlow()
+
+    private var _popular = MutableSharedFlow<Map<Int, List<Movie>>>()
+    val popular = _popular.asSharedFlow()
+
+    private var _topRated = MutableSharedFlow<Map<Int, List<Movie>>>()
+    val topRated = _topRated.asSharedFlow()
+
     @OptIn(ExperimentalCoroutinesApi::class)
     fun saveNowPlaying(page: Int, movies: List<Movie>) = run {
         if (page == 1) {
             _nowPlaying.resetReplayCache()
         }
         _nowPlaying.tryEmit(mapOf(page to movies))
+    }
+
+    @OptIn(ExperimentalCoroutinesApi::class)
+    fun saveUpcoming(page: Int, movies: List<Movie>) = run {
+        if (page == 1) {
+            _upcoming.resetReplayCache()
+        }
+        _upcoming.tryEmit(mapOf(page to movies))
+    }
+
+    @OptIn(ExperimentalCoroutinesApi::class)
+    fun saveTopRated(page: Int, movies: List<Movie>) = run {
+        if (page == 1) {
+            _topRated.resetReplayCache()
+        }
+        _topRated.tryEmit(mapOf(page to movies))
+    }
+
+    @OptIn(ExperimentalCoroutinesApi::class)
+    fun savePopular(page: Int, movies: List<Movie>) = run {
+        if (page == 1) {
+            _popular.resetReplayCache()
+        }
+        _popular.tryEmit(mapOf(page to movies))
     }
 
 //    // The rest is implemented using Room
