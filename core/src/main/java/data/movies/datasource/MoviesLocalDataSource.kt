@@ -1,6 +1,6 @@
 package data.movies.datasource
 
-import com.example.model.Movie
+import com.example.model.MovieWithPage
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
@@ -11,48 +11,48 @@ class MoviesLocalDataSource @Inject constructor(
 ) {
 
     // NowPlaying with shared flow
-    private var _nowPlaying = MutableSharedFlow<Map<Int, List<Movie>>>()
+    private var _nowPlaying = MutableSharedFlow<List<MovieWithPage>>()
     val nowPlaying = _nowPlaying.asSharedFlow()
 
-    private var _upcoming = MutableSharedFlow<Map<Int, List<Movie>>>()
+    private var _upcoming = MutableSharedFlow<List<MovieWithPage>>()
     val upcoming = _upcoming.asSharedFlow()
 
-    private var _popular = MutableSharedFlow<Map<Int, List<Movie>>>()
+    private var _popular = MutableSharedFlow<List<MovieWithPage>>()
     val popular = _popular.asSharedFlow()
 
-    private var _topRated = MutableSharedFlow<Map<Int, List<Movie>>>()
+    private var _topRated = MutableSharedFlow<List<MovieWithPage>>()
     val topRated = _topRated.asSharedFlow()
 
     @OptIn(ExperimentalCoroutinesApi::class)
-    fun saveNowPlaying(page: Int, movies: List<Movie>) = run {
+    fun saveNowPlaying(page: Int, movies: List<MovieWithPage>) = run {
         if (page == 1) {
             _nowPlaying.resetReplayCache()
         }
-        _nowPlaying.tryEmit(mapOf(page to movies))
+        _nowPlaying.tryEmit(movies)
     }
 
     @OptIn(ExperimentalCoroutinesApi::class)
-    fun saveUpcoming(page: Int, movies: List<Movie>) = run {
+    fun saveUpcoming(page: Int, movies: List<MovieWithPage>) = run {
         if (page == 1) {
             _upcoming.resetReplayCache()
         }
-        _upcoming.tryEmit(mapOf(page to movies))
+        _upcoming.tryEmit(movies)
     }
 
     @OptIn(ExperimentalCoroutinesApi::class)
-    fun saveTopRated(page: Int, movies: List<Movie>) = run {
+    fun saveTopRated(page: Int, movies: List<MovieWithPage>) = run {
         if (page == 1) {
             _topRated.resetReplayCache()
         }
-        _topRated.tryEmit(mapOf(page to movies))
+        _topRated.tryEmit(movies)
     }
 
     @OptIn(ExperimentalCoroutinesApi::class)
-    fun savePopular(page: Int, movies: List<Movie>) = run {
+    fun savePopular(page: Int, movies: List<MovieWithPage>) = run {
         if (page == 1) {
             _popular.resetReplayCache()
         }
-        _popular.tryEmit(mapOf(page to movies))
+        _popular.tryEmit(movies)
     }
 
 //    // The rest is implemented using Room
