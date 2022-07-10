@@ -11,5 +11,6 @@ class MoviesRepository @Inject constructor(
 
 //    fun forceRefresh(): Flow<Movie>
 //    fun getNextPage(page: Int)
+//    fun getDetails(movieId: String)
 
 }
