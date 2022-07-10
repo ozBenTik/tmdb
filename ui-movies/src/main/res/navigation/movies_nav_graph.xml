@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/movies_graph"
+    app:startDestination="@id/moviesLobbyFragment">
+
+    <fragment
+        android:id="@+id/moviesLobbyFragment"
+        android:name="com.example.ui_movies.MoviesLobbyFragment"
+        android:label="MoviesLobbyFragment" />
+</navigation>
