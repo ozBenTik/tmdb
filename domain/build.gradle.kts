@@ -4,5 +4,5 @@ plugins {
     id ("domain-library-plugin")
 }
 dependencies {
-    implementation(project(CORE))
+    api(project(CORE))
 }

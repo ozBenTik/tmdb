@@ -1,6 +1,8 @@
 package db.entities
 
+class MovieEntity(
 
+)
 
 //@Entity(tableName = "popular_movies",)
 //data class PopularMovies (

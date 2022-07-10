@@ -22,9 +22,10 @@ data class Movie(
 
     @SerializedName("release_date")
     val releaseDate: String,
-    @SerializedName("genre_ids")
 
+    @SerializedName("genre_ids")
     val genreIds: List<Int>,
+
     @SerializedName("original_title")
     val originalTitle: String,
 
