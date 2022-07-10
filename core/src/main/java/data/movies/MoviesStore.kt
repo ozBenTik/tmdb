@@ -20,7 +20,7 @@ class MoviesStore @Inject constructor() {
             _movies.tryEmit(map)
         }
     }
-    fun observeEnteries(): SharedFlow<Map<Int, List<Movie>>> = _movies.asSharedFlow()
+    fun observeEntries(): SharedFlow<Map<Int, List<Movie>>> = _movies.asSharedFlow()
 
     fun updatePage(page: Int, movies: List<Movie>) {
         val map = _movies.replayCache.first().toMutableMap()

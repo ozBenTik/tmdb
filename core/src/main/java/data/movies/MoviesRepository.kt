@@ -19,26 +19,26 @@ class MoviesRepository @Inject constructor(
         local.popularStore.insert(page, movies)
     }
 
-    fun observePopularMovies() = local.popularStore.observeEnteries()
+    fun observePopularMovies() = local.popularStore.observeEntries()
 
     suspend fun getNowPlayingMovies(page: Int) =
         flow {
             emit(remote.getNowPlaying(page))
         }
 
-    fun observeNowPlayingMovies() = local.nowPlayingStore.observeEnteries()
+    fun observeNowPlayingMovies() = local.nowPlayingStore.observeEntries()
 
     suspend fun getTopRatedMovies(page: Int) =
         flow {
             emit(remote.getTopRated(page))
         }
 
-    fun observeTopRatedMovies() = local.topRatedStore.observeEnteries()
+    fun observeTopRatedMovies() = local.topRatedStore.observeEntries()
 
     suspend fun getUpcomingMovies(page: Int) =
         flow {
             emit(remote.getUpcoming(page))
         }
 
-    fun observeUpcomingMovies() = local.upcomingStore.observeEnteries()
+    fun observeUpcomingMovies() = local.upcomingStore.observeEntries()
 }

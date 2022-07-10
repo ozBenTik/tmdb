@@ -1,53 +1,34 @@
 package com.example.model
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
-@Entity
-data class Movie(
-
-    @PrimaryKey
-    @SerializedName("id")
-    val id: Int,
-
+data class Movie (
     @SerializedName("poster_path")
-    val posterPath: String? = null,
-
+    val path : String? = null,
     @SerializedName("adult")
-    val adult: Boolean,
-
+    val isAdult : Boolean = false,
     @SerializedName("overview")
-    val overview: String,
-
+    val overView : String = "",
     @SerializedName("release_date")
-    val releaseDate: String,
-
+    val releaseDate : String? = null,
     @SerializedName("genre_ids")
-    val genreIds: List<Int>,
-
+    val genreList: List<Int> = listOf(),
+    @SerializedName("id")
+    val id : Int? = 0,
     @SerializedName("original_title")
-    val originalTitle: String,
-
+    val originalTitle : String? = null,
     @SerializedName("original_language")
-    val originalLanguage: String,
-
-    @SerializedName("backdrop_path")
-    val backdropPath: String? = null,
-
-    @SerializedName("vote_count")
-    val voteCount: Int,
-
-    @SerializedName("vote_average")
-    val voteAverage: Double,
-
+    val originalLanguage : String? = null,
     @SerializedName("title")
-    val title: String,
-
+    val title : String? = null,
+    @SerializedName("backdrop_path")
+    val backdropPath : String? = null,
     @SerializedName("popularity")
-    val popularity: Int,
-
+    val popularity : Double? = null,
+    @SerializedName("vote_count")
+    val voteCount : Int? = null,
     @SerializedName("video")
-    val video: Boolean,
-
+    val isVideo : Boolean = false,
+    @SerializedName("vote_average")
+    val voteAverage : Double? = null,
 )
