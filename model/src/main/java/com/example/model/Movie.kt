@@ -1,6 +1,7 @@
 package com.example.model
 
 import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
 @Entity
@@ -15,6 +16,8 @@ data class Movie(
     val releaseDate: String,
     @SerializedName("genre_ids")
     val genreIds: List<Int>,
+
+    @PrimaryKey
     @SerializedName("id")
     val id: Int,
     @SerializedName("original_title")
