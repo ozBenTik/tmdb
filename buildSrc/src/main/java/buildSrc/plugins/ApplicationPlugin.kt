@@ -3,15 +3,15 @@ package buildSrc.plugins
 import buildSrc.AndroidConfig
 import buildSrc.Libs
 import buildSrc.productFlavorsConfig
-import com.android.build.gradle.BaseExtension
+import com.android.build.gradle.AppExtension
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.dependencies
 
 class ApplicationPlugin : Plugin<Project> {
 
-    private val Project.android: BaseExtension
-        get() = extensions.findByName("android") as? BaseExtension
+    private val Project.android: AppExtension
+        get() = extensions.findByName("android") as? AppExtension
             ?: error("Not an Android module: $name")
 
     override fun apply(target: Project) {

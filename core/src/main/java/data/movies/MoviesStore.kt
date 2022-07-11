@@ -15,9 +15,11 @@ class MoviesStore @Inject constructor() {
             _movies.resetReplayCache()
             _movies.tryEmit(mapOf(page to movies))
         } else {
-            val map = _movies.replayCache.first().toMutableMap()
-            map[page] = movies
-            _movies.tryEmit(map)
+            _movies.replayCache.first().toMutableMap().let {
+                it[page] = movies
+                _movies.tryEmit(it)
+            }
+
         }
     }
     fun observeEntries(): SharedFlow<Map<Int, List<Movie>>> = _movies.asSharedFlow()

@@ -3,15 +3,15 @@ package buildSrc.plugins
 import buildSrc.AndroidConfig
 import buildSrc.Libs
 import buildSrc.productFlavorsConfig
-import com.android.build.gradle.BaseExtension
+import com.android.build.gradle.LibraryExtension
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.dependencies
 
 class DomainLibraryPlugin : Plugin<Project> {
 
-    private val Project.android: BaseExtension
-        get() = extensions.findByName("android") as? BaseExtension
+    private val Project.android: LibraryExtension
+        get() = extensions.findByName("android") as? LibraryExtension
             ?: error("Not an Android module: $name")
 
     override fun apply(target: Project) {
@@ -39,8 +39,8 @@ class DomainLibraryPlugin : Plugin<Project> {
             defaultConfig {
                 minSdk = AndroidConfig.minSdk
                 targetSdk = AndroidConfig.targetSdk
-                versionCode = AndroidConfig.versionCode
-                versionName = AndroidConfig.versionName
+//                versionCode = AndroidConfig.versionCode
+//                versionName = AndroidConfig.versionName
 
                 testInstrumentationRunner = "android.support.test.runner.AndroidJUnitRunner"
             }

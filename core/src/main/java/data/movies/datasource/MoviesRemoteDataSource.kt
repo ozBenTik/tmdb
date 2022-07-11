@@ -1,8 +1,8 @@
 package data.movies.datasource
 
-import executeWithRetry
+import extensions.executeWithRetry
+import extensions.toResult
 import network.MoviesService
-import toResult
 import util.safeApiCall
 import javax.inject.Inject
 

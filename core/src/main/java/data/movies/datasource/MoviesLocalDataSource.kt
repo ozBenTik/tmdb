@@ -12,8 +12,4 @@ class MoviesLocalDataSource @Inject constructor(
     @TopRated val topRatedStore: MoviesStore,
     @Upcoming val upcomingStore: MoviesStore,
     @NowPlaying val nowPlayingStore: MoviesStore,
-) {
-
-
-
-}
+)

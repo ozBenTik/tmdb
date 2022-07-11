@@ -41,18 +41,12 @@ class MoviesLobbyViewModel @Inject constructor(
     private val nowPlayingLoadingState = ObservableLoadingCounter()
     private val uiMessageManager = UiMessageManager()
 
-    init {
-        observePopularMovies(ObservePopularMovies.Params(1))
-        observeNowPlayingMovies(ObserveNowPlayingMovies.Params(1))
-        observeUpcomingMovies(ObserveUpcomingMovies.Params(1))
-        observeTopRatedMovies(ObserveTopRatedMovies.Params(1))
-
-//        viewModelScope.launch {
-//            observePopularMovies.flow.collect { list ->
-//                Timber.i("### ${list.size}")
-//            }
-//        }
-    }
+//    init {
+//        observePopularMovies(ObservePopularMovies.Params(1))
+//        observeNowPlayingMovies(ObserveNowPlayingMovies.Params(1))
+//        observeUpcomingMovies(ObserveUpcomingMovies.Params(1))
+//        observeTopRatedMovies(ObserveTopRatedMovies.Params(1))
+//    }
 
     val state: StateFlow<LobbyViewState> = extensions.combine(
         popularLoadingState.observable,
