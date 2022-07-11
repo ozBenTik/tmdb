@@ -37,7 +37,15 @@ class MoviesLobbyFragment: Fragment() {
 
         lifecycleScope.launch {
             viewModel.state.collect {
-                Timber.i("### ${it.popularMovies}")
+                if (it.refreshing) {
+                    Timber.i("### REFRESHING ...")
+                }
+                else {
+                    Timber.i("### Popular ### :  ${it.popularMovies}")
+                    Timber.i("### TopRated ### ${it.topRatedMovies}")
+                    Timber.i("### NowPlaying ### ${it.nowPlayingMovies}")
+                    Timber.i("### UpComing ### ${it.upcomingMovies}")
+                }
             }
         }
     }
