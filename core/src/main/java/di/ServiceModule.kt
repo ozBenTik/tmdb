@@ -1,5 +1,6 @@
 package di
 
+import com.example.core.network.ConfigurationService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -10,11 +11,16 @@ import javax.inject.Singleton
 
 @InstallIn(SingletonComponent::class)
 @Module
-object ServicesModule {
+object ServiceModule {
 
     @Singleton
     @Provides
     fun provideMoviesService(retrofit: Retrofit): MoviesService =
         retrofit.create(MoviesService::class.java)
+
+    @Singleton
+    @Provides
+    fun provideConfigurationService(retrofit: Retrofit): ConfigurationService =
+        retrofit.create(ConfigurationService::class.java)
 
 }

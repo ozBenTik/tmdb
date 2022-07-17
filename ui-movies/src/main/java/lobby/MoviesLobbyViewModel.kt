@@ -1,4 +1,4 @@
-package com.example.ui_movies
+package lobby
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -41,12 +41,14 @@ class MoviesLobbyViewModel @Inject constructor(
     private val nowPlayingLoadingState = ObservableLoadingCounter()
     private val uiMessageManager = UiMessageManager()
 
-//    init {
-//        observePopularMovies(ObservePopularMovies.Params(1))
-//        observeNowPlayingMovies(ObserveNowPlayingMovies.Params(1))
-//        observeUpcomingMovies(ObserveUpcomingMovies.Params(1))
-//        observeTopRatedMovies(ObserveTopRatedMovies.Params(1))
-//    }
+    init {
+        observePopularMovies(ObservePopularMovies.Params(1))
+        observeUpcomingMovies(ObserveUpcomingMovies.Params(1))
+        observeNowPlayingMovies(ObserveNowPlayingMovies.Params(1))
+        observeTopRatedMovies(ObserveTopRatedMovies.Params(1))
+
+        refresh()
+    }
 
     val state: StateFlow<LobbyViewState> = extensions.combine(
         popularLoadingState.observable,
@@ -54,11 +56,11 @@ class MoviesLobbyViewModel @Inject constructor(
         upcomingLoadingState.observable,
         nowPlayingLoadingState.observable,
         observePopularMovies.flow,
-        observeUpcomingMovies.flow,
         observeNowPlayingMovies.flow,
         observeTopRatedMovies.flow,
+        observeUpcomingMovies.flow,
         uiMessageManager.message,
-    ) { popularRefreshing, topRatedRefreshing, upcomingRefreshing, nowPlayingRefreshing, popularMovies, upcoming, nowPlaying, topRated, message ->
+    ) { popularRefreshing, topRatedRefreshing, upcomingRefreshing, nowPlayingRefreshing, popularMovies, nowPlaying, topRated, upcoming, message ->
 
         LobbyViewState(
             popularRefreshing = popularRefreshing,
@@ -66,37 +68,55 @@ class MoviesLobbyViewModel @Inject constructor(
             upcomingRefreshing = upcomingRefreshing,
             nowPlayingRefreshing = nowPlayingRefreshing,
             popularMovies = popularMovies,
+            topRatedMovies = topRated,
             upcomingMovies = upcoming,
             nowPlayingMovies = nowPlaying,
-            topRatedMovies = topRated,
             message = message
         )
 
     }.stateIn(
         scope = viewModelScope,
-        started = SharingStarted.WhileSubscribed(5000),
-        initialValue = LobbyViewState.Empty
+        SharingStarted.WhileSubscribed(5000),
+        LobbyViewState.Empty
     )
-
 
     fun refresh() {
         viewModelScope.launch(dispatchers.io) {
-            updatePopularMovies(UpdatePopularMovies.Params(1)).collectStatus(
-                popularLoadingState,
-                uiMessageManager
-            )
-            updateNowPlayingMovies(UpdateNowPlayingMovies.Params(1)).collectStatus(
-                popularLoadingState,
-                uiMessageManager
-            )
-            updateUpcomingMovies(UpdateUpcomingMovies.Params(1)).collectStatus(
-                popularLoadingState,
-                uiMessageManager
-            )
-            updateTopRatedMovies(UpdateTopRatedMovies.Params(1)).collectStatus(
-                popularLoadingState,
-                uiMessageManager
-            )
+            updatePopularMovies(UpdatePopularMovies.Params(UpdatePopularMovies.Page.REFRESH))
+                .collectStatus(
+                    popularLoadingState,
+                    uiMessageManager
+                )
+        }
+
+        viewModelScope.launch(dispatchers.io) {
+            updateUpcomingMovies(UpdateUpcomingMovies.Params(UpdateUpcomingMovies.Page.REFRESH))
+                .collectStatus(
+                    upcomingLoadingState,
+                    uiMessageManager
+                )
+        }
+
+        viewModelScope.launch(dispatchers.io) {
+            updateNowPlayingMovies(UpdateNowPlayingMovies.Params(UpdateNowPlayingMovies.Page.REFRESH))
+                .collectStatus(
+                    nowPlayingLoadingState,
+                    uiMessageManager
+                )
+        }
+
+        viewModelScope.launch(dispatchers.io) {
+            updateTopRatedMovies(UpdateTopRatedMovies.Params(UpdateTopRatedMovies.Page.REFRESH))
+                .collectStatus(
+                    topRatedLoadingState,
+                    uiMessageManager
+                )
+        }
+    }
+
+    fun clearMessage(id: Long) {
+        viewModelScope.launch {
+            uiMessageManager.clearMessage(id)
         }
     }
 }

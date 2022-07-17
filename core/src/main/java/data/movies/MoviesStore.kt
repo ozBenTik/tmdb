@@ -40,4 +40,12 @@ class MoviesStore @Inject constructor() {
     fun deleteAll() {
         _movies.resetReplayCache()
     }
+
+    fun getLastPage(): Int {
+        return _movies.replayCache.firstOrNull()?.let { map ->
+            map.maxOf { it.key }
+        } ?: 0
+    }
+
+    fun getMoviesForPage(page:Int) = _movies.replayCache.firstOrNull()?.let { it[page] }
 }

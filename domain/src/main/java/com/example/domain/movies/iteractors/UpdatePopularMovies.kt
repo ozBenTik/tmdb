@@ -28,4 +28,9 @@ class UpdatePopularMovies @Inject constructor(
     }
 
     data class Params(val page: Int)
+
+    object Page {
+        const val NEXT_PAGE = -1
+        const val REFRESH = -2
+    }
 }

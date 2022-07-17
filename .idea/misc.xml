@@ -3,8 +3,14 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../../../layout/custom_preview.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2682291666666667" />
-        <entry key="ui-movies/src/main/res/layout/fragment_lobby.xml" value="0.20520833333333333" />
+        <entry key="core-ui/src/main/res/layout/movie_card.xml" value="0.1" />
+        <entry key="core-ui/src/main/res/layout/movies_carrousel_view.xml" value="0.1" />
+        <entry key="core-ui/src/main/res/layout/popularity_badge_view.xml" value="0.1" />
+        <entry key="ui-movies/src/main/res/layout/fragment_lobby.xml" value="0.1" />
+        <entry key="ui-movies/src/main/res/layout/fragment_popular_movies.xml" value="0.1" />
+        <entry key="ui-movies/src/main/res/layout/list_item_popular_movie.xml" value="0.1" />
       </map>
     </option>
   </component>
@@ -13,5 +19,12 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.1" />
+      </ProjectState>
+    </option>
   </component>
 </project>

@@ -2,10 +2,15 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/movies_graph"
-    app:startDestination="@id/moviesLobbyFragment">
+    app:startDestination="@id/navigation_movies_lobby_fragment">
+
 
     <fragment
-        android:id="@+id/moviesLobbyFragment"
-        android:name="com.example.ui_movies.MoviesLobbyFragment"
+        android:id="@+id/navigation_movies_lobby_fragment"
+        android:name="lobby.MoviesLobbyFragment"
         android:label="MoviesLobbyFragment" />
+    <fragment
+        android:id="@+id/navigation_popular_movies_fragment"
+        android:name="popular.PopularMoviesFragment"
+        android:label="PopularMoviesFragment" />
 </navigation>

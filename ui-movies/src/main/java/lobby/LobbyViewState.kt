@@ -1,5 +1,4 @@
-package com.example.ui_movies
-
+package lobby
 import com.example.model.Movie
 import util.UiMessage
 

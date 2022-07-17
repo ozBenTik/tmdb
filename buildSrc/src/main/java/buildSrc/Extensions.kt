@@ -24,8 +24,13 @@ fun Project.productFlavorsConfig(defaultConfigExtensions: (DefaultConfig.() -> U
         productFlavors {
             create("dev") {
                 dimension = "mode"
+                buildConfigField("String", "BASE_URL", "\"https://api.themoviedb.org/3/\"")
+                buildConfigField("String", "API_KEY", "\"b25ada0aaa9911135fa454b2ad8494be\"")
+
             }
             create("prod") {
+                buildConfigField("String", "BASE_URL", "\"https://api.themoviedb.org/3/\"")
+                buildConfigField("String", "API_KEY", "\"b25ada0aaa9911135fa454b2ad8494be\"")
                 dimension = "mode"
             }
         }

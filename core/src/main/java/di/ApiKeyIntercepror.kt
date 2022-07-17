@@ -1,5 +1,6 @@
 package di
 
+import com.example.core.BuildConfig
 import okhttp3.Interceptor
 import okhttp3.Response
 
@@ -9,7 +10,7 @@ class ApiKeyInterceptor : Interceptor {
         chain.request().let { request ->
             val updatedUrl = request.url
                 .newBuilder()
-                .addQueryParameter("api_key", "b25ada0aaa9911135fa454b2ad8494be")
+                .addQueryParameter("api_key", BuildConfig.API_KEY)
                 .build()
 
             val updatedRequest = request.newBuilder().url(updatedUrl).build()
