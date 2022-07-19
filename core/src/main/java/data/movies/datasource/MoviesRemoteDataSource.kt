@@ -38,9 +38,9 @@ class MoviesRemoteDataSource @Inject constructor(
                 .toResult()
         }
 
-    suspend fun getRecommendations(movieId: Int, page: Int) =
+    suspend fun getRecommendations(movieId: Int) =
         safeApiCall {
-            moviesService.getRecommended(movieId, page)
+            moviesService.getRecommended(movieId)
                 .executeWithRetry()
                 .toResult()
         }
