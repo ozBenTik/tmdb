@@ -15,22 +15,17 @@ class UpdateRecommendations @Inject constructor(
 ) : FlowInteractor<UpdateRecommendations.Params, MovieResponse>(dispatchers.io) {
 
     override suspend fun doWork(params: Params): Flow<Result<MovieResponse>> {
-        return moviesRepository.getRecommendations(params.movieId, params.pageId)
+        return moviesRepository.getRecommendations(params.movieId)
             .onEach { result ->
                 when (result) {
                     is Result.Error -> Timber.e(result.exception)
                     is Result.Success -> moviesRepository.saveRecommendations(
-                        result.data.page,
+                        params.movieId,
                         result.data.movieList
                     )
                 }
             }
     }
 
-    data class Params(val movieId: Int, val pageId: Int)
-
-    object Page {
-        const val NEXT_PAGE = -1
-        const val REFRESH = -2
-    }
+    data class Params(val movieId: Int)
 }

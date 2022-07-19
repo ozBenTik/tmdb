@@ -2,15 +2,14 @@ package details
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.core.data.movies.MoviesCatchSource
 import com.example.domain.movies.iteractors.UpdateCredits
-import com.example.domain.movies.iteractors.UpdatePopularMovies
 import com.example.domain.movies.iteractors.UpdateRecommendations
+import com.example.domain.movies.observers.ObserveCredits
 import com.example.domain.movies.observers.ObserveMovieDetails
+import com.example.domain.movies.observers.ObserveRecommendations
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import util.AppCoroutineDispatchers
@@ -24,26 +23,32 @@ class MovieDetailsViewModel @Inject constructor(
     private val updateRecommendations: UpdateRecommendations,
     private val updateCredits: UpdateCredits,
     private val observeMovieDetails: ObserveMovieDetails,
+    private val observeCredits: ObserveCredits,
+    private val observeRecommendations: ObserveRecommendations,
     private val dispatchers: AppCoroutineDispatchers,
 ) : ViewModel() {
 
     private val recommendationsLoadingState = ObservableLoadingCounter()
-    private val actorsLoadingState = ObservableLoadingCounter()
-    private val movieLoadingState = ObservableLoadingCounter()
+    private val moviesLoadingState = ObservableLoadingCounter()
+    private val creditsLoadingState = ObservableLoadingCounter()
     private val uiMessageManager = UiMessageManager()
 
-    val state: StateFlow<DetailsViewState> = combine(
+    val state: StateFlow<DetailsViewState> = extensions.combine(
         recommendationsLoadingState.observable,
-        actorsLoadingState.observable,
-        movieLoadingState.observable,
+        moviesLoadingState.observable,
+        creditsLoadingState.observable,
+        observeRecommendations.flow,
+        observeCredits.flow,
         observeMovieDetails.flow,
         uiMessageManager.message,
-    ) { recommendationsRefreshing, actorsRefreshing, movieRefreshing, movie, message ->
+    ) { recommendationsRefreshing, movieRefreshing, creditsRefreshing, recommendations, credits, movie, message ->
 
         DetailsViewState(
             movieDetails = movie,
+            actorsRefreshing = creditsRefreshing,
             movieRefreshing = movieRefreshing,
-            actorsRefreshing = actorsRefreshing,
+            recommendations = recommendations,
+            actors = credits,
             recommendationsRefreshing = recommendationsRefreshing,
             message = message
         )
@@ -59,13 +64,11 @@ class MovieDetailsViewModel @Inject constructor(
      * When applied, the data would be loaded according to the movieId
      * TBD -> If possible, change it to a constructor parameter
      */
-    var movieParams: Pair<Int, MoviesCatchSource?> = 0 to null
+    var movieId  = 0
     set(value) {
         field = value
-        movieParams.second?.let { moviesCatchSource ->
-            observeMovieDetails(ObserveMovieDetails.Params(movieParams.first, moviesCatchSource))
-            refresh(movieParams.first)
-        }
+        observeMovieDetails(ObserveMovieDetails.Params(movieId))
+        refresh(movieId)
     }
 
     private fun refresh(movieId: Int) {
@@ -73,13 +76,13 @@ class MovieDetailsViewModel @Inject constructor(
         viewModelScope.launch(dispatchers.io) {
             updateCredits(UpdateCredits.Params(movieId))
                 .collectStatus(
-                    actorsLoadingState,
+                    creditsLoadingState,
                     uiMessageManager
                 )
         }
 
         viewModelScope.launch(dispatchers.io) {
-            updateRecommendations(UpdateRecommendations.Params(movieId, UpdatePopularMovies.Page.REFRESH))
+            updateRecommendations(UpdateRecommendations.Params(movieId))
                 .collectStatus(
                     recommendationsLoadingState,
                     uiMessageManager

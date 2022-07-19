@@ -1,9 +1,11 @@
 package data.movies
-import com.example.core.data.movies.MoviesCatchSource
+
+import com.example.core.extensions.addFlatLists
 import com.example.model.Actor
 import com.example.model.Movie
 import data.movies.datasource.MoviesLocalDataSource
 import data.movies.datasource.MoviesRemoteDataSource
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
@@ -68,9 +70,9 @@ class MoviesRepository @Inject constructor(
         local.recommendationsStore.insert(page, movies)
     }
 
-    suspend fun getRecommendations(movieId: Int, page: Int) =
+    suspend fun getRecommendations(movieId: Int) =
         flow {
-            emit(remote.getRecommendations(movieId, page))
+            emit(remote.getRecommendations(movieId))
         }
 
     fun observeRecommendations() = local.recommendationsStore.observeEntries()
@@ -88,12 +90,19 @@ class MoviesRepository @Inject constructor(
     fun observeCredits() = local.creditsStore.observeEntries()
 
     // ------------- Movie Catch capabilities -------------------
-    fun getMovieCatchForSource(source: MoviesCatchSource) =
-        when (source) {
-            MoviesCatchSource.NOW_PLAYING -> local.nowPlayingStore.observeEntries()
-            MoviesCatchSource.POPULAR -> local.popularStore.observeEntries()
-            MoviesCatchSource.UPCOMING -> local.upcomingStore.observeEntries()
-            MoviesCatchSource.TOP_RATED -> local.topRatedStore.observeEntries()
+    fun getMovieFromCatch(movieId: Int) =
+        combine(
+            local.nowPlayingStore.observeEntries(),
+            local.popularStore.observeEntries(),
+            local.upcomingStore.observeEntries(),
+            local.topRatedStore.observeEntries()
+        ) { nowPlaying, popular, upcoming, topRated ->
+            mutableListOf<Movie>()
+                .addFlatLists(
+                    nowPlaying.values,
+                    popular.values,
+                    upcoming.values,
+                    topRated.values
+                ).first { it.id == movieId }
         }
-
 }
