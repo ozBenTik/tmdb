@@ -1,4 +1,6 @@
 package data.movies
+import com.example.core.data.movies.MoviesCatchSource
+import com.example.model.Actor
 import com.example.model.Movie
 import data.movies.datasource.MoviesLocalDataSource
 import data.movies.datasource.MoviesRemoteDataSource
@@ -60,4 +62,38 @@ class MoviesRepository @Inject constructor(
         }
 
     fun observeUpcomingMovies() = local.upcomingStore.observeEntries()
+
+    // ------------- Recommendations capabilities -------------------
+    suspend fun saveRecommendations(page: Int, movies: List<Movie>) {
+        local.recommendationsStore.insert(page, movies)
+    }
+
+    suspend fun getRecommendations(movieId: Int, page: Int) =
+        flow {
+            emit(remote.getRecommendations(movieId, page))
+        }
+
+    fun observeRecommendations() = local.recommendationsStore.observeEntries()
+
+    // ------------- Credits capabilities -------------------
+    suspend fun saveCredits(movieId: Int, actors: List<Actor>) {
+        local.creditsStore.insert(movieId, actors)
+    }
+
+    suspend fun getCredits(movieId: Int) =
+        flow {
+            emit(remote.getCredits(movieId))
+        }
+
+    fun observeCredits() = local.creditsStore.observeEntries()
+
+    // ------------- Movie Catch capabilities -------------------
+    fun getMovieCatchForSource(source: MoviesCatchSource) =
+        when (source) {
+            MoviesCatchSource.NOW_PLAYING -> local.nowPlayingStore.observeEntries()
+            MoviesCatchSource.POPULAR -> local.popularStore.observeEntries()
+            MoviesCatchSource.UPCOMING -> local.upcomingStore.observeEntries()
+            MoviesCatchSource.TOP_RATED -> local.topRatedStore.observeEntries()
+        }
+
 }

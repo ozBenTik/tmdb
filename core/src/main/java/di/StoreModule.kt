@@ -1,5 +1,6 @@
 package di
 
+import com.example.core.data.movies.CreditsStore
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -30,4 +31,13 @@ class StoreModule {
     @Provides
     @TopRated
     fun provideTopRatedStore(): MoviesStore = MoviesStore()
+
+    @Singleton
+    @Provides
+    @Recommendations
+    fun provideRecommendationsStore(): MoviesStore = MoviesStore()
+
+    @Singleton
+    @Provides
+    fun provideActorsStore(): CreditsStore = CreditsStore()
 }
