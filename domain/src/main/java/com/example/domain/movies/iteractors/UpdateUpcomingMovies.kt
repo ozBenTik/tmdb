@@ -2,6 +2,8 @@ package com.example.domain.movies.iteractors
 import com.example.domain.FlowInteractor
 import com.example.model.MovieResponse
 import data.movies.MoviesRepository
+import data.movies.MoviesStore
+import di.Upcoming
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.onEach
 import result.Result
@@ -11,11 +13,21 @@ import javax.inject.Inject
 
 class UpdateUpcomingMovies @Inject constructor(
     private val moviesRepository: MoviesRepository,
+    @Upcoming val upcomingStore: MoviesStore,
     dispatchers: AppCoroutineDispatchers,
 ) : FlowInteractor<UpdateUpcomingMovies.Params, MovieResponse>(dispatchers.io) {
 
     override suspend fun doWork(params: Params): Flow<Result<MovieResponse>> {
-        return moviesRepository.getUpcomingMovies(params.page)
+        val page = when {
+            params.page >= 1 -> params.page
+            params.page == Page.NEXT_PAGE -> {
+                val lastPage = upcomingStore.getLastPage()
+                lastPage + 1
+            }
+            else -> 1
+        }
+
+        return moviesRepository.getUpcomingMovies(page)
             .onEach { result ->
                 when (result) {
                     is Result.Error -> Timber.e(result.exception)

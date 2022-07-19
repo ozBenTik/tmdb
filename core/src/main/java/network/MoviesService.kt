@@ -21,7 +21,7 @@ interface MoviesService {
     fun getTopRated(@Query("page") page: Int): Call<MovieResponse>
 
     @GET("movie/{movie_id}/credits")
-    fun getCredits(@Query("movieId") movieId: Int): Call<CreditsResponse>
+    fun getCredits(movieId: Int): Call<CreditsResponse>
 
     @GET("movie/{movie_id}/recommendations")
     fun getRecommended(movieId: Int): Call<MovieResponse>

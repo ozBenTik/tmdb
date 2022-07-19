@@ -28,10 +28,10 @@ class PopularityBadgeView @JvmOverloads constructor(
             field = value
             binding.progressBar.progress = value
             updateProgressColor()
-            updateProgressLable()
+            updateProgressLabel()
         }
 
-    private fun updateProgressLable() {
+    private fun updateProgressLabel() {
         binding.textView.text = "${progress}%"
     }
 

@@ -8,13 +8,13 @@
         android:id="@+id/movies_nav_graph"
         />
     <item
-        android:icon="@drawable/ic_baseline_people_24"
         android:title="people"
+        android:icon="@drawable/ic_baseline_people_24"
         android:id="@+id/people_nav_graph"
         />
     <item
-        android:icon="@drawable/ic_baseline_people_24"
         android:title="tv_shows"
+        android:icon="@drawable/ic_baseline_tv_24"
         android:id="@+id/tv_shows_nav_graph"
         />
 </menu>
