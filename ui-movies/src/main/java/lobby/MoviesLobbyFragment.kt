@@ -16,19 +16,23 @@ import com.example.ui_movies.databinding.FragmentLobbyBinding
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import extensions.launchAndRepeatWithViewLifecycle
+import nowPlaying.NowPlayingMoviesCarrouselAdapter
+import popular.PopularMoviesCarrouselAdapter
 import timber.log.Timber
+import toprated.TopRatedMoviesCarrouselAdapter
+import upcoming.UpcomingMoviesCarrouselAdapter
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class MoviesLobbyFragment: Fragment() {
+class MoviesLobbyFragment : Fragment() {
 
     lateinit var binding: FragmentLobbyBinding
     private val viewModel: MoviesLobbyViewModel by viewModels()
 
     lateinit var popularMoviesAdapter: PopularMoviesCarrouselAdapter
-    lateinit var topRatedMoviesAdapter: PopularMoviesCarrouselAdapter
-    lateinit var upcomingMoviesAdapter: PopularMoviesCarrouselAdapter
-    lateinit var nowPlayingMoviesAdapter: PopularMoviesCarrouselAdapter
+    lateinit var topRatedMoviesAdapter: TopRatedMoviesCarrouselAdapter
+    lateinit var upcomingMoviesAdapter: UpcomingMoviesCarrouselAdapter
+    lateinit var nowPlayingMoviesAdapter: NowPlayingMoviesCarrouselAdapter
 
     @Inject
     lateinit var tmdbImageManager: TmdbImageManager
@@ -99,8 +103,8 @@ class MoviesLobbyFragment: Fragment() {
                 resources.getDimension(com.example.core_ui.R.dimen.spacing_normal).toInt()
             addItemDecoration(
                 SpaceItemDecoration(
-                itemSpacing, -itemSpacing
-            )
+                    itemSpacing, -itemSpacing
+                )
             )
         }
 
@@ -111,7 +115,7 @@ class MoviesLobbyFragment: Fragment() {
     }
 
     private fun initNowPlayingAdapter() {
-        nowPlayingMoviesAdapter = PopularMoviesCarrouselAdapter(
+        nowPlayingMoviesAdapter = NowPlayingMoviesCarrouselAdapter(
             tmdbImageManager.getLatestImageProvider(),
             onMovieClick,
         )
@@ -121,19 +125,21 @@ class MoviesLobbyFragment: Fragment() {
 
             val itemSpacing =
                 resources.getDimension(com.example.core_ui.R.dimen.spacing_normal).toInt()
-            addItemDecoration(SpaceItemDecoration(
-                itemSpacing, -itemSpacing
-            ))
+            addItemDecoration(
+                SpaceItemDecoration(
+                    itemSpacing, -itemSpacing
+                )
+            )
         }
 
         binding.nowPlayingMoviesView.title.text = "Now Playing Movies"
         binding.nowPlayingMoviesView.more.setOnClickListener {
-            findNavController().navigate(R.id.navigation_popular_movies_fragment)
+            findNavController().navigate(R.id.navigation_now_playing_fragment)
         }
     }
 
     private fun initTopRatedAdapter() {
-        topRatedMoviesAdapter = PopularMoviesCarrouselAdapter(
+        topRatedMoviesAdapter = TopRatedMoviesCarrouselAdapter(
             tmdbImageManager.getLatestImageProvider(),
             onMovieClick,
         )
@@ -143,19 +149,21 @@ class MoviesLobbyFragment: Fragment() {
 
             val itemSpacing =
                 resources.getDimension(com.example.core_ui.R.dimen.spacing_normal).toInt()
-            addItemDecoration(SpaceItemDecoration(
-                itemSpacing, -itemSpacing
-            ))
+            addItemDecoration(
+                SpaceItemDecoration(
+                    itemSpacing, -itemSpacing
+                )
+            )
         }
 
         binding.topRatedMoviesView.title.text = "Top Rated Movies"
         binding.topRatedMoviesView.more.setOnClickListener {
-            findNavController().navigate(R.id.navigation_popular_movies_fragment)
+            findNavController().navigate(R.id.navigation_top_rated_movies_fragment)
         }
     }
 
     private fun initUpcomingAdapter() {
-        upcomingMoviesAdapter = PopularMoviesCarrouselAdapter(
+        upcomingMoviesAdapter = UpcomingMoviesCarrouselAdapter(
             tmdbImageManager.getLatestImageProvider(),
             onMovieClick,
         )
@@ -165,14 +173,16 @@ class MoviesLobbyFragment: Fragment() {
 
             val itemSpacing =
                 resources.getDimension(com.example.core_ui.R.dimen.spacing_normal).toInt()
-            addItemDecoration(SpaceItemDecoration(
-                itemSpacing, -itemSpacing
-            ))
+            addItemDecoration(
+                SpaceItemDecoration(
+                    itemSpacing, -itemSpacing
+                )
+            )
         }
 
         binding.upcomingMoviesView.title.text = "Upcoming Movies"
         binding.upcomingMoviesView.more.setOnClickListener {
-            findNavController().navigate(R.id.navigation_popular_movies_fragment)
+            findNavController().navigate(R.id.navigation_upcoming_movies_fragment)
         }
     }
 }

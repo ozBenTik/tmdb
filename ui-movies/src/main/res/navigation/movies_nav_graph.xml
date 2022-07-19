@@ -13,4 +13,16 @@
         android:id="@+id/navigation_popular_movies_fragment"
         android:name="popular.PopularMoviesFragment"
         android:label="PopularMoviesFragment" />
+    <fragment
+        android:id="@+id/navigation_upcoming_movies_fragment"
+        android:name="upcoming.UpcomingMoviesFragment"
+        android:label="UpcomingMoviesFragment" />
+    <fragment
+        android:id="@+id/navigation_now_playing_fragment"
+        android:name="nowPlaying.NowPlayingMoviesFragment"
+        android:label="NowPlayingMoviesFragment" />
+    <fragment
+        android:id="@+id/navigation_top_rated_movies_fragment"
+        android:name="toprated.TopRatedMoviesFragment"
+        android:label="TopRatedMoviesFragment" />
 </navigation>

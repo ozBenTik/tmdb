@@ -4,15 +4,22 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../../../../layout/custom_preview.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.28205128205128205" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.5200027465820313" />
         <entry key="app/src/main/res/menu/menu.xml" value="0.31574074074074077" />
         <entry key="core-ui/src/main/res/layout/movie_card.xml" value="0.1" />
         <entry key="core-ui/src/main/res/layout/movies_carrousel_view.xml" value="0.1" />
         <entry key="core-ui/src/main/res/layout/popularity_badge_view.xml" value="0.1" />
         <entry key="ui-login/src/main/res/layout/fragment_login.xml" value="0.1" />
         <entry key="ui-movies/src/main/res/layout/fragment_lobby.xml" value="0.1" />
+        <entry key="ui-movies/src/main/res/layout/fragment_now_playing_movies.xml" value="0.1398148148148148" />
         <entry key="ui-movies/src/main/res/layout/fragment_popular_movies.xml" value="0.1" />
+        <entry key="ui-movies/src/main/res/layout/fragment_top_rated_movies.xml" value="0.1398148148148148" />
+        <entry key="ui-movies/src/main/res/layout/fragment_toprated_movies.xml" value="0.1" />
+        <entry key="ui-movies/src/main/res/layout/fragment_upcoming_movies.xml" value="0.1398148148148148" />
+        <entry key="ui-movies/src/main/res/layout/list_item_now_playing_movie.xml" value="0.1398148148148148" />
         <entry key="ui-movies/src/main/res/layout/list_item_popular_movie.xml" value="0.1" />
+        <entry key="ui-movies/src/main/res/layout/list_item_top_rated_movie.xml" value="0.1" />
+        <entry key="ui-movies/src/main/res/layout/list_item_upcoming_movie.xml" value="0.1398148148148148" />
         <entry key="ui-people/src/main/res/layout/fragment_people.xml" value="0.1" />
         <entry key="ui-tvshows/src/main/res/layout/fragment_tv_shows.xml" value="0.27242889404296877" />
       </map>

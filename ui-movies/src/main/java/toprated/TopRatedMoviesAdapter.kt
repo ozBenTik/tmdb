@@ -1,68 +1,67 @@
-package lobby
+package toprated
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.core_ui.databinding.MovieCardBinding
 import com.example.model.Movie
 import com.example.model.util.TmdbImageUrlProvider
+import com.example.ui_movies.databinding.ListItemTopRatedMovieBinding
 
-class PopularMoviesCarrouselAdapter(
+class TopRatedMoviesAdapter(
     private val tmdbImageUrlProvider: TmdbImageUrlProvider,
+//    private val tmdbDateFormatter: TmdbDateFormatter,
     private val onItemClickListener: (movieId: Int) -> Unit,
-) :
-    ListAdapter<Movie, PopularMovieCarrouselViewHolder>(PopularMovieDiff) {
+) : PagingDataAdapter<Movie, TopRatedMovieViewHolder>(TopRatedEntryComparator) {
 
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int
-    ): PopularMovieCarrouselViewHolder {
-        val binding = MovieCardBinding.inflate(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TopRatedMovieViewHolder {
+        val binding = ListItemTopRatedMovieBinding.inflate(
             LayoutInflater.from(parent.context), parent, false
         )
-        return PopularMovieCarrouselViewHolder(binding)
+        return TopRatedMovieViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: PopularMovieCarrouselViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: TopRatedMovieViewHolder, position: Int) {
         val entry = getItem(position)
-        entry?.let {
-            holder.binding.title.text = it.title
-            holder.binding.subtitle.text = it.releaseDate
+        entry?.let { popularEntry ->
+            holder.binding.title.text = popularEntry.title
+            holder.binding.subtitle.text = "${popularEntry.voteCount} votes"
+
+            holder.binding.popularityBadge.progress = popularEntry.popularityPrecentage
 
             entry.posterPath?.let { posterPath ->
                 Glide.with(holder.itemView)
                     .load(
                         tmdbImageUrlProvider.getPosterUrl(
                             path = posterPath,
-                            imageWidth = holder.itemView.width
+                            imageWidth = holder.itemView.width,
                         )
                     )
-                    .into(holder.binding.imageView)
+                    .into(holder.binding.image)
             }
 
-            holder.binding.popularityBadge.progress = entry.popularityPrecentage
 
-            holder.itemView.setOnClickListener {
+
+            holder.binding.root.setOnClickListener {
                 onItemClickListener(entry.id)
             }
         }
 
-
     }
 }
 
-class PopularMovieCarrouselViewHolder(
-    internal val binding: MovieCardBinding
+class TopRatedMovieViewHolder(
+    internal val binding: ListItemTopRatedMovieBinding
 ) : RecyclerView.ViewHolder(binding.root)
 
-object PopularMovieDiff : DiffUtil.ItemCallback<Movie>() {
+object TopRatedEntryComparator : DiffUtil.ItemCallback<Movie>() {
     override fun areItemsTheSame(
         oldItem: Movie,
         newItem: Movie
     ): Boolean {
+        // Id is unique.
         return oldItem.id == newItem.id
     }
 

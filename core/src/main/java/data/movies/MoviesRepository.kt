@@ -1,6 +1,5 @@
 package data.movies
 
-import com.example.core.extensions.addFlatLists
 import com.example.model.Actor
 import com.example.model.Movie
 import data.movies.datasource.MoviesLocalDataSource
@@ -97,12 +96,11 @@ class MoviesRepository @Inject constructor(
             local.upcomingStore.observeEntries(),
             local.topRatedStore.observeEntries()
         ) { nowPlaying, popular, upcoming, topRated ->
-            mutableListOf<Movie>()
-                .addFlatLists(
-                    nowPlaying.values,
-                    popular.values,
-                    upcoming.values,
-                    topRated.values
-                ).first { it.id == movieId }
+            mutableListOf<Movie>().apply {
+                addAll(nowPlaying.values.flatten())
+                addAll(popular.values.flatten())
+                addAll(upcoming.values.flatten())
+                addAll(topRated.values.flatten())
+            }.first { it.id == movieId }
         }
 }
