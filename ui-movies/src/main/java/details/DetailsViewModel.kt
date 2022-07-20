@@ -1,5 +1,6 @@
 package details
 
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.domain.movies.iteractors.UpdateCredits
@@ -19,7 +20,8 @@ import util.collectStatus
 import javax.inject.Inject
 
 @HiltViewModel
-class MovieDetailsViewModel @Inject constructor(
+class DetailsViewModel @Inject constructor(
+    private val savedStateHandle: SavedStateHandle,
     private val updateRecommendations: UpdateRecommendations,
     private val updateCredits: UpdateCredits,
     private val observeMovieDetails: ObserveMovieDetails,
@@ -59,17 +61,23 @@ class MovieDetailsViewModel @Inject constructor(
         DetailsViewState.Empty
     )
 
+    init {
+        val movieId = savedStateHandle.get<Int>("movie_id") ?: 0
+        observeMovieDetails(ObserveMovieDetails.Params(movieId))
+        refresh(movieId)
+    }
+
     /**
      * A pair of movieId to MoviesCatchSource
      * When applied, the data would be loaded according to the movieId
      * TBD -> If possible, change it to a constructor parameter
      */
-    var movieId  = 0
-    set(value) {
-        field = value
-        observeMovieDetails(ObserveMovieDetails.Params(movieId))
-        refresh(movieId)
-    }
+//    var movieId  = 0
+//    set(value) {
+//        field = value
+//        observeMovieDetails(ObserveMovieDetails.Params(movieId))
+//        refresh(movieId)
+//    }
 
     private fun refresh(movieId: Int) {
 

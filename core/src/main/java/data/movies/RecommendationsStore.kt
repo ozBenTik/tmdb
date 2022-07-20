@@ -6,8 +6,9 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import javax.inject.Inject
+import javax.inject.Singleton
 
-
+@Singleton
 class RecommendationsStore @Inject constructor() {
     // Map<movieId, movies>
     private val _movieRec = MutableSharedFlow<Map<Int, List<Movie>>>(replay = 1)

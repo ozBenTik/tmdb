@@ -4,7 +4,6 @@ import com.example.model.Actor
 import com.example.model.Movie
 import data.movies.datasource.MoviesLocalDataSource
 import data.movies.datasource.MoviesRemoteDataSource
-import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
@@ -88,19 +87,4 @@ class MoviesRepository @Inject constructor(
 
     fun observeCredits() = local.creditsStore.observeEntries()
 
-    // ------------- Movie Catch capabilities -------------------
-    fun getMovieFromCatch(movieId: Int) =
-        combine(
-            local.nowPlayingStore.observeEntries(),
-            local.popularStore.observeEntries(),
-            local.upcomingStore.observeEntries(),
-            local.topRatedStore.observeEntries()
-        ) { nowPlaying, popular, upcoming, topRated ->
-            mutableListOf<Movie>().apply {
-                addAll(nowPlaying.values.flatten())
-                addAll(popular.values.flatten())
-                addAll(upcoming.values.flatten())
-                addAll(topRated.values.flatten())
-            }.first { it.id == movieId }
-        }
 }

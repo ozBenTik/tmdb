@@ -6,6 +6,11 @@
         <entry key="../../../../../layout/custom_preview.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.5200027465820313" />
         <entry key="app/src/main/res/menu/menu.xml" value="0.31574074074074077" />
+        <entry key="core-ui/src/main/res/font/work_sans.xml" value="0.1638888888888889" />
+        <entry key="core-ui/src/main/res/font/work_sans_bold.xml" value="0.1638888888888889" />
+        <entry key="core-ui/src/main/res/font/work_sans_extrabold.xml" value="0.1638888888888889" />
+        <entry key="core-ui/src/main/res/font/work_sans_medium.xml" value="0.1638888888888889" />
+        <entry key="core-ui/src/main/res/font/work_sans_semibold.xml" value="0.1638888888888889" />
         <entry key="core-ui/src/main/res/layout/movie_card.xml" value="0.1" />
         <entry key="core-ui/src/main/res/layout/movies_carrousel_view.xml" value="0.1" />
         <entry key="core-ui/src/main/res/layout/popularity_badge_view.xml" value="0.1" />
