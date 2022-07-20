@@ -38,4 +38,19 @@ class MoviesRemoteDataSource @Inject constructor(
                 .toResult()
         }
 
+    suspend fun getRecommendations(movieId: Int) =
+        safeApiCall {
+            moviesService.getRecommended(movieId)
+                .executeWithRetry()
+                .toResult()
+        }
+
+
+    suspend fun getCredits(movieId: Int) =
+        safeApiCall {
+            moviesService.getCredits(movieId)
+                .executeWithRetry()
+                .toResult()
+        }
+
 }

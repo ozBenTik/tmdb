@@ -4,7 +4,6 @@ import androidx.paging.ExperimentalPagingApi
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import com.example.domain.InvalidatingPagingSourceFactory
 import com.example.domain.MoviesPagingSource
 import com.example.domain.PaginatedMovieRemoteMediator
 import com.example.domain.PagingInteractor
@@ -34,7 +33,7 @@ class ObservePagedPopularMovies @Inject constructor(
         ).flow
     }
 
-    private val pagingSourceFactory = InvalidatingPagingSourceFactory(::createPagingSource)
+    private val pagingSourceFactory = androidx.paging.InvalidatingPagingSourceFactory(::createPagingSource)
 
     private fun createPagingSource(): MoviesPagingSource {
         return MoviesPagingSource(popularStore)

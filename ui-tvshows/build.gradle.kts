@@ -1,8 +1,12 @@
+import buildSrc.Modules.CORE
+import buildSrc.Modules.CORE_UI
+import buildSrc.Modules.DOMAIN
+
 plugins {
     id ("ui-library-plugin")
 }
 dependencies {
-    implementation(project(buildSrc.Modules.CORE_UI))
-    implementation(project(buildSrc.Modules.CORE))
-    implementation(project(buildSrc.Modules.DOMAIN))
+    implementation(project(CORE_UI))
+    implementation(project(CORE))
+    implementation(project(DOMAIN))
 }

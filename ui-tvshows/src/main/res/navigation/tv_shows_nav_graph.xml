@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/tv_shows_nav_graph"
+    app:startDestination="@id/navigation_tv_shows">
+
+    <fragment
+        android:id="@+id/navigation_tv_shows"
+        android:name="com.example.ui_tvshows.TvShowsFragment"
+        android:label="fragment_tv_shows"
+        tools:layout="@layout/fragment_tv_shows" />
+</navigation>

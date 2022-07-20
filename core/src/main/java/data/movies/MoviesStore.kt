@@ -5,8 +5,12 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class MoviesStore @Inject constructor() {
+
+    // Map<Page, movies>
     private val _movies = MutableSharedFlow<Map<Int, List<Movie>>>(replay = 1)
 
     @OptIn(ExperimentalCoroutinesApi::class)
