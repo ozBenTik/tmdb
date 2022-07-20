@@ -39,7 +39,6 @@ class UpdateTopRatedMovies @Inject constructor(
             }
     }
 
-
     data class Params(val page: Int)
 
     object Page {
