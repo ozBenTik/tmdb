@@ -11,15 +11,11 @@ class ObserveCredits @Inject constructor(
     private val moviesRepository: MoviesRepository
 ) : SubjectInteractor<ObserveCredits.Params, List<Actor>>() {
 
-//    override fun createObservable(params: Params): Map<Int, List<Actor>> {
-//        return moviesRepository.observeCredits()
-//            .map { list ->  list.flatMap { it.value } }
-//    }
-
-    data class Params(val movieId: Int)
-
     override fun createObservable(params: Params): Flow<List<Actor>> {
         return moviesRepository.observeCredits()
             .map { it[params.movieId] ?: emptyList() }
     }
+
+    data class Params(val movieId: Int)
+
 }
