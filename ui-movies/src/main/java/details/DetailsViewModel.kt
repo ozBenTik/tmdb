@@ -61,9 +61,12 @@ class DetailsViewModel @Inject constructor(
         DetailsViewState.Empty
     )
 
+    val movieId = savedStateHandle.get<Int>("movie_id") ?: 0
+
     init {
-        val movieId = savedStateHandle.get<Int>("movie_id") ?: 0
         observeMovieDetails(ObserveMovieDetails.Params(movieId))
+        observeCredits(ObserveCredits.Params(movieId))
+        observeRecommendations(ObserveRecommendations.Params(movieId))
         refresh(movieId)
     }
 

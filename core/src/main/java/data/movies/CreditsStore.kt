@@ -15,12 +15,10 @@ class CreditsStore @Inject constructor() {
 
     @OptIn(ExperimentalCoroutinesApi::class)
     fun insert(movieId: Int, actors: List<Actor>) {
-        _movieActors.resetReplayCache()
         _movieActors.tryEmit(mapOf(movieId to actors))
     }
 
     fun observeEntries(): SharedFlow<Map<Int, List<Actor>>> = _movieActors.asSharedFlow()
-
 
     @OptIn(ExperimentalCoroutinesApi::class)
     fun deleteAll() {

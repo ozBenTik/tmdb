@@ -4,6 +4,7 @@ import com.example.model.CreditsResponse
 import com.example.model.MovieResponse
 import retrofit2.Call
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface MoviesService {
@@ -21,9 +22,9 @@ interface MoviesService {
     fun getTopRated(@Query("page") page: Int): Call<MovieResponse>
 
     @GET("movie/{movie_id}/credits")
-    fun getCredits(movieId: Int): Call<CreditsResponse>
+    fun getCredits(@Path("movie_id") movieId: Int): Call<CreditsResponse>
 
     @GET("movie/{movie_id}/recommendations")
-    fun getRecommended(movieId: Int): Call<MovieResponse>
+    fun getRecommended(@Path("movie_id") movieId: Int): Call<MovieResponse>
 
 }

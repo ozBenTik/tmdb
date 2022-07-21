@@ -87,7 +87,10 @@ class MoviesLobbyFragment : Fragment() {
     }
 
     private val onMovieClick: (Int) -> Unit = { movieId ->
-        Timber.i("$movieId")
+        val args = Bundle().apply {
+            putInt("movie_id", movieId)
+        }
+        findNavController().navigate(R.id.navigation_details_fragment, args)
     }
 
     private fun initPopularAdapter() {
