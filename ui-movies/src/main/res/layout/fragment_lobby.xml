@@ -15,7 +15,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?actionBarSize"
-            app:title="Lobby" />
+            app:title="Lobby"/>
 
     </com.google.android.material.appbar.AppBarLayout>
 

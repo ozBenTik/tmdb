@@ -27,7 +27,7 @@ class UpcomingMoviesAdapter(
         val entry = getItem(position)
         entry?.let { popularEntry ->
             holder.binding.title.text = popularEntry.title
-            holder.binding.subtitle.text = "${popularEntry.voteCount} votes"
+            holder.binding.subtitle.text = "${popularEntry.voteCount} votes \u00B7 ${popularEntry.releaseDate}"
 
 //            holder.binding.subtitle.text = "${popularEntry.voteCount} votes • ${
 //                tmdbDateFormatter.formatMediumDate(popularEntry.releaseDate)
@@ -45,7 +45,6 @@ class UpcomingMoviesAdapter(
                     )
                     .into(holder.binding.image)
             }
-
 
 
             holder.binding.root.setOnClickListener {

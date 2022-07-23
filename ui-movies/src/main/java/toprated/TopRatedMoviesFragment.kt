@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.core.TmdbImageManager
 import com.example.moviestmdb.core_ui.util.SpaceItemDecoration
+import com.example.ui_movies.R
 import com.example.ui_movies.databinding.FragmentTopRatedMoviesBinding
 import dagger.hilt.android.AndroidEntryPoint
 import extensions.launchAndRepeatWithViewLifecycle
@@ -45,10 +46,6 @@ class TopRatedMoviesFragment: Fragment() {
 
         NavigationUI.setupWithNavController(binding.toolbar, findNavController())
 
-        binding.toolbar.apply {
-            title = "TopRated Movies"
-        }
-
         launchAndRepeatWithViewLifecycle {
             viewModel.pagedList.collectLatest { pagingData ->
                 pagingAdapter.submitData(pagingData)
@@ -57,6 +54,10 @@ class TopRatedMoviesFragment: Fragment() {
     }
 
     private val movieClickListener : (Int) -> Unit = { movieId ->
+        val args = Bundle().apply {
+            putInt("movie_id", movieId)
+        }
+        findNavController().navigate(R.id.navigation_details_fragment, args)
     }
 
     private fun initAdapter() {

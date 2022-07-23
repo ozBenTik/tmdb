@@ -9,26 +9,25 @@
     <fragment
         android:id="@+id/navigation_movies_lobby_fragment"
         android:name="lobby.MoviesLobbyFragment"
-        android:label="MoviesLobbyFragment" />
+        android:label="Lobby" />
     <fragment
         android:id="@+id/navigation_popular_movies_fragment"
         android:name="popular.PopularMoviesFragment"
-        android:label="PopularMoviesFragment" />
+        android:label="Popular Movies" />
     <fragment
         android:id="@+id/navigation_upcoming_movies_fragment"
         android:name="upcoming.UpcomingMoviesFragment"
-        android:label="UpcomingMoviesFragment" />
+        android:label="Upcoming Movies" />
     <fragment
         android:id="@+id/navigation_now_playing_fragment"
         android:name="nowPlaying.NowPlayingMoviesFragment"
-        android:label="NowPlayingMoviesFragment" />
+        android:label="Now Playing Movies" />
     <fragment
         android:id="@+id/navigation_top_rated_movies_fragment"
         android:name="toprated.TopRatedMoviesFragment"
-        android:label="TopRatedMoviesFragment" />
+        android:label="Top Rated Movies" />
     <fragment
         android:id="@+id/navigation_details_fragment"
         android:name="details.DetailsFragment"
-        android:label="fragment_details"
         tools:layout="@layout/fragment_details" />
 </navigation>
