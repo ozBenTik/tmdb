@@ -51,7 +51,7 @@
 
         <!--Styles-->
         <item name="appBarLayoutStyle">@style/Widget.Tmdb.AppBar</item>
-        <item name="bottomAppBarStyle">@style/Widget.MaterialComponents.BottomAppBar.PrimarySurface</item>
+        <item name="bottomAppBarStyle">@style/Widget.Material3.BottomNavigationView.ActiveIndicator</item>
         <item name="bottomSheetStyle">@style/Widget.MaterialComponents.BottomSheet.Modal</item>
         <item name="navigationViewStyle">@style/Widget.Tmdb.NavigationView</item>
         <item name="snackbarStyle">@style/Widget.Tmdb.Snackbar</item>
