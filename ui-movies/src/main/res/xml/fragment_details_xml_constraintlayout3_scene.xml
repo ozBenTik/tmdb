@@ -20,6 +20,7 @@
             android:layout_height="230dp"
             motion:layout_constraintTop_toTopOf="parent"
             motion:layout_constraintStart_toStartOf="parent" />
+
     </ConstraintSet>
 
     <ConstraintSet android:id="@+id/end">
