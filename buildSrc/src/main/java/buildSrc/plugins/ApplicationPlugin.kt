@@ -30,6 +30,7 @@ class ApplicationPlugin : Plugin<Project> {
             apply("kotlin-parcelize")
             apply("kotlin-kapt")
             apply("dagger.hilt.android.plugin")
+            apply(Libs.Firebase.googleServices)
         }
     }
 
@@ -63,6 +64,7 @@ class ApplicationPlugin : Plugin<Project> {
 
     private fun Project.dependenciesConfig() {
         dependencies {
+
             "implementation"(Libs.Kotlin.stdlib)
             "implementation"(Libs.Coroutines.android)
             "implementation"(Libs.Coroutines.core)

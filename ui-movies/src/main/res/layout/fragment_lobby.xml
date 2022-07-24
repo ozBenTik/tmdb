@@ -15,7 +15,17 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?actionBarSize"
-            app:title="Lobby"/>
+            app:title="Lobby">
+
+            <ImageView
+                android:id="@+id/logout_button"
+                android:src="@drawable/ic_baseline_exit_to_app_24"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                />
+
+        </androidx.appcompat.widget.Toolbar>
 
     </com.google.android.material.appbar.AppBarLayout>
 

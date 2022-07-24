@@ -7,12 +7,15 @@ import android.view.View.GONE
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.NavigationUI
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.core.TmdbImageManager
 import com.example.moviestmdb.core_ui.util.SpaceItemDecoration
 import com.example.ui_movies.databinding.FragmentDetailsBinding
+import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
 import extensions.launchAndRepeatWithViewLifecycle
 import timber.log.Timber
@@ -49,10 +52,16 @@ class DetailsFragment : Fragment() {
         initActorsAdapter()
 
         binding.scrollView.setOnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
-            val totalScrollLength = binding.constraintLayout3.height - binding.scrollView.height
+            val totalScrollLength = binding.detailsBackdropImageView.height
             val progress: Float = scrollY.toFloat()/totalScrollLength
             binding.constraintLayout3.progress = progress
+        }
 
+
+        NavigationUI.setupWithNavController(binding.toolbar, findNavController())
+
+        binding.logoutButton.setOnClickListener {
+            FirebaseAuth.getInstance().signOut()
         }
 
         launchAndRepeatWithViewLifecycle {
@@ -61,6 +70,7 @@ class DetailsFragment : Fragment() {
 
                 uiState.movieDetails?.let { movie ->
 
+                    binding.toolbar.title = movie.title
                     binding.title.text = movie.title
                     binding.detailsOverviewTextView.text = movie.overView
                     binding.detailsRatingPrecentageTextView.text = "${movie.popularityPrecentage}%"

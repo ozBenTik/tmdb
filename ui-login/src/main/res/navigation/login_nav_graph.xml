@@ -2,12 +2,19 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/login_nav_graph"
-    app:startDestination="@id/navigation_login_fragment">
+    android:id="@+id/login_nav_graph">
 
     <fragment
         android:id="@+id/navigation_login_fragment"
         android:name="com.example.ui_login.LoginFragment"
         android:label="fragment_login"
-        tools:layout="@layout/fragment_login" />
+        tools:layout="@layout/fragment_login">
+
+        <deepLink
+            app:uri="android-app://androidx.navigation/tmdb://auth.com/loginpage"
+            app:action="android.intent.action.VIEW"
+            app:mimeType="type/subtype"/>
+    </fragment>
+
+
 </navigation>

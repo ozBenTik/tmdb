@@ -5,6 +5,14 @@ object Libs {
     const val jdkDesugar = "com.android.tools:desugar_jdk_libs:1.1.5"
     const val timber = "com.jakewharton.timber:timber:4.7.1"
 
+    object Firebase {
+        private const val version = "30.3.0"
+        const val bom = "com.google.firebase:firebase-bom:30.3.0"
+        const val firebaseAuth = "com.google.firebase:firebase-auth-ktx"
+        const val googleServices = "com.google.gms.google-services"
+        const val googleServicesPlugin = "com.google.gms:google-services:4.3.13"
+    }
+
     object Kotlin {
         private const val version = "1.6.10"
         const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$version"

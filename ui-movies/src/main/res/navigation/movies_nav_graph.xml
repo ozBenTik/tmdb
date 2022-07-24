@@ -30,4 +30,5 @@
         android:id="@+id/navigation_details_fragment"
         android:name="details.DetailsFragment"
         tools:layout="@layout/fragment_details" />
+
 </navigation>
