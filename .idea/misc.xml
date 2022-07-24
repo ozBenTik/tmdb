@@ -23,7 +23,7 @@
         <entry key="core-ui/src/main/res/layout/recommended_card.xml" value="0.48005523681640627" />
         <entry key="core-ui/src/main/res/layout/recommended_carrousel_view.xml" value="0.1" />
         <entry key="ui-login/src/main/res/layout/fragment_login.xml" value="0.1" />
-        <entry key="ui-movies/src/main/res/layout/fragment_details.xml" value="0.48578611431699814" />
+        <entry key="ui-movies/src/main/res/layout/fragment_details.xml" value="0.41811981201171877" />
         <entry key="ui-movies/src/main/res/layout/fragment_lobby.xml" value="0.1" />
         <entry key="ui-movies/src/main/res/layout/fragment_now_playing_movies.xml" value="0.1398148148148148" />
         <entry key="ui-movies/src/main/res/layout/fragment_popular_movies.xml" value="0.1" />

@@ -75,4 +75,8 @@
         <item name="android:lines">2</item>
     </style>
 
+    <style name="TextAppearance.Tmdb.DetailsHeadline" parent="TextAppearance.Material3.HeadlineLarge">
+        <item name="android:textColor">@color/tmdb_black_800</item>
+    </style>
+
 </resources>

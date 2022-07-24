@@ -48,11 +48,19 @@ class DetailsFragment : Fragment() {
         initRecommendedAdapter()
         initActorsAdapter()
 
+        binding.scrollView.setOnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
+            val totalScrollLength = binding.constraintLayout3.height - binding.scrollView.height
+            val progress: Float = scrollY.toFloat()/totalScrollLength
+            binding.constraintLayout3.progress = progress
+
+        }
+
         launchAndRepeatWithViewLifecycle {
             viewModel.state.collect{ uiState ->
                 Timber.i("$$$$ recs = ${uiState.recommendations}  actors = ${uiState.actors}")
 
                 uiState.movieDetails?.let { movie ->
+
                     binding.title.text = movie.title
                     binding.detailsOverviewTextView.text = movie.overView
                     binding.detailsRatingPrecentageTextView.text = "${movie.popularityPrecentage}%"
