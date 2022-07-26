@@ -4,24 +4,23 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.NavOptions
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI.setupWithNavController
-import com.example.ui_login.LoginFragment
-import com.example.ui_login.LoginResult
-import com.google.android.material.snackbar.Snackbar
+import com.example.core.data.user.UserRemoteDataSource
 import com.google.firebase.auth.FirebaseAuth
-import com.oz.tmdb.R
 import com.oz.tmdb.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
-import timber.log.Timber
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityMainBinding
+
+
+    @Inject
+    lateinit var firebaseAuthStateUserDataSource: UserRemoteDataSource
 
     private lateinit var navHostFragment: NavHostFragment
     private lateinit var auth: FirebaseAuth
@@ -42,27 +41,19 @@ class MainActivity : AppCompatActivity() {
             setupWithNavController(binding.bottomNavigation, navController)
 
 
-            lifecycleScope.launchWhenCreated {
-                navController.currentBackStackEntryFlow.collectLatest {
-                    it.savedStateHandle.get<Boolean>(LoginFragment.LOGIN_SUCCESSFUL)?.let { success ->
-                        if (success) {
-                            binding.bottomNavigation.visibility = View.VISIBLE
-                        } else {
-                            Snackbar.make(binding.root, "Sign in failed", Snackbar.LENGTH_LONG).show()
-                        }
-                    }
-                }
-            }
-
-
-            auth.addAuthStateListener {
-                if (it.currentUser == null) {
-                    binding.bottomNavigation.visibility = View.GONE
-                    Timber.i("No User")
-                    navController
-                        .navigate(
-                            "tmdb://auth.com/loginpage",
+            lifecycleScope.launchWhenStarted {
+                firebaseAuthStateUserDataSource.getBasicUserInfo().collectLatest { result ->
+                    val isSignedIn = result?.isSignedIn() ?: false
+                    if (!isSignedIn) {
+                        binding.bottomNavigation.visibility = View.GONE
+                        navController.navigate(com.example.ui_login.R.id.login_nav_graph)
+                    } else {
+                        navController.popBackStack(
+                            com.example.ui_login.R.id.login_nav_graph,
+                            false
                         )
+                        binding.bottomNavigation.visibility = View.VISIBLE
+                    }
                 }
             }
         }

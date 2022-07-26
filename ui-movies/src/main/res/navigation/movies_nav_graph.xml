@@ -5,30 +5,35 @@
     android:id="@+id/movies_nav_graph"
     app:startDestination="@id/navigation_movies_lobby_fragment">
 
-
     <fragment
         android:id="@+id/navigation_movies_lobby_fragment"
         android:name="lobby.MoviesLobbyFragment"
+        tools:layout="@layout/fragment_lobby"
         android:label="Lobby" />
     <fragment
         android:id="@+id/navigation_popular_movies_fragment"
         android:name="popular.PopularMoviesFragment"
+        tools:layout="@layout/fragment_popular_movies"
         android:label="Popular Movies" />
     <fragment
         android:id="@+id/navigation_upcoming_movies_fragment"
         android:name="upcoming.UpcomingMoviesFragment"
+        tools:layout="@layout/fragment_upcoming_movies"
         android:label="Upcoming Movies" />
     <fragment
         android:id="@+id/navigation_now_playing_fragment"
         android:name="nowPlaying.NowPlayingMoviesFragment"
+        tools:layout="@layout/fragment_now_playing_movies"
         android:label="Now Playing Movies" />
     <fragment
         android:id="@+id/navigation_top_rated_movies_fragment"
         android:name="toprated.TopRatedMoviesFragment"
+        tools:layout="@layout/fragment_top_rated_movies"
         android:label="Top Rated Movies" />
     <fragment
         android:id="@+id/navigation_details_fragment"
         android:name="details.DetailsFragment"
-        tools:layout="@layout/fragment_details" />
+        tools:layout="@layout/fragment_details"
+        android:label="Details"/>
 
 </navigation>

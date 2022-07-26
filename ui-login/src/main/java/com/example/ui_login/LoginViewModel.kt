@@ -23,10 +23,10 @@ class LoginViewModel: ViewModel() {
 
     val loginState = MutableSharedFlow<LoginResult>(replay = 1)
 
-    fun login(email: String, password: String) =viewModelScope.launch {
+    fun login(email: String, password: String) = viewModelScope.launch {
         FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
-                viewModelScope.launch(Dispatchers.IO) {
+                viewModelScope.launch {
                     if (task.isSuccessful) {
                         Timber.i("signInWithEmail:success")
                         loginState.emit(LoginResult.SUCCESS(task.result.user))

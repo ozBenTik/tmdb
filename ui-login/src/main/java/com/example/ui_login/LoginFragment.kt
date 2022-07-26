@@ -4,17 +4,19 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
+import androidx.activity.OnBackPressedDispatcher
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.SavedStateHandle
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.ui_login.databinding.FragmentLoginBinding
-import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
 import extensions.launchAndRepeatWithViewLifecycle
 import timber.log.Timber
-import java.lang.Exception
+
 
 class LoginFragment : Fragment() {
 
@@ -67,7 +69,7 @@ class LoginFragment : Fragment() {
                 when (it) {
                     is LoginResult.SUCCESS -> {
                         savedStateHandle?.set(LOGIN_SUCCESSFUL, true)
-                        findNavController().popBackStack()
+                        navController.popBackStack()
                     }
                     is LoginResult.FAILURE -> {
                         savedStateHandle?.set(LOGIN_SUCCESSFUL, false)
@@ -76,6 +78,13 @@ class LoginFragment : Fragment() {
                 }
             }
         }
-    }
 
+        requireActivity()
+            .onBackPressedDispatcher
+            .addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true /* enabled by default */) {
+                override fun handleOnBackPressed() {
+                    requireActivity().finish()
+                }
+            })
+    }
 }
