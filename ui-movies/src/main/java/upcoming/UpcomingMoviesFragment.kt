@@ -14,7 +14,6 @@ import com.example.core.TmdbImageManager
 import com.example.moviestmdb.core_ui.util.SpaceItemDecoration
 import com.example.ui_movies.R
 import com.example.ui_movies.databinding.FragmentUpcomingMoviesBinding
-import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
 import extensions.launchAndRepeatWithViewLifecycle
 import kotlinx.coroutines.flow.collectLatest
@@ -46,7 +45,7 @@ class UpcomingMoviesFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.logoutButton.setOnClickListener {
-            FirebaseAuth.getInstance().signOut()
+            viewModel.signOut()
         }
 
         NavigationUI.setupWithNavController(binding.toolbar, findNavController())

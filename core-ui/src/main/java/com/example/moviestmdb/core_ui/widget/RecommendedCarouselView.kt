@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
-import com.example.core_ui.databinding.MoviesCarrouselViewBinding
 import com.example.core_ui.databinding.RecommendedCarrouselViewBinding
 
 class RecommendedCarouselView @JvmOverloads constructor(

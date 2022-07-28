@@ -5,4 +5,7 @@ plugins {
 }
 dependencies {
     api(project(CORE))
+
+    implementation(platform(buildSrc.Libs.Firebase.bom))
+    implementation(buildSrc.Libs.Firebase.firebaseAuth)
 }

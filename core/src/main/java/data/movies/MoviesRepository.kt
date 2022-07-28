@@ -24,7 +24,6 @@ class MoviesRepository @Inject constructor(
 
     fun observePopularMovies() = local.popularStore.observeEntries()
 
-
     // ------------- Now Playing capabilities -------------------
     suspend fun saveNowPlayingMovies(page: Int, movies: List<Movie>) {
         local.nowPlayingStore.insert(page, movies)

@@ -14,10 +14,11 @@ import androidx.navigation.fragment.findNavController
 import com.example.ui_login.databinding.FragmentLoginBinding
 import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
+import dagger.hilt.android.AndroidEntryPoint
 import extensions.launchAndRepeatWithViewLifecycle
 import timber.log.Timber
 
-
+@AndroidEntryPoint
 class LoginFragment : Fragment() {
 
 
@@ -67,11 +68,11 @@ class LoginFragment : Fragment() {
 
             viewModel.loginState.collect {
                 when (it) {
-                    is LoginResult.SUCCESS -> {
+                    is LoginViewModel.LoginResult.SUCCESS -> {
                         savedStateHandle?.set(LOGIN_SUCCESSFUL, true)
                         navController.popBackStack()
                     }
-                    is LoginResult.FAILURE -> {
+                    is LoginViewModel.LoginResult.FAILURE -> {
                         savedStateHandle?.set(LOGIN_SUCCESSFUL, false)
                         Timber.e("Sign in failed -> ${it.exception ?: ""}")
                     }

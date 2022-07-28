@@ -8,4 +8,5 @@ dependencies {
 
     implementation(platform(buildSrc.Libs.Firebase.bom))
     implementation(buildSrc.Libs.Firebase.firebaseAuth)
+    implementation(buildSrc.Libs.Firebase.firebaseDb)
 }
