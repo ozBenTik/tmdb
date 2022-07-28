@@ -17,7 +17,6 @@ class LogoutIteractor @Inject constructor(
         userRepository.logout()
     }
 
-
     class Params()
 
 }

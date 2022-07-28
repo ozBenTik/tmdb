@@ -8,7 +8,9 @@ import com.example.domain.movies.iteractors.UpdateRecommendations
 import com.example.domain.movies.observers.ObserveCredits
 import com.example.domain.movies.observers.ObserveMovieDetails
 import com.example.domain.movies.observers.ObserveRecommendations
+import com.example.domain.users.iteractors.AddFavorite
 import com.example.domain.users.iteractors.LogoutIteractor
+import com.example.domain.users.iteractors.RemoveFavorite
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -28,6 +30,8 @@ class DetailsViewModel @Inject constructor(
     private val updateCredits: UpdateCredits,
     private val observeMovieDetails: ObserveMovieDetails,
     private val observeCredits: ObserveCredits,
+    private val addFavorite: AddFavorite,
+    private val removeFavorite: RemoveFavorite,
     private val observeRecommendations: ObserveRecommendations,
     private val logoutIteractor: LogoutIteractor,
     private val dispatchers: AppCoroutineDispatchers,
@@ -104,10 +108,22 @@ class DetailsViewModel @Inject constructor(
         }
     }
 
+    fun logout() {
+        viewModelScope.launch(dispatchers.io) {
+            logoutIteractor(LogoutIteractor.Params()).collect()
+        }
+    }
 
+    fun applyFavorite(movieId: Int) {
+        viewModelScope.launch(dispatchers.io) {
+            addFavorite(AddFavorite.Params(movieId)).collect()
+        }
+    }
 
-    fun logout()  = viewModelScope.launch(dispatchers.io) {
-        logoutIteractor(LogoutIteractor.Params()).collect()
+    fun removeFavorite(movieId: Int) {
+        viewModelScope.launch(dispatchers.io) {
+            removeFavorite(RemoveFavorite.Params(movieId)).collect()
+        }
     }
 
     fun clearMessage(id: Long) {

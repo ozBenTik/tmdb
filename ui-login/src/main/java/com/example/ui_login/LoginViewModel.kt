@@ -24,5 +24,4 @@ class LoginViewModel @Inject constructor(
             it.data?.let { loggedIn -> loginState.tryEmit(loggedIn) }
         }
     }
-
 }

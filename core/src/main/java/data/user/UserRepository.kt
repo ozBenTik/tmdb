@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.flow
 import result.Result
 import javax.inject.Inject
 
-class LoginRepository @Inject constructor(
+class UserRepository @Inject constructor(
     private val userRemoteDataSource: UserRemoteDataSource
 ){
     fun observeFavorites(): Flow<List<Int>> =
