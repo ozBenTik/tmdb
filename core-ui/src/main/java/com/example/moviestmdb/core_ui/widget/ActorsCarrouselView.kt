@@ -7,7 +7,6 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.example.core_ui.databinding.ActorsCarrouselViewBinding
-import com.example.core_ui.databinding.MoviesCarrouselViewBinding
 
 class ActorsCarrouselView @JvmOverloads constructor(
     context: Context,

@@ -8,9 +8,11 @@ import com.example.domain.movies.iteractors.UpdateRecommendations
 import com.example.domain.movies.observers.ObserveCredits
 import com.example.domain.movies.observers.ObserveMovieDetails
 import com.example.domain.movies.observers.ObserveRecommendations
+import com.example.domain.users.iteractors.LogoutIteractor
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import util.AppCoroutineDispatchers
@@ -27,6 +29,7 @@ class DetailsViewModel @Inject constructor(
     private val observeMovieDetails: ObserveMovieDetails,
     private val observeCredits: ObserveCredits,
     private val observeRecommendations: ObserveRecommendations,
+    private val logoutIteractor: LogoutIteractor,
     private val dispatchers: AppCoroutineDispatchers,
 ) : ViewModel() {
 
@@ -99,6 +102,12 @@ class DetailsViewModel @Inject constructor(
                     uiMessageManager
                 )
         }
+    }
+
+
+
+    fun logout()  = viewModelScope.launch(dispatchers.io) {
+        logoutIteractor(LogoutIteractor.Params()).collect()
     }
 
     fun clearMessage(id: Long) {

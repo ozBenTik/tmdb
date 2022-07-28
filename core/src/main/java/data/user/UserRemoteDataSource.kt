@@ -1,20 +1,18 @@
 package com.example.core.data.user
 
-import com.example.core.data.user.AuthenticatedUserInfoBasic
-import com.example.core.data.user.FirebaseUserInfo
 import com.google.firebase.auth.FirebaseAuth
+import di.ApplicationScope
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.*
 import timber.log.Timber
-import javax.inject.Inject
-import di.ApplicationScope
 import util.AppCoroutineDispatchers
+import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
 class UserRemoteDataSource @Inject constructor(
-    private val firebase: FirebaseAuth,
+    private val firebaseAuth: FirebaseAuth,
     @ApplicationScope private val externalScope: CoroutineScope,
     private val dispatchers: AppCoroutineDispatchers,
 ) {
@@ -25,8 +23,8 @@ class UserRemoteDataSource @Inject constructor(
                 // This callback gets always executed on the main thread because of Firebase
                 trySend(auth)
             }
-            firebase.addAuthStateListener(authStateListener)
-            awaitClose { firebase.removeAuthStateListener(authStateListener) }
+            firebaseAuth.addAuthStateListener(authStateListener)
+            awaitClose { firebaseAuth.removeAuthStateListener(authStateListener) }
         }
             .map { authState ->
                 // This map gets executed in the Flow's context
@@ -51,5 +49,23 @@ class UserRemoteDataSource @Inject constructor(
 
         // Send the current user for observers
         return FirebaseUserInfo(auth.currentUser)
+    }
+
+    fun login(email: String, password: String) = callbackFlow {
+
+        val authStateListener: ((Boolean) -> Unit) = { auth ->
+            // This callback gets always executed on the main thread because of Firebase
+            trySend(auth)
+        }
+
+        firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener {
+            authStateListener(it.isSuccessful)
+        }
+
+        awaitClose {  }
+    }
+
+    fun logout() {
+        firebaseAuth.signOut()
     }
 }

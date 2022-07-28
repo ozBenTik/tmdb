@@ -1,12 +1,15 @@
 package com.example.core.data.user
 
-import data.movies.datasource.MoviesRemoteDataSource
-import kotlinx.coroutines.flow.Flow
-import result.Result
 import javax.inject.Inject
 
-class LoginRepository @Inject constructor(
+class UserRepository @Inject constructor(
     private val userRemoteDataSource: UserRemoteDataSource
 ){
+
+    fun login(email: String, password: String) =
+        userRemoteDataSource.login(email, password)
+
+    fun logout() =
+        userRemoteDataSource.logout()
 
 }
