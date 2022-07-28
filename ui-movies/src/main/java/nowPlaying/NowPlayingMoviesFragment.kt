@@ -47,7 +47,7 @@ class NowPlayingMoviesFragment: Fragment() {
         NavigationUI.setupWithNavController(binding.toolbar, findNavController())
 
         binding.logoutButton.setOnClickListener {
-            viewModel.signOut()
+            viewModel.logout()
         }
 
         launchAndRepeatWithViewLifecycle {

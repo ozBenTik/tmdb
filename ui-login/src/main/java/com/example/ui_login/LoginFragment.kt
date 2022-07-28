@@ -5,15 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
-import androidx.activity.OnBackPressedDispatcher
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.SavedStateHandle
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.ui_login.databinding.FragmentLoginBinding
-import com.google.firebase.FirebaseApp
-import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
 import extensions.launchAndRepeatWithViewLifecycle
 import timber.log.Timber
@@ -21,10 +17,8 @@ import timber.log.Timber
 @AndroidEntryPoint
 class LoginFragment : Fragment() {
 
-
     lateinit var binding: FragmentLoginBinding
     private val viewModel: LoginViewModel by viewModels()
-    private lateinit var auth: FirebaseAuth
 
     private var savedStateHandle: SavedStateHandle? = null
 
@@ -34,9 +28,6 @@ class LoginFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        context?.let {
-            FirebaseApp.initializeApp(it)
-        }
     }
 
     override fun onCreateView(
@@ -68,13 +59,12 @@ class LoginFragment : Fragment() {
 
             viewModel.loginState.collect {
                 when (it) {
-                    is LoginViewModel.LoginResult.SUCCESS -> {
+                    true -> {
                         savedStateHandle?.set(LOGIN_SUCCESSFUL, true)
                         navController.popBackStack()
                     }
-                    is LoginViewModel.LoginResult.FAILURE -> {
+                    false -> {
                         savedStateHandle?.set(LOGIN_SUCCESSFUL, false)
-                        Timber.e("Sign in failed -> ${it.exception ?: ""}")
                     }
                 }
             }

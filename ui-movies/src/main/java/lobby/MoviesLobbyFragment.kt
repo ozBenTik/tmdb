@@ -58,7 +58,7 @@ class MoviesLobbyFragment : Fragment() {
         }
 
         binding.logoutButton.setOnClickListener {
-            viewModel.signOut()
+            viewModel.logout()
         }
 
         launchAndRepeatWithViewLifecycle {

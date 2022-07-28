@@ -45,7 +45,7 @@ class TopRatedMoviesFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.logoutButton.setOnClickListener {
-            viewModel.signOut()
+            viewModel.logout()
         }
 
         NavigationUI.setupWithNavController(binding.toolbar, findNavController())

@@ -3,22 +3,21 @@ package com.example.domain.users.iteractors
 import com.example.core.data.user.UserRepository
 import com.example.domain.FlowInteractor
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.flow
 import result.Result
 import util.AppCoroutineDispatchers
 import javax.inject.Inject
 
-class SignoutIteractor @Inject constructor(
+class LogoutIteractor @Inject constructor(
     private val userRepository: UserRepository,
     dispatchers: AppCoroutineDispatchers,
-) : FlowInteractor<SignoutIteractor.Params, Unit>(dispatchers.io) {
+) : FlowInteractor<LogoutIteractor.Params, Boolean>(dispatchers.io) {
 
-    override suspend fun doWork(params: Params): Flow<Result<Unit>> {
-        return userRepository.logout().map {
-            Result.Success(it)
-        }
+    override suspend fun doWork(params: Params): Flow<Result<Boolean>> = flow{
+        userRepository.logout()
     }
 
-    data class Params(val a: Unit? = null)
+
+    class Params()
 
 }

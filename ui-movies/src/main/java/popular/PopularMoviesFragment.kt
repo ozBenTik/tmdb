@@ -46,7 +46,7 @@ class PopularMoviesFragment: Fragment() {
 
 
         binding.logoutButton.setOnClickListener {
-            viewModel.signOut()
+            viewModel.logout()
         }
 
         NavigationUI.setupWithNavController(binding.toolbar, findNavController())

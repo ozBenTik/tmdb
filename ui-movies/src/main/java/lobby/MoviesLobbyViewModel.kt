@@ -10,7 +10,7 @@ import com.example.domain.movies.observers.ObserveNowPlayingMovies
 import com.example.domain.movies.observers.ObservePopularMovies
 import com.example.domain.movies.observers.ObserveTopRatedMovies
 import com.example.domain.movies.observers.ObserveUpcomingMovies
-import com.example.domain.users.iteractors.SignoutIteractor
+import com.example.domain.users.iteractors.LogoutIteractor
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -30,7 +30,7 @@ class MoviesLobbyViewModel @Inject constructor(
     private val updateNowPlayingMovies: UpdateNowPlayingMovies,
     private val updateTopRatedMovies: UpdateTopRatedMovies,
     private val updateUpcomingMovies: UpdateUpcomingMovies,
-    private val signoutIteractor: SignoutIteractor,
+    private val logoutIteractor: LogoutIteractor,
     private val dispatchers: AppCoroutineDispatchers,
     observePopularMovies: ObservePopularMovies,
     observeTopRatedMovies: ObserveTopRatedMovies,
@@ -48,7 +48,6 @@ class MoviesLobbyViewModel @Inject constructor(
         observePopularMovies(ObservePopularMovies.Params(1))
         observeUpcomingMovies(ObserveUpcomingMovies.Params(1))
         observeNowPlayingMovies(ObserveNowPlayingMovies.Params(1))
-        observeTopRatedMovies(ObserveTopRatedMovies.Params(1))
         observeTopRatedMovies(ObserveTopRatedMovies.Params(1))
 
         refresh()
@@ -84,12 +83,6 @@ class MoviesLobbyViewModel @Inject constructor(
         LobbyViewState.Empty
     )
 
-    fun signOut() {
-        viewModelScope.launch(dispatchers.io) {
-            signoutIteractor(SignoutIteractor.Params()).collect()
-        }
-    }
-
     fun refresh() {
         viewModelScope.launch(dispatchers.io) {
             updatePopularMovies(UpdatePopularMovies.Params(UpdatePopularMovies.Page.REFRESH))
@@ -122,6 +115,10 @@ class MoviesLobbyViewModel @Inject constructor(
                     uiMessageManager
                 )
         }
+    }
+
+    fun logout()  = viewModelScope.launch(dispatchers.io) {
+        logoutIteractor(LogoutIteractor.Params()).collect()
     }
 
     fun clearMessage(id: Long) {
