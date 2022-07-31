@@ -14,12 +14,10 @@ import com.example.moviestmdb.core_ui.util.SpaceItemDecoration
 import com.example.ui_movies.R
 import com.example.ui_movies.databinding.FragmentLobbyBinding
 import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
 import extensions.launchAndRepeatWithViewLifecycle
 import nowPlaying.NowPlayingMoviesCarrouselAdapter
 import popular.PopularMoviesCarrouselAdapter
-import timber.log.Timber
 import toprated.TopRatedMoviesCarrouselAdapter
 import upcoming.UpcomingMoviesCarrouselAdapter
 import javax.inject.Inject
@@ -60,7 +58,7 @@ class MoviesLobbyFragment : Fragment() {
         }
 
         binding.logoutButton.setOnClickListener {
-            FirebaseAuth.getInstance().signOut()
+            viewModel.logout()
         }
 
         launchAndRepeatWithViewLifecycle {

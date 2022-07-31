@@ -1,4 +1,4 @@
-package com.example.domain
+package com.example.domain.movies
 
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadType

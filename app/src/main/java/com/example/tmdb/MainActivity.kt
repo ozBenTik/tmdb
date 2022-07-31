@@ -18,7 +18,6 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityMainBinding
 
-
     @Inject
     lateinit var firebaseAuthStateUserDataSource: UserRemoteDataSource
 
@@ -39,7 +38,6 @@ class MainActivity : AppCompatActivity() {
 
             auth = FirebaseAuth.getInstance()
             setupWithNavController(binding.bottomNavigation, navController)
-
 
             lifecycleScope.launchWhenStarted {
                 firebaseAuthStateUserDataSource.getBasicUserInfo().collectLatest { result ->

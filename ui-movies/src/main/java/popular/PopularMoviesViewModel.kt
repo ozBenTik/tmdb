@@ -6,20 +6,29 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.example.domain.movies.observers.ObservePagedPopularMovies
+import com.example.domain.users.iteractors.LogoutIteractor
 import com.example.model.Movie
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.launch
+import util.AppCoroutineDispatchers
 import javax.inject.Inject
 
 @HiltViewModel
 class PopularMoviesViewModel @Inject constructor(
-    private val pagingInteractor: ObservePagedPopularMovies
+    private val pagingInteractor: ObservePagedPopularMovies,
+    private val logoutIteractor: LogoutIteractor,
+    private val dispatchers: AppCoroutineDispatchers
 ): ViewModel() {
     val pagedList: Flow<PagingData<Movie>> =
         pagingInteractor.flow.cachedIn(viewModelScope)
 
     init {
         pagingInteractor(ObservePagedPopularMovies.Params(PAGING_CONFIG))
+    }
+
+    fun logout() = viewModelScope.launch(dispatchers.io){
+        logoutIteractor(LogoutIteractor.Params())
     }
 
     companion object {

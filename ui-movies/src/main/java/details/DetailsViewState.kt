@@ -4,7 +4,7 @@ import com.example.model.Movie
 import util.UiMessage
 
 data class DetailsViewState(
-    val movieDetails: Movie? = null,
+    val movieDetails: Pair<Movie, Boolean>? = null,
     val movieRefreshing: Boolean = false,
     val recommendations: List<Movie> = emptyList(),
     val recommendationsRefreshing: Boolean = false,

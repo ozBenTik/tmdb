@@ -7,12 +7,8 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.core_ui.databinding.ActorCardBinding
-import com.example.core_ui.databinding.MovieCardBinding
 import com.example.model.Actor
-import com.example.model.Movie
 import com.example.model.util.TmdbImageUrlProvider
-import nowPlaying.NowPlayingMovieCarrouselViewHolder
-import nowPlaying.NowPlayingMovieDiff
 
 class ActorsCarrouselAdapter(
     private val tmdbImageUrlProvider: TmdbImageUrlProvider,

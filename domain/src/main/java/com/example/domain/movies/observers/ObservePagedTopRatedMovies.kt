@@ -4,9 +4,9 @@ import androidx.paging.ExperimentalPagingApi
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import com.example.domain.MoviesPagingSource
-import com.example.domain.PaginatedMovieRemoteMediator
 import com.example.domain.PagingInteractor
+import com.example.domain.movies.MoviesPagingSource
+import com.example.domain.movies.PaginatedMovieRemoteMediator
 import com.example.domain.movies.iteractors.UpdateTopRatedMovies
 import com.example.model.Movie
 import data.movies.MoviesStore
