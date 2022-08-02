@@ -1,6 +1,7 @@
 package data.movies
 
 import com.example.model.Actor
+import com.example.model.Genre
 import com.example.model.Movie
 import data.movies.datasource.MoviesLocalDataSource
 import data.movies.datasource.MoviesRemoteDataSource
@@ -85,5 +86,17 @@ class MoviesRepository @Inject constructor(
         }
 
     fun observeCredits() = local.creditsStore.observeEntries()
+
+    // ------------- Genres capabilities -------------------
+    suspend fun saveGenres(genres: List<Genre>) {
+        local.genresStore.insert(genres)
+    }
+
+    suspend fun getGenres() =
+        flow {
+            emit(remote.getGenres())
+        }
+
+    fun observeGenres() = local.genresStore.observeEntries()
 
 }
