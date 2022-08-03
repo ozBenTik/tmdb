@@ -1,5 +1,7 @@
 package com.example.model
 
+import kotlin.reflect.KClass
+
 data class DiscoveryParams(
 
 val language: String = "",
@@ -166,14 +168,8 @@ val with_genres: String = ""
 //Filter the results to exclude the specific production companies you specify here. AND / OR filters are supported.
 ) {
 
-
-    override fun toString(): String {
-        StringBuilder().apply {
-            this@DiscoveryParams::class.java.declaredFields.forEach {
-
-            }
+    fun toMap(): Map<String, String> =
+        mutableMapOf<String, String>().apply {
+            put("language", this@DiscoveryParams.language)
         }
-        return super.toString()
-    }
-
 }

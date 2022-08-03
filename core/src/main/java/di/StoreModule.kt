@@ -35,6 +35,11 @@ class StoreModule {
 
     @Singleton
     @Provides
+    @Discovery
+    fun provideDiscoveryStore(): MoviesStore = MoviesStore()
+
+    @Singleton
+    @Provides
     fun provideRecommendationsStore(): RecommendationsStore = RecommendationsStore()
 
     @Singleton

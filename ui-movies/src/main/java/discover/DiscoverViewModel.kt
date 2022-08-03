@@ -12,6 +12,7 @@ import com.example.model.Movie
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.launch
 import util.AppCoroutineDispatchers
 import javax.inject.Inject
@@ -25,7 +26,7 @@ class DiscoverViewModel @Inject constructor(
     val pagedList: Flow<PagingData<Movie>> =
         pagingInteractor.flow.cachedIn(viewModelScope)
 
-    private val discoverParamsFilter = MutableStateFlow<DiscoveryParams>(DiscoveryParams())
+    private val discoverParamsFilter = MutableStateFlow(DiscoveryParams())
 
     init {
         pagingInteractor(ObservePagedDiscovery.Params(discoverParamsFilter, PAGING_CONFIG))

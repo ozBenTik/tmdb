@@ -19,12 +19,14 @@
         <entry key="core-ui/src/main/res/font/work_sans_semibold.xml" value="0.1638888888888889" />
         <entry key="core-ui/src/main/res/layout/actor_card.xml" value="0.720164609053498" />
         <entry key="core-ui/src/main/res/layout/actors_carrousel_view.xml" value="0.26970977783203126" />
+        <entry key="core-ui/src/main/res/layout/filter_bottom_shit.xml" value="0.26296296296296295" />
         <entry key="core-ui/src/main/res/layout/movie_card.xml" value="0.1" />
         <entry key="core-ui/src/main/res/layout/movies_carrousel_view.xml" value="0.1" />
         <entry key="core-ui/src/main/res/layout/popularity_badge_view.xml" value="0.1" />
         <entry key="core-ui/src/main/res/layout/recommended_card.xml" value="0.48005523681640627" />
         <entry key="core-ui/src/main/res/layout/recommended_carrousel_view.xml" value="0.1" />
         <entry key="ui-login/src/main/res/layout/fragment_login.xml" value="0.31416897451950687" />
+        <entry key="ui-movies/src/main/res/drawable/ic_baseline_filter_alt_24.xml" value="0.173" />
         <entry key="ui-movies/src/main/res/layout/fragment_details.xml" value="0.5029535864978903" />
         <entry key="ui-movies/src/main/res/layout/fragment_lobby.xml" value="0.1" />
         <entry key="ui-movies/src/main/res/layout/fragment_now_playing_movies.xml" value="0.1398148148148148" />
@@ -36,6 +38,7 @@
         <entry key="ui-movies/src/main/res/layout/list_item_popular_movie.xml" value="0.1" />
         <entry key="ui-movies/src/main/res/layout/list_item_top_rated_movie.xml" value="0.1" />
         <entry key="ui-movies/src/main/res/layout/list_item_upcoming_movie.xml" value="0.1398148148148148" />
+        <entry key="ui-movies/src/main/res/menu/discover_menu.xml" value="0.26296296296296295" />
         <entry key="ui-movies/src/main/res/menu/menu.xml" value="0.45754956786985257" />
         <entry key="ui-people/src/main/res/layout/fragment_people.xml" value="0.1" />
         <entry key="ui-tvshows/src/main/res/layout/fragment_tv_shows.xml" value="0.27242889404296877" />

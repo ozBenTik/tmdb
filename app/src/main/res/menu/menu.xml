@@ -2,19 +2,19 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:title="movies"
+        android:title="Movies"
         android:icon="@drawable/ic_baseline_local_movies_24"
         android:id="@+id/movies_nav_graph"
         />
 
     <item
-        android:title="tv_shows"
-        android:icon="@drawable/ic_baseline_tv_24"
-        android:id="@+id/tv_shows_nav_graph"
+        android:title="Discover"
+        android:icon="@drawable/ic_baseline_search_24"
+        android:id="@+id/discover_nav_graph"
         />
 
     <item
-        android:title="user details"
+        android:title="User Details"
         android:icon="@drawable/ic_baseline_people_24"
         android:id="@+id/user_nav_graph"
         />

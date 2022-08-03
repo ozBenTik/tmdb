@@ -86,4 +86,15 @@ class MoviesRepository @Inject constructor(
 
     fun observeCredits() = local.creditsStore.observeEntries()
 
+    // ------------- Discover capabilities -------------------
+    suspend fun saveDiscovery(page: Int, movies: List<Movie>) {
+        local.discoveryStore.insert(page, movies)
+    }
+
+    fun observeDiscovery() = local.discoveryStore.observeEntries()
+
+    suspend fun getDiscovery(page: Int, discoveryParams: Map<String, String>) =
+        flow {
+            emit(remote.getDiscovery(page, discoveryParams))
+        }
 }

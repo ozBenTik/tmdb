@@ -7,14 +7,13 @@ import androidx.paging.PagingData
 import com.example.domain.PagingInteractor
 import com.example.domain.movies.MoviesPagingSource
 import com.example.domain.movies.PaginatedMovieRemoteMediator
+import com.example.domain.movies.iteractors.UpdateDiscovery
 import com.example.model.Movie
-import com.example.core.data.movies.datasource.localstore.MoviesStore
-import com.example.domain.movies.iteractors.discovery.UpdateDiscovery
 import com.example.model.DiscoveryParams
+import data.movies.MoviesStore
 import di.Discovery
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.*
 import javax.inject.Inject
 
 @OptIn(ExperimentalPagingApi::class)
@@ -27,16 +26,15 @@ class ObservePagedDiscovery @Inject constructor(
     override fun createObservable(
         params: Params
     ): Flow<PagingData<Movie>> {
-        return params.discoveryInput.flatMapLatest {
-            Pager(
+        return Pager(
                 config = params.pagingConfig,
                 remoteMediator = PaginatedMovieRemoteMediator(moviesStore = discoveryStore) { page ->
-                    updateDiscovery.executeSync(UpdateDiscovery.Params(page, it))
+                    updateDiscovery.executeSync(UpdateDiscovery.Params(page, params.discoveryInput.first()))
                     pagingSourceFactory.invalidate()
                 },
                 pagingSourceFactory = pagingSourceFactory
             ).flow
-        }
+
     }
 
     private val pagingSourceFactory = androidx.paging.InvalidatingPagingSourceFactory(::createPagingSource)
