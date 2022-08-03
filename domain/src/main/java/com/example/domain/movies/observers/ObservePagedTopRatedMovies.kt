@@ -9,7 +9,7 @@ import com.example.domain.movies.MoviesPagingSource
 import com.example.domain.movies.PaginatedMovieRemoteMediator
 import com.example.domain.movies.iteractors.UpdateTopRatedMovies
 import com.example.model.Movie
-import data.movies.MoviesStore
+import com.example.core.data.movies.datasource.localstore.MoviesStore
 import di.TopRated
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject

@@ -9,7 +9,7 @@ import com.example.domain.movies.MoviesPagingSource
 import com.example.domain.movies.PaginatedMovieRemoteMediator
 import com.example.domain.movies.iteractors.UpdateUpcomingMovies
 import com.example.model.Movie
-import data.movies.MoviesStore
+import com.example.core.data.movies.datasource.localstore.MoviesStore
 import di.Upcoming
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
@@ -36,7 +36,9 @@ class ObservePagedUpcomingMovies @Inject constructor(
     private val pagingSourceFactory = androidx.paging.InvalidatingPagingSourceFactory(::createPagingSource)
 
     private fun createPagingSource(): MoviesPagingSource {
-        return MoviesPagingSource(upcomingStore)
+        return MoviesPagingSource(upcomingStore).apply {
+
+        }
     }
 
     data class Params(

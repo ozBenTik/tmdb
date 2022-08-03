@@ -1,4 +1,4 @@
-package data.movies
+package com.example.core.data.movies.datasource.localstore
 import com.example.model.Movie
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableSharedFlow
