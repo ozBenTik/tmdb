@@ -3,9 +3,8 @@ package nowPlaying
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.*
-import com.bumptech.glide.Glide.init
 import com.example.domain.movies.iteractors.UpdateGenres
-import com.example.domain.movies.observers.ObserveNowPlayingGenres
+import com.example.domain.movies.observers.ObserveGenres
 import com.example.domain.movies.observers.ObservePagedNowPlayingMovies
 import com.example.domain.users.iteractors.LogoutIteractor
 import com.example.model.MovieAndGenres
@@ -18,7 +17,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class NowPlayingMoviesViewModel @Inject constructor(
-    observeGenres: ObserveNowPlayingGenres,
+    observeGenres: ObserveGenres,
     private val pagedNowPlaying: ObservePagedNowPlayingMovies,
     private val logoutIteractor: LogoutIteractor,
     private val updateGenres: UpdateGenres,
@@ -58,7 +57,7 @@ class NowPlayingMoviesViewModel @Inject constructor(
     }.cachedIn(viewModelScope)
 
     init {
-        observeGenres(ObserveNowPlayingGenres.Params())
+        observeGenres(ObserveGenres.Params())
         loadData()
     }
 

@@ -1,26 +1,38 @@
 package com.example.model
 
-import kotlin.reflect.KClass
+import com.example.model.FilterKey.*
 
-data class DiscoveryParams(
+enum class FilterKey{
+    LANGUAGE,
+    GENRES,
+    RELEASE_DATE_FROM,
+    RELEASE_DATE_TO
+}
 
-val language: String = "",
+data class FilterParams(
+
+    var language: String = "",
 //pattern: ([a-z]{2})-([A-Z]{2})
 //default: en-US
 //optional
+//
+//    val region: String = "",
+////Specify a ISO 3166-1 code to filter release dates. Must be uppercase.
+////pattern: ^[A-Z]{2}$
+////optional
+//
+//    val sort_by: String = "",
+////Allowed Values: , popularity.asc, popularity.desc, release_date.asc, release_date.desc, revenue.asc, revenue.desc, primary_release_date.asc, primary_release_date.desc, original_title.asc, original_title.desc, vote_average.asc, vote_average.desc, vote_count.asc, vote_count.desc
+////default: popularity.desc
 
-val region: String = "",
-//Specify a ISO 3166-1 code to filter release dates. Must be uppercase.
-//pattern: ^[A-Z]{2}$
-//optional
-
-val sort_by: String = "",
-//Allowed Values: , popularity.asc, popularity.desc, release_date.asc, release_date.desc, revenue.asc, revenue.desc, primary_release_date.asc, primary_release_date.desc, original_title.asc, original_title.desc, vote_average.asc, vote_average.desc, vote_count.asc, vote_count.desc
-//default: popularity.desc
-
-val with_genres: String = ""
+    var with_genres: String = "",
 //Comma separated value of genre ids that you want to include in the results.
 //optional
+
+    var release_dateFrom: String = "",
+    var release_dateTo: String = "",
+
+    var genres: MutableList<String> = mutableListOf<String>()
 
 ////Choose from one of the many available sort options.
 ////Allowed Values: , popularity.asc, popularity.desc, release_date.asc, release_date.desc, revenue.asc, revenue.desc, primary_release_date.asc, primary_release_date.desc, original_title.asc, original_title.desc, vote_average.asc, vote_average.desc, vote_count.asc, vote_count.desc
@@ -168,8 +180,38 @@ val with_genres: String = ""
 //Filter the results to exclude the specific production companies you specify here. AND / OR filters are supported.
 ) {
 
+    fun removeFilter(filterParam: FilterKey, value: Any) {
+        when(filterParam) {
+            LANGUAGE -> {
+                this.language = ""
+            }
+            GENRES -> {
+                (value as? String)?.let {
+                    this.genres.remove(it)
+                }
+            }
+            RELEASE_DATE_FROM -> { this.release_dateFrom = "" }
+            RELEASE_DATE_TO ->{ this.release_dateTo = "" }
+        }
+    }
+
+    fun addFilter(filterParam: FilterKey, value: Any) {
+        when(filterParam) {
+            LANGUAGE -> { this.language = (value as? String) ?: "" }
+            GENRES -> { (value as? String)?.let { this.genres.add(it) } }
+            RELEASE_DATE_FROM -> { this.release_dateFrom = (value as? String) ?: "" }
+            RELEASE_DATE_TO ->{ this.release_dateTo = (value as? String) ?: "" }
+        }
+    }
+
     fun toMap(): Map<String, String> =
         mutableMapOf<String, String>().apply {
-            put("language", this@DiscoveryParams.language)
+            put("release_date.gte", this@FilterParams.release_dateFrom)
+            put("release_date.lte", this@FilterParams.release_dateTo)
+            put("language", this@FilterParams.language)
+            put("with_genres", this@FilterParams.genres.takeIf { it.isNotEmpty() }?.let {
+                val string = it.toString()
+                string.substring(1, string.length-1)
+            } ?: "")
         }
 }

@@ -30,12 +30,9 @@ interface MoviesService {
     @GET("movie/{movie_id}/recommendations")
     fun getRecommended(@Path("movie_id") movieId: Int): Call<MovieResponse>
 
-<<<<<<< HEAD
     @GET("discover/movie")
     fun getDiscovery(@Query("page") page: Int, @QueryMap queries: Map<String, String>) : Call<MovieResponse>
 
-=======
     @GET("genre/movie/list")
     fun getGenres(): Call<GenreResponse>
->>>>>>> 24948fcc2e16e7472ebe66410a76401b7f9e0614
 }

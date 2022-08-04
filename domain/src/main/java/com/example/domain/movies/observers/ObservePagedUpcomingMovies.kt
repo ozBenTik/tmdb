@@ -36,9 +36,7 @@ class ObservePagedUpcomingMovies @Inject constructor(
     private val pagingSourceFactory = androidx.paging.InvalidatingPagingSourceFactory(::createPagingSource)
 
     private fun createPagingSource(): MoviesPagingSource {
-        return MoviesPagingSource(upcomingStore).apply {
-
-        }
+        return MoviesPagingSource(upcomingStore)
     }
 
     data class Params(

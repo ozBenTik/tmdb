@@ -5,18 +5,21 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentResultListener
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.NavigationUI
+import androidx.paging.PagingData
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.core.TmdbImageManager
+import com.example.domain.movies.MoviesPagingSource
+import com.example.model.Movie
 import com.example.moviestmdb.core_ui.util.SpaceItemDecoration
-import com.example.moviestmdb.core_ui.widget.filterbottomshit.FiltersBottomShit
+import filterbottomshit.FiltersBottomShit
 import com.example.ui_movies.R
 import com.example.ui_movies.databinding.FragmentDiscoverBinding
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import dagger.hilt.android.AndroidEntryPoint
 import extensions.launchAndRepeatWithViewLifecycle
 import kotlinx.coroutines.flow.collectLatest
@@ -48,31 +51,15 @@ class DiscoverFragment : Fragment() {
         return binding.root
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
-        R.id.filter -> {
-            showBottomShit()
-            true
-        }
-        R.id.logout -> {
-            viewModel.logout()
-            true
-        }
-        else -> {
-            super.onOptionsItemSelected(item)
-        }
-
+    private fun showBottomShit() {
+        FiltersBottomShit{
+            viewModel.applyFilters(it)
+        }.show(parentFragmentManager, "")
     }
 
-    fun showBottomShit() {
-        val modalBottomSheet = FiltersBottomShit()
-        modalBottomSheet.show(parentFragmentManager, FiltersBottomShit.TAG)
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-//        viewModel.fetchDiscover(DiscoveryParams(language = "he-il"))
-
 
         binding.topAppBar.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
@@ -110,12 +97,6 @@ class DiscoverFragment : Fragment() {
         binding.list.run {
             layoutManager = GridLayoutManager(context, 2, RecyclerView.VERTICAL, false)
             adapter = pagingAdapter
-
-            val spacing = resources.getDimension(com.example.core_ui.R.dimen.spacing_normal).toInt()
-            val decoration = SpaceItemDecoration(
-                spacing, -spacing
-            )
-            addItemDecoration(decoration)
         }
     }
 }

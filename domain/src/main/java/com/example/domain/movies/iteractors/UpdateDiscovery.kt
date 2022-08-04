@@ -1,10 +1,11 @@
 package com.example.domain.movies.iteractors
+
+import com.example.core.data.movies.datasource.localstore.MoviesStore
 import com.example.domain.FlowInteractor
 import com.example.model.MovieResponse
 import data.movies.MoviesRepository
-import com.example.model.DiscoveryParams
-import data.movies.MoviesStore
 import di.Discovery
+import com.example.model.FilterParams
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.onEach
 import result.Result
@@ -32,7 +33,7 @@ class UpdateDiscovery @Inject constructor(
             .onEach { result ->
                 when (result) {
                     is Result.Error -> Timber.e(result.exception)
-                    is Result.Success -> moviesRepository.saveNowPlayingMovies(
+                    is Result.Success -> moviesRepository.saveDiscovery(
                         result.data.page,
                         result.data.movieList
                     )
@@ -40,7 +41,7 @@ class UpdateDiscovery @Inject constructor(
             }
     }
 
-    data class Params(val page: Int, val discoveryParams: DiscoveryParams)
+    data class Params(val page: Int, val discoveryParams: FilterParams)
 
     object Page {
         const val NEXT_PAGE = -1

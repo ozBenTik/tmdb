@@ -6,9 +6,9 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.core_ui.databinding.MovieCardBinding
 import com.example.model.Movie
 import com.example.model.util.TmdbImageUrlProvider
+import com.example.ui_movies.databinding.DiscoveryCardBinding
 
 class DiscoverAdapter(
     private val tmdbImageUrlProvider: TmdbImageUrlProvider,
@@ -17,7 +17,7 @@ class DiscoverAdapter(
 ) : PagingDataAdapter<Movie, DiscoveryViewHolder>(TopRatedEntryComparator) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DiscoveryViewHolder {
-        val binding = MovieCardBinding.inflate(
+        val binding = DiscoveryCardBinding.inflate(
             LayoutInflater.from(parent.context), parent, false
         )
         return DiscoveryViewHolder(binding)
@@ -53,7 +53,7 @@ class DiscoverAdapter(
 }
 
 class DiscoveryViewHolder(
-    internal val binding: MovieCardBinding
+    internal val binding: DiscoveryCardBinding
 ) : RecyclerView.ViewHolder(binding.root)
 
 object TopRatedEntryComparator : DiffUtil.ItemCallback<Movie>() {

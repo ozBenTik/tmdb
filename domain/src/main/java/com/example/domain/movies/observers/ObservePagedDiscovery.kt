@@ -4,13 +4,14 @@ import androidx.paging.ExperimentalPagingApi
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
+import com.example.core.data.movies.datasource.localstore.MoviesStore
 import com.example.domain.PagingInteractor
 import com.example.domain.movies.MoviesPagingSource
 import com.example.domain.movies.PaginatedMovieRemoteMediator
 import com.example.domain.movies.iteractors.UpdateDiscovery
+import com.example.domain.movies.iteractors.UpdateTopRatedMovies
 import com.example.model.Movie
-import com.example.model.DiscoveryParams
-import data.movies.MoviesStore
+import com.example.model.FilterParams
 import di.Discovery
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.*
@@ -22,19 +23,20 @@ class ObservePagedDiscovery @Inject constructor(
     private val updateDiscovery: UpdateDiscovery,
 ) : PagingInteractor<ObservePagedDiscovery.Params, Movie>() {
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     override fun createObservable(
         params: Params
     ): Flow<PagingData<Movie>> {
-        return Pager(
+        return params.filterParams.flatMapLatest { filterParams ->
+            discoveryStore.deleteAll()
+            Pager(
                 config = params.pagingConfig,
                 remoteMediator = PaginatedMovieRemoteMediator(moviesStore = discoveryStore) { page ->
-                    updateDiscovery.executeSync(UpdateDiscovery.Params(page, params.discoveryInput.first()))
+                    updateDiscovery.executeSync(UpdateDiscovery.Params(page, filterParams))
                     pagingSourceFactory.invalidate()
                 },
                 pagingSourceFactory = pagingSourceFactory
             ).flow
-
+        }
     }
 
     private val pagingSourceFactory = androidx.paging.InvalidatingPagingSourceFactory(::createPagingSource)
@@ -44,7 +46,7 @@ class ObservePagedDiscovery @Inject constructor(
     }
 
     data class Params(
-        val discoveryInput: Flow<DiscoveryParams>,
+        val filterParams: Flow<FilterParams>,
         override val pagingConfig: PagingConfig,
     ) : Parameters<Movie>
 }

@@ -62,8 +62,11 @@
         <item name="android:windowBackground">?android:colorBackground</item>
         <item name="android:windowLightStatusBar" tools:ignore="NewApi">true</item>
 
-        <item name="bottomSheetDialogTheme">@style/ModalBottomSheetDialog</item>
+        <item name="bottomSheetDialogTheme">@style/CustomBottomSheetDialogTheme</item>
+
+        <item name="android:datePickerStyle">@style/DatePickerStyle</item>
     </style>
+
 
     <style name="ThemeOverlay.Tmdb.Snackbar" parent="">
         <item name="colorPrimary">@color/tmdb_red_400</item>
