@@ -1,8 +1,8 @@
 package com.example.domain.movies.iteractors
+import com.example.core.data.movies.datasource.localstore.MoviesStore
 import com.example.domain.FlowInteractor
 import com.example.model.MovieResponse
 import data.movies.MoviesRepository
-import com.example.core.data.movies.datasource.localstore.MoviesStore
 import di.Popular
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.onEach

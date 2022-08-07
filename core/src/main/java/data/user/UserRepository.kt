@@ -1,11 +1,6 @@
 package com.example.core.data.user
 
-import com.google.android.gms.tasks.Task
-import com.google.firebase.auth.AuthResult
-import data.movies.datasource.MoviesRemoteDataSource
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
-import result.Result
 import javax.inject.Inject
 
 class UserRepository @Inject constructor(

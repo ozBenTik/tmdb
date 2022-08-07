@@ -1,14 +1,10 @@
 package data.movies.datasource
 
-import di.*
 import com.example.core.data.movies.datasource.localstore.CreditsStore
 import com.example.core.data.movies.datasource.localstore.GenresStore
-import com.example.core.data.movies.datasource.localstore.RecommendationsStore
 import com.example.core.data.movies.datasource.localstore.MoviesStore
-import di.NowPlaying
-import di.Popular
-import di.TopRated
-import di.Upcoming
+import com.example.core.data.movies.datasource.localstore.RecommendationsStore
+import di.*
 import javax.inject.Inject
 
 class MoviesLocalDataSource @Inject constructor(

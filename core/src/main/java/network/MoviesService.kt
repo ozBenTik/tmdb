@@ -1,7 +1,6 @@
 package network
 
 import com.example.model.CreditsResponse
-import com.example.model.Genre
 import com.example.model.GenreResponse
 import com.example.model.MovieResponse
 import retrofit2.Call

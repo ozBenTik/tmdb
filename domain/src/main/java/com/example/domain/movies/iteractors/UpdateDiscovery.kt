@@ -2,10 +2,10 @@ package com.example.domain.movies.iteractors
 
 import com.example.core.data.movies.datasource.localstore.MoviesStore
 import com.example.domain.FlowInteractor
+import com.example.model.FilterParams
 import com.example.model.MovieResponse
 import data.movies.MoviesRepository
 import di.Discovery
-import com.example.model.FilterParams
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.onEach
 import result.Result
@@ -41,7 +41,9 @@ class UpdateDiscovery @Inject constructor(
             }
     }
 
-    data class Params(val page: Int, val discoveryParams: FilterParams)
+    data class Params(
+        val page: Int, val discoveryParams: FilterParams
+        )
 
     object Page {
         const val NEXT_PAGE = -1

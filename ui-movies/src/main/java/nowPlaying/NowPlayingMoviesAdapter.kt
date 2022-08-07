@@ -6,12 +6,9 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.model.Genre
-import com.example.model.Movie
 import com.example.model.MovieAndGenres
 import com.example.model.util.TmdbImageUrlProvider
 import com.example.ui_movies.databinding.ItemNowplayingMovieBinding
-import kotlinx.coroutines.flow.flowOf
 
 class NowPlayingMoviesAdapter(
     private val tmdbImageUrlProvider: TmdbImageUrlProvider,

@@ -12,7 +12,6 @@ import com.example.ui_movies.databinding.DiscoveryCardBinding
 
 class DiscoverAdapter(
     private val tmdbImageUrlProvider: TmdbImageUrlProvider,
-//    private val tmdbDateFormatter: TmdbDateFormatter,
     private val onItemClickListener: (movieId: Int) -> Unit,
 ) : PagingDataAdapter<Movie, DiscoveryViewHolder>(TopRatedEntryComparator) {
 

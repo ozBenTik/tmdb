@@ -4,8 +4,8 @@ import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadType
 import androidx.paging.PagingState
 import androidx.paging.RemoteMediator
-import com.example.model.Movie
 import com.example.core.data.movies.datasource.localstore.MoviesStore
+import com.example.model.Movie
 
 @OptIn(ExperimentalPagingApi::class)
 class PaginatedMovieRemoteMediator(

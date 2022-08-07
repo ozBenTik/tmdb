@@ -1,14 +1,7 @@
 package com.example.core.data.user
 
-import android.app.Activity
-import android.util.Log
-import androidx.annotation.NonNull
-import com.example.model.Movie
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.OnFailureListener
-import com.google.android.gms.tasks.Task
-import com.google.android.gms.tasks.Tasks
-import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -20,7 +13,6 @@ import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.*
 import result.Result
 import timber.log.Timber
-import util.AppCoroutineDispatchers
 import javax.inject.Inject
 import javax.inject.Singleton
 

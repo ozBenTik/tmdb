@@ -2,12 +2,14 @@ package com.example.ui_userdetails
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.domain.movies.iteractors.UpdateTopRatedMovies
 import com.example.domain.users.iteractors.RemoveFavorite
 import com.example.domain.users.observers.ObserveFavoriteMovies
 import com.example.domain.users.observers.ObserveUserDetails
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import util.AppCoroutineDispatchers
 import util.ObservableLoadingCounter

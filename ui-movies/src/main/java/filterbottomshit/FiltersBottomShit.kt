@@ -76,7 +76,7 @@ class FiltersBottomShit(
             viewModel.genres.collectLatest { generes ->
                 binding.genresLoadingView.visibility = View.GONE
                 binding.genresChipGroup.removeAllViews()
-                generes.forEach { genre ->
+                generes?.forEach { genre ->
                     genre.name?.let { genreName ->
                         binding.genresChipGroup.addView(
                             Chip(context).apply {

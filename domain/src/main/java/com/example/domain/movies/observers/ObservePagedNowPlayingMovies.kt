@@ -1,20 +1,17 @@
 package com.example.domain.movies.observers
 
-import androidx.lifecycle.Transformations.map
-import androidx.paging.*
+import androidx.paging.ExperimentalPagingApi
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
 import com.example.core.data.movies.datasource.localstore.MoviesStore
 import com.example.domain.PagingInteractor
 import com.example.domain.movies.MoviesPagingSource
 import com.example.domain.movies.PaginatedMovieRemoteMediator
 import com.example.domain.movies.iteractors.UpdateNowPlayingMovies
-import com.example.model.Genre
 import com.example.model.Movie
 import di.NowPlaying
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.filter
-import kotlinx.coroutines.flow.map
-import java.util.Locale.filter
 import javax.inject.Inject
 
 @OptIn(ExperimentalPagingApi::class)

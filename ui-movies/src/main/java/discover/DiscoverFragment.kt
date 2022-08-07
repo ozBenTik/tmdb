@@ -2,26 +2,18 @@ package discover
 
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentResultListener
 import androidx.fragment.app.viewModels
-import androidx.paging.PagingData
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.core.TmdbImageManager
-import com.example.domain.movies.MoviesPagingSource
-import com.example.model.Movie
-import com.example.moviestmdb.core_ui.util.SpaceItemDecoration
-import filterbottomshit.FiltersBottomShit
 import com.example.ui_movies.R
 import com.example.ui_movies.databinding.FragmentDiscoverBinding
-import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.android.material.bottomsheet.BottomSheetDialog
 import dagger.hilt.android.AndroidEntryPoint
 import extensions.launchAndRepeatWithViewLifecycle
+import filterbottomshit.FiltersBottomShit
 import kotlinx.coroutines.flow.collectLatest
 import javax.inject.Inject
 
