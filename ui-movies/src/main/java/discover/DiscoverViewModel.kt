@@ -15,6 +15,7 @@ import kotlinx.coroutines.launch
 import util.AppCoroutineDispatchers
 import util.ObservableLoadingCounter
 import util.UiMessageManager
+import java.util.logging.Filter
 import javax.inject.Inject
 
 @HiltViewModel
@@ -24,19 +25,30 @@ class DiscoverViewModel @Inject constructor(
     private val dispatchers: AppCoroutineDispatchers
 ) : ViewModel() {
 
-    private val discoverParamsFilter = MutableStateFlow(FilterParams())
+    val discoverParamsFilter = MutableStateFlow(FilterParams())
+
+    init {
+        pagingInteractor(ObservePagedDiscovery.Params(discoverParamsFilter, PAGING_CONFIG))
+        loadData()
+    }
+
+    private fun loadData() {
+        viewModelScope.launch(dispatchers.io) {
+            discoverParamsFilter.collect()
+        }
+    }
 
     fun applyFilters(filterParams: FilterParams) {
         discoverParamsFilter.tryEmit(filterParams)
     }
 
+    fun requireParams(onParamsRequired: (params: FilterParams)->Unit) {
+        onParamsRequired(discoverParamsFilter.value)
+    }
+
     val pagedList: Flow<PagingData<Movie>> =
         pagingInteractor.flow.cachedIn(viewModelScope)
 
-    init {
-        pagingInteractor(ObservePagedDiscovery.Params(discoverParamsFilter, PAGING_CONFIG))
-
-    }
 
     fun logout() = viewModelScope.launch(dispatchers.io) {
         logoutIteractor(LogoutIteractor.Params())

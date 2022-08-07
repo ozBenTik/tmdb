@@ -28,6 +28,11 @@
 
     <style name="DatePickerStyle" parent="ThemeOverlay.MaterialComponents.MaterialCalendar">
 <!--        <item name="height">50dp</item>-->
+        <item name="materialCalendarHeaderTitle">@style/customHeaderTitle</item>
+    </style>
+
+    <style name="customHeaderTitle" parent="@style/Widget.MaterialComponents.MaterialCalendar.HeaderTitle">
+        <item name="android:textSize">24sp</item>
     </style>
 
 </resources>

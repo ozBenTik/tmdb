@@ -7,10 +7,7 @@ import com.example.model.FilterKey
 import com.example.model.FilterParams
 import com.example.model.Genre
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.*
 import result.data
 import util.AppCoroutineDispatchers
 import javax.inject.Inject
@@ -22,9 +19,16 @@ class FilterViewModel @Inject constructor(
     private val dispatchers: AppCoroutineDispatchers
 ) : ViewModel() {
 
-    private var filterParams = FilterParams()
+    var filterParams = FilterParams()
+    set(value) {
+        applyFilter(FilterKey.LANGUAGE, filterParams.language)
+        applyFilter(FilterKey.RELEASE_DATE_FROM, filterParams.release_dateFrom)
+        applyFilter(FilterKey.RELEASE_DATE_TO, filterParams.release_dateTo)
+        applyFilter(FilterKey.GENRES, filterParams.genres)
+        field = value
+    }
 
-    var genres : Flow<List<Genre>?> = flow {
+    var genres: Flow<List<Genre>?> = flow {
         updateGenres(UpdateGenres.Params()).map { result ->
             emit(result.data?.genreList)
         }.collect()
@@ -42,11 +46,12 @@ class FilterViewModel @Inject constructor(
         filterParams.removeFilter(filterKey, value)
     }
 
-    fun retrieveParams(): FilterParams {
-        return filterParams
-    }
-
-    fun setParams(filterParams: FilterParams) {
-        this.filterParams = filterParams.copy()
-    }
+//    fun setParams(filterParams: FilterParams) {
+//        this.filterParams.apply {
+//            applyFilter(FilterKey.LANGUAGE, filterParams.language)
+//            applyFilter(FilterKey.RELEASE_DATE_FROM, filterParams.release_dateFrom)
+//            applyFilter(FilterKey.RELEASE_DATE_TO, filterParams.release_dateTo)
+//            applyFilter(FilterKey.GENRES, filterParams.genres)
+//        }
+//    }
 }

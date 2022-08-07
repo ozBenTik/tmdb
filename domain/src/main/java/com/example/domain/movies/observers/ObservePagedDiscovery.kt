@@ -26,7 +26,7 @@ class ObservePagedDiscovery @Inject constructor(
     override fun createObservable(
         params: Params
     ): Flow<PagingData<Movie>> {
-        return params.filterParams.flatMapMerge { filterParams ->
+        return params.filterParams.flatMapLatest { filterParams ->
             discoveryStore.deleteAll()
             Pager(
                 config = params.pagingConfig,

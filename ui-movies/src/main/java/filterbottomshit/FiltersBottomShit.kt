@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AutoCompleteTextView
+import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.viewModels
 import com.example.model.FilterKey
 import com.example.model.FilterParams
@@ -22,6 +24,7 @@ import java.util.*
 
 @AndroidEntryPoint
 class FiltersBottomShit(
+    private val currentParams: FilterParams,
     val onSubmit: (params: FilterParams) -> Unit
 ) : BottomSheetDialogFragment() {
 
@@ -37,33 +40,42 @@ class FiltersBottomShit(
         return binding.root
     }
 
+    private fun updateFilters(filterParams: FilterParams) {
+        viewModel.filterParams = filterParams
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        if (!currentParams.isEmpty()) {
+            updateFilters(currentParams)
+        }
 
         binding.cancelFilter.setOnClickListener {
             dismiss()
         }
 
         binding.submitButton.setOnClickListener {
-            onSubmit(viewModel.retrieveParams())
-            dismiss()
+            onSubmit( viewModel.filterParams)
+            dismissAllowingStateLoss()
         }
 
         binding.toDatePicker.setOnClickListener {
-            showDatePicker { mils, formatted ->
+            showDatePicker( viewModel.filterParams.release_dateFrom.second) { mils, formatted ->
                 binding.toDateTextView.text = formatted
-                viewModel.applyFilter(FilterKey.RELEASE_DATE_TO, formatted)
+                viewModel.applyFilter(FilterKey.RELEASE_DATE_TO, mils to formatted)
             }
         }
 
         binding.fromDatePicker.setOnClickListener {
-            showDatePicker { mils, formatted ->
+            showDatePicker( viewModel.filterParams.release_dateFrom.second) { mils, formatted ->
                 binding.fromDateTextView.text = formatted
-                viewModel.applyFilter(FilterKey.RELEASE_DATE_FROM, formatted)
+                viewModel.applyFilter(FilterKey.RELEASE_DATE_FROM, mils to formatted)
             }
         }
 
         initLanguageField(
+            viewModel.filterParams.language,
             binding.languageInput,
             listOf(
                 "" to "",
@@ -83,12 +95,12 @@ class FiltersBottomShit(
                                 text = genreName
                                 id = genre.id!!
                                 isCheckable = true
+                                isChecked =  viewModel.filterParams.genres.contains(genre)
                                 setOnClickListener {
                                     if ((it as Chip).isChecked) {
-                                        viewModel.applyFilter(FilterKey.GENRES, genreName)
-
+                                        viewModel.applyFilter(FilterKey.GENRES, genre)
                                     } else {
-                                        viewModel.removeFilter(FilterKey.GENRES, genreName)
+                                        viewModel.removeFilter(FilterKey.GENRES, id)
                                     }
                                 }
                             }
@@ -100,6 +112,7 @@ class FiltersBottomShit(
     }
 
     private fun initLanguageField(
+        initialValue: String,
         container: AutoCompleteTextView,
         items: List<Pair<String, String>>
     ) {
@@ -113,11 +126,17 @@ class FiltersBottomShit(
                 )
             )
 
+            items.forEachIndexed { index, langPair ->
+                if (langPair.second == initialValue) {
+                    setSelection(index)
+                    return
+                }
+            }
+
             setOnItemClickListener { adapterView, view, pos, id ->
                 ((adapterView.getItemAtPosition(pos) as? Pair<String, String>)?.second)?.let {
                     if (it.isEmpty()) {
                         binding.languageInput.clearListSelection()
-//                        viewModel.clearFilter(FilterParam.LANGUAGE)
                     }
                     viewModel.applyFilter(
                         FilterKey.LANGUAGE, it
@@ -128,20 +147,19 @@ class FiltersBottomShit(
         }
     }
 
-    private fun showDatePicker(onDateSelected: (mills: Long, toString: String) -> Unit) {
-
+    private fun showDatePicker(initialValue: Long, onDateSelected: (mills: Long, toString: String) -> Unit) {
 
         val datePicker =
             MaterialDatePicker.Builder.datePicker()
                 .setTheme(com.example.core_ui.R.style.DatePickerStyle)
                 .setTitleText("Select a date")
                 .setSelection(
-                    MaterialDatePicker.todayInUtcMilliseconds()
+                    initialValue.takeIf { it > 0 } ?: MaterialDatePicker.todayInUtcMilliseconds()
                 )
                 .build()
 
         datePicker.addOnPositiveButtonClickListener {
-            val formatter = SimpleDateFormat("dd/MM/yyyy")
+            val formatter = SimpleDateFormat("dd-MM-yyyy")
             val calender = Calendar.getInstance()
             calender.timeInMillis = it
             onDateSelected(it, formatter.format(calender.time).toString())
@@ -152,6 +170,6 @@ class FiltersBottomShit(
     }
 
     companion object {
-        const val TAG = "ModalBottomSheet"
+        const val TAG = "FilterBottomSheet"
     }
 }

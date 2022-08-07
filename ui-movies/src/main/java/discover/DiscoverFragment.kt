@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.core.TmdbImageManager
+import com.example.model.FilterParams
 import com.example.ui_movies.R
 import com.example.ui_movies.databinding.FragmentDiscoverBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -44,9 +45,23 @@ class DiscoverFragment : Fragment() {
     }
 
     private fun showBottomShit() {
-        FiltersBottomShit{
-            viewModel.applyFilters(it)
-        }.show(parentFragmentManager, "")
+
+        viewModel.requireParams { filterParams ->
+            filterParams.let { currentParams ->
+                FiltersBottomShit(currentParams) { updatedParams ->
+                    if (updatedParams != currentParams) {
+                        viewModel.applyFilters(
+                            FilterParams(
+                                updatedParams.language,
+                                updatedParams.release_dateFrom,
+                                updatedParams.release_dateTo,
+                                updatedParams.genres
+                            )
+                        )
+                    }
+                }.show(parentFragmentManager, FiltersBottomShit.TAG)
+            }
+        }
     }
 
 
