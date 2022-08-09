@@ -10,35 +10,42 @@
         android:name="lobby.MoviesLobbyFragment"
         android:label="Lobby"
         tools:layout="@layout/fragment_lobby" />
+
     <fragment
         android:id="@+id/navigation_popular_movies_fragment"
         android:name="popular.PopularMoviesFragment"
         android:label="Popular Movies"
         tools:layout="@layout/fragment_popular_movies" />
+
     <fragment
         android:id="@+id/navigation_upcoming_movies_fragment"
         android:name="upcoming.UpcomingMoviesFragment"
         android:label="Upcoming Movies"
         tools:layout="@layout/fragment_upcoming_movies" />
+
     <fragment
         android:id="@+id/navigation_now_playing_fragment"
         android:name="nowPlaying.NowPlayingMoviesFragment"
         android:label="Now Playing Movies"
         tools:layout="@layout/fragment_now_playing_movies" />
+
     <fragment
         android:id="@+id/navigation_top_rated_movies_fragment"
         android:name="toprated.TopRatedMoviesFragment"
         android:label="Top Rated Movies"
         tools:layout="@layout/fragment_top_rated_movies" />
+
     <fragment
         android:id="@+id/navigation_details_fragment"
         android:name="details.DetailsFragment"
         android:label="Details"
         tools:layout="@layout/fragment_details" />
+
     <fragment
         android:id="@+id/discoverFragment"
         android:name="discover.DiscoverFragment"
-        android:label="DiscoverFragment">
+        android:label="DiscoverFragment"
+        tools:layout="@layout/fragment_discover">
 
         <deepLink
             app:action="android.intent.action.VIEW"

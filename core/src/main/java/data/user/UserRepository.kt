@@ -9,11 +9,8 @@ class UserRepository @Inject constructor(
     fun observeFavorites(): Flow<List<Int>> =
         userRemoteDataSource.observeFavorites()
 
-    fun updateImageUrl(imageUrl: String) =
-        userRemoteDataSource.updateImageUrl(imageUrl)
-
-    fun updateDisplayName(displayName: String) =
-        userRemoteDataSource.updateDisplayName(displayName)
+    fun updateUserProfile(imageUrl: String?, displayName: String?) =
+        userRemoteDataSource.updateUserProfile(imageUrl, displayName)
 
     fun addFavorite(movieId: Int) =
         userRemoteDataSource.addFavorite(movieId)

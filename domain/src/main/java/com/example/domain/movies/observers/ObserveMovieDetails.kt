@@ -11,9 +11,9 @@ import javax.inject.Inject
 class ObserveMovieDetails @Inject constructor(
     private val userRepository: UserRepository,
     private val moviesRepository: MoviesRepository
-) : SubjectInteractor<ObserveMovieDetails.Params, Pair<Movie, Boolean>>() {
+) : SubjectInteractor<ObserveMovieDetails.Params, Pair<Movie, Boolean>?>() {
 
-    override fun createObservable(params: Params): Flow<Pair<Movie, Boolean>> =
+    override fun createObservable(params: Params): Flow<Pair<Movie, Boolean>?> =
         combine(
             userRepository.observeFavorites(),
             moviesRepository.observeNowPlayingMovies(),
@@ -26,9 +26,9 @@ class ObserveMovieDetails @Inject constructor(
                 addAll(popular.values.flatten())
                 addAll(upcoming.values.flatten())
                 addAll(topRated.values.flatten())
-            }.first {
+            }.firstOrNull {
                 it.id == params.movieId
-            }.let {
+            }?.let {
                 it to favorites.contains(it.id)
             }
         }

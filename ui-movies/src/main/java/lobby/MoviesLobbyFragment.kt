@@ -57,8 +57,14 @@ class MoviesLobbyFragment : Fragment() {
             viewModel.refresh()
         }
 
-        binding.logoutButton.setOnClickListener {
-            viewModel.logout()
+        binding.toolbar.setOnMenuItemClickListener { menuItem ->
+            when (menuItem.itemId) {
+                com.example.core_ui.R.id.signout_action_item -> {
+                    viewModel.logout()
+                    true
+                }
+                else -> false
+            }
         }
 
         launchAndRepeatWithViewLifecycle {

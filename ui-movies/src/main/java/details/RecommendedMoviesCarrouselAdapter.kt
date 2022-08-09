@@ -30,11 +30,11 @@ class RecommendedMoviesCarrouselAdapter(
         entry?.let {
             holder.binding.title.text = it.title
 
-            entry.posterPath?.let { posterPath ->
+            entry.backdropPath?.let { backdrop ->
                 Glide.with(holder.itemView)
                     .load(
-                        tmdbImageUrlProvider.getPosterUrl(
-                            path = posterPath,
+                        tmdbImageUrlProvider.getBackdropUrl(
+                            path = backdrop,
                             imageWidth = holder.itemView.width
                         )
                     )

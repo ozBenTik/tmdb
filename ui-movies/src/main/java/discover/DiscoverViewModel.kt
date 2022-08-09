@@ -35,7 +35,6 @@ class DiscoverViewModel @Inject constructor(
         loadData()
     }
 
-
     private fun loadData() {
         viewModelScope.launch(dispatchers.io) {
             discoverFilters.collect()
@@ -43,7 +42,6 @@ class DiscoverViewModel @Inject constructor(
     }
 
     fun applyFilters(filterParams: FilterParams) {
-
         discoverFilters.tryEmit(
             FilterParams(
                 filterParams.language,
