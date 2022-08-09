@@ -13,6 +13,7 @@ import com.example.domain.movies.iteractors.UpdateTopRatedMovies
 import com.example.model.Movie
 import com.example.model.FilterParams
 import di.Discovery
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.*
 import javax.inject.Inject

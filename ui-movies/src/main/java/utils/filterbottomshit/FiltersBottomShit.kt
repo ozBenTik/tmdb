@@ -1,17 +1,19 @@
-package filterbottomshit
+package utils.filterbottomshit
 
+import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AutoCompleteTextView
-import androidx.core.content.ContentProviderCompat.requireContext
-import androidx.fragment.app.FragmentManager
+import android.widget.TextView
 import androidx.fragment.app.viewModels
 import com.example.model.FilterKey
 import com.example.model.FilterParams
 import com.example.ui_movies.R
 import com.example.ui_movies.databinding.FilterBottomShitBinding
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.chip.Chip
 import com.google.android.material.datepicker.MaterialDatePicker
@@ -25,11 +27,17 @@ import java.util.*
 @AndroidEntryPoint
 class FiltersBottomShit(
     private val currentParams: FilterParams,
-    val onSubmit: (params: FilterParams) -> Unit
 ) : BottomSheetDialogFragment() {
+
+    constructor() : this(FilterParams())
 
     lateinit var binding: FilterBottomShitBinding
     private val viewModel: FilterViewModel by viewModels()
+
+    private val filterParams: FilterParams
+    get() = viewModel.filterParams
+
+    var onSubmit: (params: FilterParams) -> Unit = {}
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,15 +48,17 @@ class FiltersBottomShit(
         return binding.root
     }
 
-    private fun updateFilters(filterParams: FilterParams) {
-        viewModel.filterParams = filterParams
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        val dialog = BottomSheetDialog(requireContext(), theme)
+        dialog.behavior.state = BottomSheetBehavior.STATE_EXPANDED
+        return dialog
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         if (!currentParams.isEmpty()) {
-            updateFilters(currentParams)
+            viewModel.filterParams = currentParams
         }
 
         binding.cancelFilter.setOnClickListener {
@@ -56,26 +66,30 @@ class FiltersBottomShit(
         }
 
         binding.submitButton.setOnClickListener {
-            onSubmit( viewModel.filterParams)
-            dismissAllowingStateLoss()
+            onSubmit(filterParams)
+            dismiss()
         }
 
         binding.toDatePicker.setOnClickListener {
-            showDatePicker( viewModel.filterParams.release_dateFrom.second) { mils, formatted ->
-                binding.toDateTextView.text = formatted
-                viewModel.applyFilter(FilterKey.RELEASE_DATE_TO, mils to formatted)
+            showDatePicker(
+                filterParams.release_dateTo.second,
+                binding.toDateTextView
+            ) { mils, formatted ->
+                viewModel.addFilter(FilterKey.RELEASE_DATE_TO, mils to formatted)
             }
         }
 
         binding.fromDatePicker.setOnClickListener {
-            showDatePicker( viewModel.filterParams.release_dateFrom.second) { mils, formatted ->
-                binding.fromDateTextView.text = formatted
-                viewModel.applyFilter(FilterKey.RELEASE_DATE_FROM, mils to formatted)
+            showDatePicker(
+                filterParams.release_dateFrom.second,
+                binding.fromDateTextView
+            ) { mils, formatted ->
+                viewModel.addFilter(FilterKey.RELEASE_DATE_FROM, mils to formatted)
             }
         }
 
         initLanguageField(
-            viewModel.filterParams.language,
+            filterParams.language,
             binding.languageInput,
             listOf(
                 "" to "",
@@ -85,9 +99,14 @@ class FiltersBottomShit(
         )
 
         launchAndRepeatWithViewLifecycle {
+
             viewModel.genres.collectLatest { generes ->
+
                 binding.genresLoadingView.visibility = View.GONE
                 binding.genresChipGroup.removeAllViews()
+
+                val checkedGenres = filterParams.genres
+
                 generes?.forEach { genre ->
                     genre.name?.let { genreName ->
                         binding.genresChipGroup.addView(
@@ -95,10 +114,10 @@ class FiltersBottomShit(
                                 text = genreName
                                 id = genre.id!!
                                 isCheckable = true
-                                isChecked =  viewModel.filterParams.genres.contains(genre)
+                                isChecked = checkedGenres.contains(genre)
                                 setOnClickListener {
                                     if ((it as Chip).isChecked) {
-                                        viewModel.applyFilter(FilterKey.GENRES, genre)
+                                        viewModel.addFilter(FilterKey.GENRES, genre)
                                     } else {
                                         viewModel.removeFilter(FilterKey.GENRES, id)
                                     }
@@ -138,7 +157,7 @@ class FiltersBottomShit(
                     if (it.isEmpty()) {
                         binding.languageInput.clearListSelection()
                     }
-                    viewModel.applyFilter(
+                    viewModel.addFilter(
                         FilterKey.LANGUAGE, it
                     )
                     binding.languageInput.clearFocus()
@@ -147,29 +166,36 @@ class FiltersBottomShit(
         }
     }
 
-    private fun showDatePicker(initialValue: Long, onDateSelected: (mills: Long, toString: String) -> Unit) {
+    private fun showDatePicker(
+        initialValue: Long,
+        presenterTextView: TextView,
+        onDateSelected: (mills: Long, formatted: String) -> Unit
+    ) {
 
-        val datePicker =
-            MaterialDatePicker.Builder.datePicker()
-                .setTheme(com.example.core_ui.R.style.DatePickerStyle)
-                .setTitleText("Select a date")
-                .setSelection(
-                    initialValue.takeIf { it > 0 } ?: MaterialDatePicker.todayInUtcMilliseconds()
-                )
-                .build()
+        val formatter = SimpleDateFormat("dd-MM-yyyy")
+        val calender = Calendar.getInstance()
+        calender.timeInMillis =
+            initialValue.takeIf { it > 0 } ?: MaterialDatePicker.todayInUtcMilliseconds()
+        presenterTextView.text = formatter.format(calender.time)
 
-        datePicker.addOnPositiveButtonClickListener {
-            val formatter = SimpleDateFormat("dd-MM-yyyy")
-            val calender = Calendar.getInstance()
-            calender.timeInMillis = it
-            onDateSelected(it, formatter.format(calender.time).toString())
-            datePicker.dismiss()
-        }
+        MaterialDatePicker.Builder.datePicker()
+            .setTheme(com.example.core_ui.R.style.DatePickerStyle)
+            .setTitleText("Select a date")
+            .setSelection(calender.timeInMillis)
+            .build().let { datePicker ->
 
-        datePicker.show(parentFragmentManager, "")
+                datePicker.addOnPositiveButtonClickListener {
+                    calender.timeInMillis = it
+                    onDateSelected(it, formatter.format(calender.time))
+                    datePicker.dismiss()
+                }
+
+                datePicker.show(parentFragmentManager, DATE_PICKER_TAG)
+            }
     }
 
     companion object {
         const val TAG = "FilterBottomSheet"
+        const val DATE_PICKER_TAG = "DatePicker"
     }
 }

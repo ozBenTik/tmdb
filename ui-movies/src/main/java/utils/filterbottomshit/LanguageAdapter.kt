@@ -1,4 +1,4 @@
-package filterbottomshit
+package utils.filterbottomshit
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -11,7 +11,7 @@ import com.example.ui_movies.R
 
 class LanguageAdapter(
     context: Context,
-    private val resource: Int,
+    resource: Int,
     private val textViewResourceId: Int,
     private val items: List<Pair<String, String>>
 ) :

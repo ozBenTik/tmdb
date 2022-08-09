@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.core.TmdbImageManager
@@ -14,8 +15,8 @@ import com.example.ui_movies.R
 import com.example.ui_movies.databinding.FragmentDiscoverBinding
 import dagger.hilt.android.AndroidEntryPoint
 import extensions.launchAndRepeatWithViewLifecycle
-import filterbottomshit.FiltersBottomShit
 import kotlinx.coroutines.flow.collectLatest
+import utils.filterbottomshit.FiltersBottomShit
 import javax.inject.Inject
 
 
@@ -25,45 +26,31 @@ class DiscoverFragment : Fragment() {
     lateinit var binding: FragmentDiscoverBinding
     private val viewModel: DiscoverViewModel by viewModels()
 
-    lateinit var pagingAdapter: DiscoverAdapter
+    private lateinit var pagingAdapter: DiscoverAdapter
+    private lateinit var onSubmitFilters: (filters: FilterParams) -> Unit
 
     @Inject
     lateinit var tmdbImageManager: TmdbImageManager
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
         binding = FragmentDiscoverBinding.inflate(inflater)
+        initFiltersCallback()
         initAdapter()
         return binding.root
     }
 
     private fun showBottomShit() {
-
-        viewModel.requireParams { filterParams ->
-            filterParams.let { currentParams ->
-                FiltersBottomShit(currentParams) { updatedParams ->
-                    if (updatedParams != currentParams) {
-                        viewModel.applyFilters(
-                            FilterParams(
-                                updatedParams.language,
-                                updatedParams.release_dateFrom,
-                                updatedParams.release_dateTo,
-                                updatedParams.genres
-                            )
-                        )
-                    }
-                }.show(parentFragmentManager, FiltersBottomShit.TAG)
-            }
+        viewModel.requireFilters { currentFilters ->
+            FiltersBottomShit(currentFilters).apply {
+                onSubmit = onSubmitFilters
+            }.show(parentFragmentManager, FiltersBottomShit.TAG)
         }
     }
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -92,6 +79,18 @@ class DiscoverFragment : Fragment() {
     }
 
     private val movieClickListener: (Int) -> Unit = { movieId ->
+
+        val args = Bundle().apply {
+            putInt("movie_id", movieId)
+        }
+        findNavController().navigate(R.id.navigation_details_fragment, args)
+    }
+
+    private fun initFiltersCallback() {
+        onSubmitFilters = { updatedParams ->
+            viewModel.applyFilters(updatedParams)
+            pagingAdapter.refresh()
+        }
     }
 
     private fun initAdapter() {

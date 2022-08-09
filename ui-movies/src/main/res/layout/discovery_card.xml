@@ -47,7 +47,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintTop_toTopOf="parent"
-            android:background="@color/color_transparent_on_surface"
+            android:background="@color/color_transparent_on_image_background"
             app:layout_constraintEnd_toStartOf="@+id/guideline_end"
             app:layout_constraintStart_toStartOf="@+id/guideline_start">
 
@@ -58,7 +58,7 @@
                 android:layout_marginTop="16dp"
                 android:gravity="center"
                 android:lines="2"
-                android:textColor="@color/tmdb_white_50"
+                android:textColor="@color/color_transparent_on_image_text"
                 android:text="TextView"
                 android:textAppearance="@style/TextAppearance.Tmdb.Headline6"
                 app:layout_constraintTop_toTopOf="@+id/imageView"
@@ -71,7 +71,7 @@
                 android:layout_marginTop="4dp"
                 android:lines="1"
                 android:gravity="center"
-                android:textColor="@color/tmdb_white_50"
+                android:textColor="@color/color_transparent_on_image_text"
                 android:text="TextView"
                 android:textAppearance="@style/TextAppearance.Tmdb.Subtitle2"
                 app:layout_constraintEnd_toStartOf="@+id/guideline_end"

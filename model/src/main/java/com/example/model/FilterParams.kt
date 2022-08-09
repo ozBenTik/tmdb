@@ -16,6 +16,28 @@ data class FilterParams(
     var genres: MutableList<Genre> = mutableListOf()
 ) {
 
+    override fun equals(other: Any?): Boolean {
+        return (other as? FilterParams)?.let { otherFilters ->
+
+            val equalGens = genres.size == otherFilters.genres.size &&
+                        genres.containsAll(otherFilters.genres) &&
+                        otherFilters.genres.containsAll(genres)
+
+            val equalLang = language == otherFilters.language
+            val equal_date_to = release_dateTo == otherFilters.release_dateTo
+            val equal_date_from = release_dateFrom == otherFilters.release_dateFrom
+
+            equalGens && equalLang && equal_date_to && equal_date_from
+        } ?: false
+    }
+
+    fun clear() {
+        language = ""
+        release_dateFrom = "" to 0L
+        release_dateTo = "" to 0L
+        genres = mutableListOf()
+    }
+
     fun isEmpty() =
         language.isEmpty() && genres.isEmpty() && release_dateFrom.first.isEmpty() && release_dateTo.first.isEmpty()
 
@@ -25,9 +47,9 @@ data class FilterParams(
 
             GENRES -> {
                 (value as? Int)?.let { idToBeRemoved ->
-                    genres.remove(
-                        genres.first { it.id == idToBeRemoved }
-                    )
+                    genres.find { it.id == idToBeRemoved }?.let {
+                        genres.remove(it)
+                    }
                 }
             }
 
@@ -41,9 +63,14 @@ data class FilterParams(
         when (filterParam) {
             LANGUAGE -> this.language = (value as? String) ?: ""
 
-            GENRES -> (value as? Genre)?.let { this.genres.add(it) }
+            GENRES -> (value as? Genre)?.let {
+                if (!genres.contains(it)) {
+                    this.genres.add(it)
+                }
+            }
 
-            RELEASE_DATE_FROM -> this.release_dateFrom = (value as? Pair<String, Long>) ?: ("" to 0L)
+            RELEASE_DATE_FROM -> this.release_dateFrom =
+                (value as? Pair<String, Long>) ?: ("" to 0L)
 
             RELEASE_DATE_TO -> this.release_dateTo = (value as? Pair<String, Long>) ?: ("" to 0L)
         }

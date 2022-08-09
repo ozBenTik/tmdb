@@ -10,7 +10,7 @@
     <item
         android:title="Discover"
         android:icon="@drawable/ic_baseline_search_24"
-        android:id="@+id/discover_nav_graph"
+        android:id="@+id/discoverFragment"
         />
 
     <item

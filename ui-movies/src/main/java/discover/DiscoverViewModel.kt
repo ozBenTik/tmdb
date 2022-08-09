@@ -5,45 +5,57 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
+import com.example.core.data.movies.datasource.localstore.MoviesStore
 import com.example.domain.movies.observers.ObservePagedDiscovery
 import com.example.domain.users.iteractors.LogoutIteractor
 import com.example.model.FilterParams
 import com.example.model.Movie
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.*
+import di.Discovery
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import util.AppCoroutineDispatchers
-import util.ObservableLoadingCounter
-import util.UiMessageManager
-import java.util.logging.Filter
 import javax.inject.Inject
 
 @HiltViewModel
 class DiscoverViewModel @Inject constructor(
+    @Discovery val store: MoviesStore,
     private val pagingInteractor: ObservePagedDiscovery,
     private val logoutIteractor: LogoutIteractor,
     private val dispatchers: AppCoroutineDispatchers
 ) : ViewModel() {
 
-    val discoverParamsFilter = MutableStateFlow(FilterParams())
+    private val discoverFilters = MutableStateFlow(value = FilterParams())
 
     init {
-        pagingInteractor(ObservePagedDiscovery.Params(discoverParamsFilter, PAGING_CONFIG))
+        pagingInteractor(ObservePagedDiscovery.Params(discoverFilters, PAGING_CONFIG))
         loadData()
     }
 
+
     private fun loadData() {
         viewModelScope.launch(dispatchers.io) {
-            discoverParamsFilter.collect()
+            discoverFilters.collect()
         }
     }
 
     fun applyFilters(filterParams: FilterParams) {
-        discoverParamsFilter.tryEmit(filterParams)
+
+        discoverFilters.tryEmit(
+            FilterParams(
+                filterParams.language,
+                filterParams.release_dateFrom,
+                filterParams.release_dateTo,
+                filterParams.genres
+            )
+        )
     }
 
-    fun requireParams(onParamsRequired: (params: FilterParams)->Unit) {
-        onParamsRequired(discoverParamsFilter.value)
+    fun requireFilters(onParamsRequired: (params: FilterParams) -> Unit) {
+        onParamsRequired(discoverFilters.value)
     }
 
     val pagedList: Flow<PagingData<Movie>> =
