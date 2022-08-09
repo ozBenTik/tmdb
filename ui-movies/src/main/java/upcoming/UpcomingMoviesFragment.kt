@@ -44,8 +44,14 @@ class UpcomingMoviesFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.logoutButton.setOnClickListener {
-            viewModel.logout()
+        binding.toolbar.setOnMenuItemClickListener { menuItem ->
+            when (menuItem.itemId) {
+                com.example.core_ui.R.id.signout_action_item -> {
+                    viewModel.logout()
+                    true
+                }
+                else -> false
+            }
         }
 
         NavigationUI.setupWithNavController(binding.toolbar, findNavController())

@@ -7,13 +7,13 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.core_ui.databinding.ActorCardBinding
-import com.example.model.Actor
+import com.example.model.ActorPart
 import com.example.model.util.TmdbImageUrlProvider
 
 class ActorsCarrouselAdapter(
     private val tmdbImageUrlProvider: TmdbImageUrlProvider,
 ) :
-    ListAdapter<Actor, ActorCarrouselViewHolder>(ActorDiff) {
+    ListAdapter<ActorPart, ActorCarrouselViewHolder>(ActorDiff) {
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -31,11 +31,11 @@ class ActorsCarrouselAdapter(
             holder.binding.title.text = it.name
             holder.binding.subtitle.text = it.character
 
-            entry.profile_path?.let { posterPath ->
+            entry.profilePath?.let { profile ->
                 Glide.with(holder.itemView)
                     .load(
-                        tmdbImageUrlProvider.getPosterUrl(
-                            path = posterPath,
+                        tmdbImageUrlProvider.getBackdropUrl(
+                            path = profile,
                             imageWidth = holder.itemView.width
                         )
                     )
@@ -49,17 +49,17 @@ class ActorCarrouselViewHolder(
     internal val binding: ActorCardBinding
 ) : RecyclerView.ViewHolder(binding.root)
 
-object ActorDiff : DiffUtil.ItemCallback<Actor>() {
+object ActorDiff : DiffUtil.ItemCallback<ActorPart>() {
     override fun areItemsTheSame(
-        oldItem: Actor,
-        newItem: Actor
+        oldItem: ActorPart,
+        newItem: ActorPart
     ): Boolean {
         return oldItem.id == newItem.id
     }
 
     override fun areContentsTheSame(
-        oldItem: Actor,
-        newItem: Actor
+        oldItem: ActorPart,
+        newItem: ActorPart
     ): Boolean {
         return oldItem == newItem
     }

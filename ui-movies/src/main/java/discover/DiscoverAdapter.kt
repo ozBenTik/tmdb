@@ -33,7 +33,7 @@ class DiscoverAdapter(
             entry.posterPath?.let { posterPath ->
                 Glide.with(holder.itemView)
                     .load(
-                        tmdbImageUrlProvider.getPosterUrl(
+                        tmdbImageUrlProvider.getBackdropUrl(
                             path = posterPath,
                             imageWidth = holder.itemView.width,
                         )

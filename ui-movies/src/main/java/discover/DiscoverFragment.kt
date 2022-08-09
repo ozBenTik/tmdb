@@ -37,7 +37,6 @@ class DiscoverFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
         binding = FragmentDiscoverBinding.inflate(inflater)
         initFiltersCallback()
         initAdapter()
@@ -79,10 +78,10 @@ class DiscoverFragment : Fragment() {
     }
 
     private val movieClickListener: (Int) -> Unit = { movieId ->
-
         val args = Bundle().apply {
             putInt("movie_id", movieId)
         }
+
         findNavController().navigate(R.id.navigation_details_fragment, args)
     }
 

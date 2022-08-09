@@ -1,6 +1,7 @@
 package di
 
 import com.example.core.network.ConfigurationService
+import com.example.core.network.PeopleService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -22,5 +23,10 @@ object ServiceModule {
     @Provides
     fun provideConfigurationService(retrofit: Retrofit): ConfigurationService =
         retrofit.create(ConfigurationService::class.java)
+
+    @Singleton
+    @Provides
+    fun providePeopleServiceService(retrofit: Retrofit): PeopleService =
+        retrofit.create(PeopleService::class.java)
 
 }

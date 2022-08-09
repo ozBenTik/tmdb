@@ -39,6 +39,16 @@ class MainActivity : AppCompatActivity() {
             auth = FirebaseAuth.getInstance()
             setupWithNavController(binding.bottomNavigation, navController)
 
+            navController.addOnDestinationChangedListener { controller, destination, arguments ->
+                if (destination.id == com.example.ui_movies.R.id.navigation_details_fragment ||
+                    destination.id == com.example.ui_login.R.id.navigation_login_fragment
+                ) {
+                    binding.bottomNavigation.visibility = View.GONE
+                } else {
+                    binding.bottomNavigation.visibility = View.VISIBLE
+                }
+            }
+
             lifecycleScope.launchWhenStarted {
                 firebaseAuthStateUserDataSource.getBasicUserInfo().collectLatest { result ->
                     val isSignedIn = result?.isSignedIn() ?: false

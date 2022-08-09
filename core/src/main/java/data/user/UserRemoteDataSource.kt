@@ -1,8 +1,10 @@
 package com.example.core.data.user
 
+import android.net.Uri
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.OnFailureListener
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.userProfileChangeRequest
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -57,28 +59,34 @@ class UserRemoteDataSource @Inject constructor(
         return FirebaseUserInfo(auth.currentUser)
     }
 
-    fun updateImageUrl(imageUrl: String) {
-        firebaseAuth.currentUser?.let {
-            val userRef = firebaseDB.reference
-                .child("users")
-                .child(it.uid)
+    fun updateUserProfile(imageUrl: String?, displayName: String?) = callbackFlow {
 
-            userRef.child("imageUrl").setValue(imageUrl)
+        val callback: (result: Result<Boolean>) -> Unit = { res ->
+            trySend(res)
         }
-    }
 
-    fun updateDisplayName(displayName: String) {
-        firebaseAuth.currentUser?.let {
-            val userRef = firebaseDB.reference
-                .child("users")
-                .child(it.uid)
-            userRef.child("displayName").setValue(displayName)
+        val profileUpdates = userProfileChangeRequest {
+            displayName?.let {
+                setDisplayName(it)
+            }
+            imageUrl?.let {
+                photoUri = Uri.parse(it)
+            }
         }
+
+        val onCompleteListener = OnCompleteListener<Void> {
+            callback(Result.Success(it.isSuccessful))
+        }
+
+        firebaseAuth.currentUser?.updateProfile(profileUpdates)
+            ?.addOnCompleteListener(onCompleteListener)
+
+        awaitClose { }
     }
 
     fun addFavorite(movieId: Int) = callbackFlow {
 
-        val callback: (result: Result<Boolean>) ->  Unit = { res ->
+        val callback: (result: Result<Boolean>) -> Unit = { res ->
             trySend(res)
         }
 
@@ -89,7 +97,7 @@ class UserRemoteDataSource @Inject constructor(
                 .child("$movieId")
         }
 
-        val onCompleteListener = OnCompleteListener<Void>{
+        val onCompleteListener = OnCompleteListener<Void> {
             callback(Result.Success(it.isSuccessful))
         }
 
@@ -102,12 +110,12 @@ class UserRemoteDataSource @Inject constructor(
             ?.addOnFailureListener(onFailureListener)
             ?.addOnCompleteListener(onCompleteListener)
 
-        awaitClose {  }
+        awaitClose { }
     }
 
-    fun removeFavorite(movieId: Int) = callbackFlow{
+    fun removeFavorite(movieId: Int) = callbackFlow {
 
-        val callback: (result: Result<Boolean>) ->  Unit = { res ->
+        val callback: (result: Result<Boolean>) -> Unit = { res ->
             trySend(res)
         }
 
@@ -118,7 +126,7 @@ class UserRemoteDataSource @Inject constructor(
                 .child("$movieId")
         }
 
-        val onCompleteListener = OnCompleteListener<Void>{
+        val onCompleteListener = OnCompleteListener<Void> {
             callback(Result.Success(it.isSuccessful))
         }
 
@@ -126,13 +134,13 @@ class UserRemoteDataSource @Inject constructor(
             ?.removeValue()
             ?.addOnCompleteListener(onCompleteListener)
 
-        awaitClose {  }
+        awaitClose { }
 
     }
 
     fun observeFavorites() = callbackFlow {
 
-        val callback: (result: List<Int>) ->  Unit = { res ->
+        val callback: (result: List<Int>) -> Unit = { res ->
             trySend(res)
         }
 
@@ -144,11 +152,12 @@ class UserRemoteDataSource @Inject constructor(
 
         val listener = object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                val favs = mutableListOf<Int>()
-                (snapshot.value as? Map<String, Boolean>)?.forEach { map ->
-                    favs.add(map.key.toInt())
-                }
-                callback(favs)
+                callback(
+                    mutableListOf<Int>().apply {
+                        (snapshot.value as? Map<String, Boolean>)?.forEach { map ->
+                            add(map.key.toInt())
+                        }
+                    })
             }
 
             override fun onCancelled(error: DatabaseError) {}
@@ -174,6 +183,6 @@ class UserRemoteDataSource @Inject constructor(
             authStateListener(it.isSuccessful)
         }
 
-        awaitClose {  }
+        awaitClose { }
     }
 }

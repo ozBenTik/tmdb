@@ -15,7 +15,6 @@ import di.Discovery
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import util.AppCoroutineDispatchers
 import javax.inject.Inject
@@ -35,7 +34,6 @@ class DiscoverViewModel @Inject constructor(
         loadData()
     }
 
-
     private fun loadData() {
         viewModelScope.launch(dispatchers.io) {
             discoverFilters.collect()
@@ -43,7 +41,6 @@ class DiscoverViewModel @Inject constructor(
     }
 
     fun applyFilters(filterParams: FilterParams) {
-
         discoverFilters.tryEmit(
             FilterParams(
                 filterParams.language,
