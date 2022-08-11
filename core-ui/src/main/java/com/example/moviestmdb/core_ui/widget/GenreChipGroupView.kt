@@ -1,12 +1,14 @@
 package com.example.moviestmdb.core_ui.widget
 
 import android.content.Context
+import android.system.Os.remove
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.core_ui.R
 import com.example.core_ui.databinding.GenresChipGroupBinding
 import com.google.android.material.chip.Chip
+import kotlinx.coroutines.flow.MutableStateFlow
 
 class GenreChipGroupView @JvmOverloads constructor(
     context: Context,

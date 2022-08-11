@@ -1,11 +1,26 @@
 package com.example.domain.movies.iteractors
 
+<<<<<<< HEAD
 import com.example.domain.FlowInteractor
 import com.example.model.GenreResponse
 import data.movies.MoviesRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.onEach
 import result.Result
+=======
+import androidx.paging.flatMap
+import androidx.paging.map
+import com.example.core.data.movies.datasource.localstore.GenresStore
+import com.example.domain.FlowInteractor
+import com.example.domain.movies.observers.ObservePagedNowPlayingMovies
+import com.example.model.Genre
+import com.example.model.GenreResponse
+import data.movies.MoviesRepository
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.onEach
+import result.Result
+import result.data
 import timber.log.Timber
 import util.AppCoroutineDispatchers
 import javax.inject.Inject

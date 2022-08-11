@@ -4,12 +4,12 @@ import androidx.paging.ExperimentalPagingApi
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import com.example.core.data.movies.datasource.localstore.MoviesStore
 import com.example.domain.PagingInteractor
 import com.example.domain.movies.MoviesPagingSource
 import com.example.domain.movies.PaginatedMovieRemoteMediator
 import com.example.domain.movies.iteractors.UpdateUpcomingMovies
 import com.example.model.Movie
+import data.movies.MoviesStore
 import di.Upcoming
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
