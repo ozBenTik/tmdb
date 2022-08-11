@@ -6,9 +6,12 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.model.Genre
+import com.example.model.Movie
 import com.example.model.MovieAndGenres
 import com.example.model.util.TmdbImageUrlProvider
-import com.example.ui_movies.databinding.FragmentNowPlayingMoviesBinding
+import com.example.ui_movies.databinding.ItemNowplayingMovieBinding
+import kotlinx.coroutines.flow.flowOf
 
 class NowPlayingMoviesAdapter(
     private val tmdbImageUrlProvider: TmdbImageUrlProvider,
@@ -16,7 +19,7 @@ class NowPlayingMoviesAdapter(
 ) : PagingDataAdapter<MovieAndGenres, NowPlayingMovieViewHolder>(NowPlayingEntryComparator) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NowPlayingMovieViewHolder {
-        val binding = FragmentNowPlayingMoviesBinding.inflate(
+        val binding = ItemNowplayingMovieBinding.inflate(
             LayoutInflater.from(parent.context), parent, false
         )
         return NowPlayingMovieViewHolder(binding)
@@ -59,7 +62,7 @@ class NowPlayingMoviesAdapter(
 }
 
 class NowPlayingMovieViewHolder(
-    internal val binding: FragmentNowPlayingMoviesBinding
+    internal val binding: ItemNowplayingMovieBinding
 ) : RecyclerView.ViewHolder(binding.root)
 
 object NowPlayingEntryComparator : DiffUtil.ItemCallback<MovieAndGenres>() {

@@ -24,7 +24,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="TextView"
+        android:textColor="?colorSecondary"
         android:textAppearance="@style/TextAppearance.Tmdb.ListPrimary"
         app:layout_constraintEnd_toStartOf="@+id/loading"
         app:layout_constraintStart_toStartOf="@id/guideline_start"

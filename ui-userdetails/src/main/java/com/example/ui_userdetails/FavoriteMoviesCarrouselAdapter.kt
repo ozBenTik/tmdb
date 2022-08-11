@@ -9,6 +9,7 @@ import com.bumptech.glide.Glide
 import com.example.core_ui.databinding.MovieCardBinding
 import com.example.model.Movie
 import com.example.model.util.TmdbImageUrlProvider
+import com.example.ui_userdetails.databinding.FavoriteItemBinding
 
 class FavoriteMovieCarouselAdapter(
     private val tmdbImageUrlProvider: TmdbImageUrlProvider,
@@ -20,7 +21,7 @@ class FavoriteMovieCarouselAdapter(
         parent: ViewGroup,
         viewType: Int
     ): FavoriteMovieCarrouselViewHolder {
-        val binding = MovieCardBinding.inflate(
+        val binding = FavoriteItemBinding.inflate(
             LayoutInflater.from(parent.context), parent, false
         )
         return FavoriteMovieCarrouselViewHolder(binding)
@@ -29,8 +30,6 @@ class FavoriteMovieCarouselAdapter(
     override fun onBindViewHolder(holder: FavoriteMovieCarrouselViewHolder, position: Int) {
         val entry = getItem(position)
         entry?.let {
-            holder.binding.title.text = it.title
-            holder.binding.subtitle.text = it.releaseDate
 
             entry.posterPath?.let { posterPath ->
                 Glide.with(holder.itemView)
@@ -40,10 +39,8 @@ class FavoriteMovieCarouselAdapter(
                             imageWidth = holder.itemView.width
                         )
                     )
-                    .into(holder.binding.imageView)
+                    .into(holder.binding.movieImage)
             }
-
-            holder.binding.popularityBadge.progress = entry.popularityPrecentage
 
             holder.itemView.setOnClickListener {
                 onItemClickListener(entry.id)
@@ -53,7 +50,7 @@ class FavoriteMovieCarouselAdapter(
 }
 
 class FavoriteMovieCarrouselViewHolder(
-    internal val binding: MovieCardBinding
+    internal val binding: FavoriteItemBinding
 ) : RecyclerView.ViewHolder(binding.root)
 
 object FavoriteMovieDiff : DiffUtil.ItemCallback<Movie>() {

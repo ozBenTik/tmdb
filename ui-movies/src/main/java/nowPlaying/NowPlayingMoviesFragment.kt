@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.core.TmdbImageManager
 import com.example.moviestmdb.core_ui.util.SpaceItemDecoration
 import com.example.ui_movies.R
-import com.example.ui_movies.databinding.FragmentNowplayingBinding
+import com.example.ui_movies.databinding.FragmentNowPlayingMoviesBinding
 import dagger.hilt.android.AndroidEntryPoint
 import extensions.launchAndRepeatWithViewLifecycle
 import kotlinx.coroutines.flow.collectLatest
@@ -22,7 +22,7 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class NowPlayingMoviesFragment : Fragment() {
 
-    lateinit var binding: FragmentNowplayingBinding
+    lateinit var binding: FragmentNowPlayingMoviesBinding
     private val viewModel: NowPlayingMoviesViewModel by viewModels()
 
     lateinit var pagingAdapter: NowPlayingMoviesAdapter
@@ -35,7 +35,7 @@ class NowPlayingMoviesFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentNowplayingBinding.inflate(inflater)
+        binding = FragmentNowPlayingMoviesBinding.inflate(inflater)
 
         initAdapter()
 

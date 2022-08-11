@@ -178,6 +178,7 @@ class UserDetailsFragment : Fragment() {
             tmdbImageManager.getLatestImageProvider(),
             onMovieClick,
         )
+
         binding.favoriteMoviesView.recyclerView.run {
             adapter = favoriteMoviesAdapter
             layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)

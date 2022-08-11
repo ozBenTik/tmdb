@@ -20,15 +20,15 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
-
         <TextView
             android:id="@+id/title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
             android:lines="1"
-            android:text="TextView"
-            android:textAppearance="@style/TextAppearance.Tmdb.Subtitle2"
+            android:textColor="?colorSecondary"
+            android:textAppearance="@style/TextAppearance.Tmdb.ListPrimary"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView"

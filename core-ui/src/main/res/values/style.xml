@@ -12,6 +12,11 @@
         <item name="itemIconTint">@color/color_on_surface_emphasis_medium</item>
     </style>
 
+    <style name="Widget.Tmdb.ActionBar" parent="Widget.Material3.ActionBar.Solid">
+        <item name="android:textAppearance">?textAppearanceHeadline6</item>
+        <item name="backgroundColor">?colorSurface</item>
+    </style>
+
     <style name="Widget.Tmdb.AppBar" parent="@style/Widget.MaterialComponents.AppBarLayout.Surface">
         <item name="android:elevation">8dp</item>
     </style>

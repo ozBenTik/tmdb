@@ -11,6 +11,7 @@
         android:layout_height="?actionBarSize">
 
         <androidx.appcompat.widget.Toolbar
+            style="@style/Widget.Tmdb.ActionBar"
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?actionBarSize"

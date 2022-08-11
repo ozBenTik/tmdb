@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-<!--    <color name="purple_200">#FFBB86FC</color>-->
-<!--    <color name="purple_500">#FF6200EE</color>-->
-<!--    <color name="purple_700">#FF3700B3</color>-->
-<!--    <color name="teal_200">#FF03DAC5</color>-->
-<!--    <color name="teal_700">#FF018786</color>-->
-<!--    <color name="black">#FF000000</color>-->
-<!--    <color name="white">#FFFFFFFF</color>-->
 
+    <color name="purple_500">#6200EE</color>
+    <color name="purple_700">#3700B3</color>
+    <color name="teal_200">#03DAC6</color>
+    <color name="teal_700">#018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="red">#B00020</color>
 
     <color name="tmdb_white_50">#ffffff</color>
 
@@ -31,6 +31,7 @@
     <color name="tmdb_orange_500">#f9aa33</color>
 
     <color name="tmdb_red_200">#cf7779</color>
+    <color name="tmdb_red_300">#cF6679</color>
     <color name="tmdb_red_400">#ff4c5d</color>
     <color name="tmdb_red_500">#F44336</color>
 
@@ -43,6 +44,9 @@
     <color name="tmdb_black_900_alpha_060">#99000000</color>
 
     <color name="nav_bar">@color/tmdb_black_900_alpha_020</color>
+
+    <color name="color_on_image_text">@color/tmdb_black_800</color>
+    <color name="color_on_image_transparent_back">#5EFFFFFF</color>
 
     <color name="tmdb_popularity_bg">@color/tmdb_black_900_alpha_087</color>
     <color name="tmdb_popularity_high">@color/tmdb_green_500</color>

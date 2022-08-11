@@ -3,7 +3,7 @@
 
     <style name="Theme.Tmdb.Dark" parent="Base.Theme.Tmdb">
         <!--Color-->
-        <item name="colorPrimary">@color/tmdb_blue_200</item>
+        <item name="colorPrimary">@color/tmdb_red_200</item>
         <item name="colorPrimaryVariant">@color/tmdb_blue_300</item>
         <item name="colorSecondary">@color/tmdb_orange_300</item>
         <item name="colorSecondaryVariant">@color/tmdb_orange_300</item>
