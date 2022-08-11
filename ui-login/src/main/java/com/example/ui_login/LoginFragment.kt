@@ -12,7 +12,6 @@ import androidx.navigation.fragment.findNavController
 import com.example.ui_login.databinding.FragmentLoginBinding
 import dagger.hilt.android.AndroidEntryPoint
 import extensions.launchAndRepeatWithViewLifecycle
-import timber.log.Timber
 
 @AndroidEntryPoint
 class LoginFragment : Fragment() {

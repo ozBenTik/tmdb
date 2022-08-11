@@ -1,12 +1,12 @@
 package di
 
-import com.example.core.data.movies.CreditsStore
-import com.example.core.data.movies.RecommendationsStore
+import com.example.core.data.movies.datasource.localstore.CreditsStore
+import com.example.core.data.movies.datasource.localstore.MoviesStore
+import com.example.core.data.movies.datasource.localstore.RecommendationsStore
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import data.movies.MoviesStore
 import javax.inject.Singleton
 
 @InstallIn(SingletonComponent::class)
@@ -32,6 +32,11 @@ class StoreModule {
     @Provides
     @TopRated
     fun provideTopRatedStore(): MoviesStore = MoviesStore()
+
+    @Singleton
+    @Provides
+    @Discovery
+    fun provideDiscoveryStore(): MoviesStore = MoviesStore()
 
     @Singleton
     @Provides

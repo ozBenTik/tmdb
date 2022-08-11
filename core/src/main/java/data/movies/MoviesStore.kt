@@ -1,9 +1,8 @@
-package data.movies
+package com.example.core.data.movies.datasource.localstore
 import com.example.model.Movie
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.SharedFlow
-import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.*
+import okhttp3.Cache.Companion.key
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -13,22 +12,17 @@ class MoviesStore @Inject constructor() {
     // Map<Page, movies>
     private val _movies = MutableSharedFlow<Map<Int, List<Movie>>>(replay = 1)
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     fun insert(page: Int, movies: List<Movie>) {
         if (page == 1) {
-            _movies.resetReplayCache()
+            deleteAll()
             _movies.tryEmit(mapOf(page to movies))
         } else {
-            _movies.replayCache.first().toMutableMap().let {
-                it[page] = movies
-                _movies.tryEmit(it)
-            }
-
+            updatePage(page, movies)
         }
     }
     fun observeEntries(): SharedFlow<Map<Int, List<Movie>>> = _movies.asSharedFlow()
 
-    fun updatePage(page: Int, movies: List<Movie>) {
+    private fun updatePage(page: Int, movies: List<Movie>) {
         val map = _movies.replayCache.first().toMutableMap()
         map[page] = movies
         _movies.tryEmit(map)

@@ -1,30 +1,29 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-
     <style name="Theme.tmdb" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <!--Color-->
-        <item name="colorPrimary">#02A0F7</item>
-        <item name="colorPrimaryVariant">@color/tmdb_black_900_alpha_060</item>
-        <item name="colorSecondary">@color/tmdb_orange_300</item>
-        <item name="colorSecondaryVariant">@color/tmdb_orange_400</item>
-        <item name="colorPrimaryDark">#37F9BE64</item>
-
-        <item name="android:colorBackground">#59000000</item>
-        <item name="colorSurface">@color/black</item>
-        <item name="colorPrimarySurfaceVariant">?attr/colorPrimaryVariant</item>
-        <item name="colorError">@color/tmdb_red_400</item>
-
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/purple_200</item>
+        <item name="colorPrimaryVariant">@color/purple_700</item>
         <item name="colorOnPrimary">@color/black</item>
-        <item name="colorOnBackground">@color/tmdb_black_900</item>
-        <item name="colorOnSurface">@color/tmdb_black_900</item>
-        <item name="colorOnError">@color/tmdb_black_900</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/teal_200</item>
+        <item name="colorSecondaryVariant">@color/teal_200</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <!-- Customize your theme here. -->
+        <item name="android:colorBackground">@color/tmdb_black_800</item>
 
-        <item name="scrimBackground">@color/tmdb_white_50_alpha_060</item>
-        <item name="android:statusBarColor" tools:targetApi="l">@color/tmdb_black_900_alpha_087</item>
-        <item name="android:navigationBarColor">@color/nav_bar</item>
+        <item name="colorOnBackground">@color/purple_200</item>
+        <item name="colorOnSurface">@color/tmdb_blue_50_alpha_060</item>
+        <item name="colorOnError">@color/tmdb_white_50</item>
+        <item name="colorError">@color/tmdb_red_400</item>
+        <item name="colorPrimarySurfaceVariant">?attr/colorPrimaryVariant</item>
+        <item name="colorSurface">@color/tmdb_black_800</item>
 
         <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.Tmdb.SmallComponent</item>
-        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.Tmdb.MediumComponent</item>
+        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.Tmdb.MediumComponent
+        </item>
         <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.Tmdb.LargeComponent</item>
 
         <!--Typography-->
@@ -52,19 +51,27 @@
 
         <!--Styles-->
         <item name="appBarLayoutStyle">@style/Widget.Tmdb.AppBar</item>
-        <item name="bottomAppBarStyle">@style/Widget.Material3.BottomNavigationView.ActiveIndicator</item>
+        <item name="bottomAppBarStyle">
+            @style/Widget.Material3.BottomNavigationView.ActiveIndicator
+        </item>
         <item name="bottomSheetStyle">@style/Widget.MaterialComponents.BottomSheet.Modal</item>
         <item name="navigationViewStyle">@style/Widget.Tmdb.NavigationView</item>
         <item name="snackbarStyle">@style/Widget.Tmdb.Snackbar</item>
         <item name="snackbarButtonStyle">@style/Widget.Tmdb.SnackbarButton</item>
 
         <!--System/Platform attributes-->
-        <item name="android:windowBackground">@color/black</item>
+        <item name="android:windowBackground">?android:colorBackground</item>
         <item name="android:windowLightStatusBar" tools:ignore="NewApi">true</item>
+
+        <item name="bottomSheetDialogTheme">@style/CustomBottomSheetDialogTheme</item>
+
+        <item name="android:datePickerStyle">@style/DatePickerStyle</item>
+
     </style>
 
     <style name="ThemeOverlay.Tmdb.Snackbar" parent="">
         <item name="colorPrimary">@color/tmdb_red_400</item>
         <item name="colorOnSurface">@color/tmdb_black_900</item>
     </style>
+
 </resources>

@@ -8,32 +8,48 @@
     <fragment
         android:id="@+id/navigation_movies_lobby_fragment"
         android:name="lobby.MoviesLobbyFragment"
-        tools:layout="@layout/fragment_lobby"
-        android:label="Lobby" />
+        android:label="Lobby"
+        tools:layout="@layout/fragment_lobby" />
+
     <fragment
         android:id="@+id/navigation_popular_movies_fragment"
         android:name="popular.PopularMoviesFragment"
-        tools:layout="@layout/fragment_popular_movies"
-        android:label="Popular Movies" />
+        android:label="Popular Movies"
+        tools:layout="@layout/fragment_popular_movies" />
+
     <fragment
         android:id="@+id/navigation_upcoming_movies_fragment"
         android:name="upcoming.UpcomingMoviesFragment"
-        tools:layout="@layout/fragment_upcoming_movies"
-        android:label="Upcoming Movies" />
+        android:label="Upcoming Movies"
+        tools:layout="@layout/fragment_upcoming_movies" />
+
     <fragment
         android:id="@+id/navigation_now_playing_fragment"
         android:name="nowPlaying.NowPlayingMoviesFragment"
-        tools:layout="@layout/fragment_now_playing_movies"
-        android:label="Now Playing Movies" />
+        android:label="Now Playing Movies"
+        tools:layout="@layout/fragment_now_playing_movies" />
+
     <fragment
         android:id="@+id/navigation_top_rated_movies_fragment"
         android:name="toprated.TopRatedMoviesFragment"
-        tools:layout="@layout/fragment_top_rated_movies"
-        android:label="Top Rated Movies" />
+        android:label="Top Rated Movies"
+        tools:layout="@layout/fragment_top_rated_movies" />
+
     <fragment
         android:id="@+id/navigation_details_fragment"
         android:name="details.DetailsFragment"
-        tools:layout="@layout/fragment_details"
-        android:label="Details"/>
+        android:label="Details"
+        tools:layout="@layout/fragment_details" />
 
+    <fragment
+        android:id="@+id/discoverFragment"
+        android:name="discover.DiscoverFragment"
+        android:label="DiscoverFragment"
+        tools:layout="@layout/fragment_discover">
+
+        <deepLink
+            app:action="android.intent.action.VIEW"
+            app:mimeType="type/subtype"
+            app:uri="android-app://androidx.navigation/tmdb://movies.com/discover" />
+    </fragment>
 </navigation>

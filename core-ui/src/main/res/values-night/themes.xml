@@ -12,6 +12,7 @@
         <item name="colorSurface">@color/tmdb_black_800</item>
         <item name="colorPrimarySurfaceVariant">?attr/colorSurface</item>
         <item name="colorError">@color/tmdb_red_200</item>
+        <item name="colorTransparentOnSurface">#14414141</item>
 
         <item name="colorOnPrimary">@color/tmdb_black_900</item>
         <item name="colorOnSecondary">@color/tmdb_black_900</item>

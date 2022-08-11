@@ -4,10 +4,13 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.NavController
+import androidx.navigation.NavDestination
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI.setupWithNavController
 import com.example.core.data.user.UserRemoteDataSource
 import com.google.firebase.auth.FirebaseAuth
+import com.oz.tmdb.R
 import com.oz.tmdb.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -38,6 +41,16 @@ class MainActivity : AppCompatActivity() {
 
             auth = FirebaseAuth.getInstance()
             setupWithNavController(binding.bottomNavigation, navController)
+
+            navController.addOnDestinationChangedListener { controller, destination, arguments ->
+                if (destination.id == com.example.ui_movies.R.id.navigation_details_fragment ||
+                    destination.id == com.example.ui_login.R.id.navigation_login_fragment
+                ) {
+                    binding.bottomNavigation.visibility = View.GONE
+                } else {
+                    binding.bottomNavigation.visibility = View.VISIBLE
+                }
+            }
 
             lifecycleScope.launchWhenStarted {
                 firebaseAuthStateUserDataSource.getBasicUserInfo().collectLatest { result ->

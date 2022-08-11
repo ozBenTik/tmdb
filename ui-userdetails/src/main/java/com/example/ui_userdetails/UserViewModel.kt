@@ -2,13 +2,19 @@ package com.example.ui_userdetails
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.domain.movies.iteractors.UpdateTopRatedMovies
+import com.example.domain.users.iteractors.LogoutIteractor
 import com.example.domain.users.iteractors.RemoveFavorite
+import com.example.domain.users.iteractors.UpdateUserDetails
 import com.example.domain.users.observers.ObserveFavoriteMovies
 import com.example.domain.users.observers.ObserveUserDetails
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import result.data
 import util.AppCoroutineDispatchers
 import util.ObservableLoadingCounter
 import util.UiMessageManager
@@ -19,9 +25,11 @@ import javax.inject.Inject
 class UserViewModel @Inject constructor(
     val observeFavoriteMovies: ObserveFavoriteMovies,
     val observeUserDetails: ObserveUserDetails,
+    val updateUserDetails: UpdateUserDetails,
     val removeFavoriteIteractor: RemoveFavorite,
+    private val logoutIteractor: LogoutIteractor,
     private val dispatchers: AppCoroutineDispatchers,
-    ) : ViewModel() {
+) : ViewModel() {
 
     private val favoritesLoadingState = ObservableLoadingCounter()
     private val userLoadingState = ObservableLoadingCounter()
@@ -33,7 +41,7 @@ class UserViewModel @Inject constructor(
         observeFavoriteMovies(ObserveFavoriteMovies.Params())
     }
 
-    val state: StateFlow<DetailsViewState> = combine(
+    val state: StateFlow<UserDetailsViewState> = combine(
         observeUserDetails.flow,
         observeFavoriteMovies.flow,
         favoritesLoadingState.observable,
@@ -41,7 +49,7 @@ class UserViewModel @Inject constructor(
         uiMessageManager.message,
     ) { userDetails, favorites, favoritesLoading, userLoading, message ->
 
-        DetailsViewState(
+        UserDetailsViewState(
             userDetails = userDetails,
             userRefreshing = userLoading,
             favorites = favorites,
@@ -52,7 +60,7 @@ class UserViewModel @Inject constructor(
     }.stateIn(
         viewModelScope,
         SharingStarted.WhileSubscribed(5000),
-        DetailsViewState.Empty
+        UserDetailsViewState.Empty
     )
 
 
@@ -67,8 +75,26 @@ class UserViewModel @Inject constructor(
     }
 
     fun clearMessage(id: Long) {
-        viewModelScope.launch {
+        viewModelScope.launch(dispatchers.io) {
             uiMessageManager.clearMessage(id)
+        }
+    }
+
+    fun logout() = viewModelScope.launch(dispatchers.io) {
+        logoutIteractor(LogoutIteractor.Params())
+    }
+
+    fun updateUserProfile(
+        imageUrl: String? = null,
+        displayName: String? = null,
+        onUpdated: (success: Boolean) -> Unit
+    ) {
+        viewModelScope.launch(dispatchers.io) {
+            updateUserDetails(UpdateUserDetails.Params(imageUrl, displayName)).collect {
+                withContext(dispatchers.main) {
+                    onUpdated(it.data ?: false)
+                }
+            }
         }
     }
 }

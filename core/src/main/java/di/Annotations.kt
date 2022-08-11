@@ -25,7 +25,7 @@ annotation class NowPlaying
 @Retention(AnnotationRetention.RUNTIME)
 @Qualifier
 @MustBeDocumented
-annotation class Favorite
+annotation class Discovery
 
 @Retention(AnnotationRetention.RUNTIME)
 @Qualifier

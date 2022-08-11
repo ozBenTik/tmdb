@@ -13,11 +13,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.core.TmdbImageManager
 import com.example.moviestmdb.core_ui.util.SpaceItemDecoration
+import com.example.ui_movies.R
 import com.example.ui_movies.databinding.FragmentDetailsBinding
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import extensions.launchAndRepeatWithViewLifecycle
-import timber.log.Timber
 import java.time.LocalDate
 import javax.inject.Inject
 
@@ -47,89 +48,109 @@ class DetailsFragment : Fragment() {
         initRecommendedAdapter()
         initActorsAdapter()
 
+        binding.floatingActionButton.isExtended = false
+
         binding.scrollView.setOnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
+
             val totalScrollLength = binding.detailsBackdropImageView.height
             val progress: Float = scrollY.toFloat() / totalScrollLength
-            binding.constraintLayout3.progress = progress
+
+            if (progress > 50) {
+                binding.floatingActionButton.extend()
+            } else {
+                binding.floatingActionButton.shrink()
+            }
+
+            binding.mainLayout.progress = progress
         }
 
-
-        NavigationUI.setupWithNavController(binding.toolbar, findNavController())
-
-        binding.logoutButton.setOnClickListener {
-            viewModel.logout()
+        binding.toolbar.setOnMenuItemClickListener { menuItem ->
+            when (menuItem.itemId) {
+                com.example.core_ui.R.id.signout_action_item -> {
+                    viewModel.logout()
+                    true
+                }
+                else -> false
+            }
         }
 
         launchAndRepeatWithViewLifecycle {
 
             viewModel.state.collect { uiState ->
-                Timber.i("$$$$ recs = ${uiState.recommendations}  actors = ${uiState.actors}")
 
-                uiState.movieDetails?.let { movieDetails ->
+                if (uiState != DetailsViewState.Empty) {
 
-                    binding.favoritesSwitch.isChecked = movieDetails.second
+//                Timber.i("$$$$ recs = ${uiState.recommendations}  actors = ${uiState.actors}")
 
-                    movieDetails.first.let { movie ->
-                        binding.favoritesSwitch.setOnCheckedChangeListener { compoundButton, b ->
-                            if (b) {
-                                viewModel.applyFavorite(movie.id)
-                            } else {
-                                viewModel.removeFavorite(movie.id)
+                    uiState.movieDetails?.let { movieDetails ->
+
+                        binding.favoritesSwitch.isChecked = movieDetails.second
+
+                        movieDetails.first.let { movie ->
+                            binding.favoritesSwitch.setOnCheckedChangeListener { compoundButton, b ->
+                                if (b) {
+                                    viewModel.applyFavorite(movie.id)
+                                } else {
+                                    viewModel.removeFavorite(movie.id)
+                                }
+                            }
+
+                            uiState.message?.let { message ->
+                                Snackbar.make(requireView(), message.message, Snackbar.LENGTH_LONG)
+                                    .setAction("Dismiss") {
+                                        viewModel.clearMessage(message.id)
+                                    }
+                                    .show()
+                            }
+
+                            binding.toolbar.title = movie.title
+                            binding.title.text = movie.title
+                            binding.detailsOverviewTextView.text = movie.overView
+                            binding.detailsRatingPrecentageTextView.text =
+                                "${movie.popularityPrecentage}%"
+                            binding.detailsNumberOfVotesTextView.text =
+                                "${(movie.voteCount ?: 0) / 1000}K votes"
+                            binding.detailsStatusTextView.text =
+                                if (LocalDate.parse(movie.releaseDate).isAfter(LocalDate.now()))
+                                    "To be released at\n${movie.releaseDate}"
+                                else
+                                    "released"
+
+                            movie.posterPath?.let { posterPath ->
+                                Glide.with(binding.root)
+                                    .load(
+                                        tmdbImageManager.getLatestImageProvider().getPosterUrl(
+                                            path = posterPath,
+                                            imageWidth = binding.detailsPosterImageView.width
+                                        )
+                                    )
+                                    .into(binding.detailsPosterImageView)
+
+                            }
+
+                            movie.backdropPath?.let { backdropPath ->
+                                Glide.with(binding.root)
+                                    .load(
+                                        tmdbImageManager.getLatestImageProvider().getBackdropUrl(
+                                            path = backdropPath,
+                                            imageWidth = binding.root.width
+                                        )
+                                    )
+                                    .into(binding.detailsBackdropImageView)
+
                             }
                         }
 
-                        uiState.message?.let { message ->
-                            Snackbar.make(requireView(), message.message, Snackbar.LENGTH_LONG)
-                                .setAction("Dismiss") {
-                                    viewModel.clearMessage(message.id)
-                                }
-                                .show()
-                        }
+                        binding.actorsView.setLoading(uiState.actorsRefreshing)
+                        actorsAdapter.submitList(uiState.actors)
 
-                        binding.toolbar.title = movie.title
-                        binding.title.text = movie.title
-                        binding.detailsOverviewTextView.text = movie.overView
-                        binding.detailsRatingPrecentageTextView.text =
-                            "${movie.popularityPrecentage}%"
-                        binding.detailsNumberOfVotesTextView.text =
-                            "${(movie.voteCount ?: 0) / 1000}K votes"
-                        binding.detailsStatusTextView.text =
-                            if (LocalDate.parse(movie.releaseDate).isAfter(LocalDate.now()))
-                                "To be released at\n${movie.releaseDate}"
-                            else
-                                "released"
+                        binding.recommendedMoviesView.setLoading(uiState.recommendationsRefreshing)
+                        recommendedAdapter.submitList(uiState.recommendations)
 
-                        movie.posterPath?.let { posterPath ->
-                            Glide.with(binding.root)
-                                .load(
-                                    tmdbImageManager.getLatestImageProvider().getPosterUrl(
-                                        path = posterPath,
-                                        imageWidth = binding.detailsPosterImageView.width
-                                    )
-                                )
-                                .into(binding.detailsPosterImageView)
-
-                        }
-
-                        movie.backdropPath?.let { backdropPath ->
-                            Glide.with(binding.root)
-                                .load(
-                                    tmdbImageManager.getLatestImageProvider().getBackdropUrl(
-                                        path = backdropPath,
-                                        imageWidth = binding.root.width
-                                    )
-                                )
-                                .into(binding.detailsBackdropImageView)
-
-                        }
                     }
 
-                    binding.actorsView.setLoading(uiState.actorsRefreshing)
-                    actorsAdapter.submitList(uiState.actors)
-
-                    binding.recommendedMoviesView.setLoading(uiState.recommendationsRefreshing)
-                    recommendedAdapter.submitList(uiState.recommendations)
-
+                    binding.contentLoadingView.visibility = View.GONE
+                    binding.mainLayout.visibility = View.VISIBLE
                 }
             }
         }

@@ -13,16 +13,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.core.TmdbImageManager
 import com.example.moviestmdb.core_ui.util.SpaceItemDecoration
 import com.example.ui_movies.R
-import com.example.ui_movies.databinding.FragmentNowPlayingMoviesBinding
+import com.example.ui_movies.databinding.FragmentNowplayingBinding
 import dagger.hilt.android.AndroidEntryPoint
 import extensions.launchAndRepeatWithViewLifecycle
 import kotlinx.coroutines.flow.collectLatest
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class NowPlayingMoviesFragment: Fragment() {
+class NowPlayingMoviesFragment : Fragment() {
 
-    lateinit var binding: FragmentNowPlayingMoviesBinding
+    lateinit var binding: FragmentNowplayingBinding
     private val viewModel: NowPlayingMoviesViewModel by viewModels()
 
     lateinit var pagingAdapter: NowPlayingMoviesAdapter
@@ -35,9 +35,10 @@ class NowPlayingMoviesFragment: Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentNowPlayingMoviesBinding.inflate(inflater)
+        binding = FragmentNowplayingBinding.inflate(inflater)
 
         initAdapter()
+
         return binding.root
     }
 
@@ -46,8 +47,30 @@ class NowPlayingMoviesFragment: Fragment() {
 
         NavigationUI.setupWithNavController(binding.toolbar, findNavController())
 
-        binding.logoutButton.setOnClickListener {
-            viewModel.logout()
+        binding.toolbar.setOnMenuItemClickListener { menuItem ->
+            when (menuItem.itemId) {
+                com.example.core_ui.R.id.signout_action_item -> {
+                    viewModel.logout()
+                    true
+                }
+                else -> false
+            }
+        }
+
+        launchAndRepeatWithViewLifecycle {
+            viewModel.loadData()
+        }
+
+        launchAndRepeatWithViewLifecycle {
+            viewModel.genres.collect { genres ->
+                genres.map { genre ->
+                    genre.name?.takeIf { genre.id != null }?.let { genreName ->
+                        binding.genresChipGroup.addGenre(genreName, genre.id!!) {
+                            viewModel.filter(binding.genresChipGroup.chipsContainer.checkedChipIds)
+                        }
+                    }
+                }
+            }
         }
 
         launchAndRepeatWithViewLifecycle {
@@ -57,7 +80,7 @@ class NowPlayingMoviesFragment: Fragment() {
         }
     }
 
-    private val movieClickListener : (Int) -> Unit = { movieId ->
+    private val movieClickListener: (Int) -> Unit = { movieId ->
         val args = Bundle().apply {
             putInt("movie_id", movieId)
         }
@@ -68,7 +91,6 @@ class NowPlayingMoviesFragment: Fragment() {
         pagingAdapter =
             NowPlayingMoviesAdapter(
                 tmdbImageManager.getLatestImageProvider(),
-//                tmdbDateFormatter,
                 movieClickListener
             )
 
@@ -83,5 +105,4 @@ class NowPlayingMoviesFragment: Fragment() {
             addItemDecoration(decoration)
         }
     }
-
 }

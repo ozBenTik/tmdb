@@ -1,9 +1,6 @@
 package com.example.domain.users.iteractors
 import com.example.core.data.user.UserRepository
 import com.example.domain.FlowInteractor
-import com.example.model.Movie
-import data.movies.MoviesStore
-import di.Favorite
 import kotlinx.coroutines.flow.Flow
 import result.Result
 import util.AppCoroutineDispatchers

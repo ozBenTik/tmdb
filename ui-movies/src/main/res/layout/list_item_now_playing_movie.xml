@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="100dp"
+    android:layout_height="120dp"
     android:padding="4dp"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
@@ -72,6 +72,15 @@
             app:layout_constraintStart_toStartOf="@+id/guideline_start_content"
             app:layout_constraintTop_toBottomOf="@+id/title"
             tools:text="1054 votes * Apr 5, 2022" />
+
+        <com.example.moviestmdb.core_ui.widget.GenreChipGroupView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/popularity_badge"
+            app:layout_constraintRight_toRightOf="parent"
+            android:id="@+id/genres_chip_group" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </com.google.android.material.card.MaterialCardView>

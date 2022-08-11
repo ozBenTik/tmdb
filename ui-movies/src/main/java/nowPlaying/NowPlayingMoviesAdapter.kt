@@ -6,18 +6,17 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.model.Movie
+import com.example.model.MovieAndGenres
 import com.example.model.util.TmdbImageUrlProvider
-import com.example.ui_movies.databinding.ListItemNowPlayingMovieBinding
+import com.example.ui_movies.databinding.FragmentNowPlayingMoviesBinding
 
 class NowPlayingMoviesAdapter(
     private val tmdbImageUrlProvider: TmdbImageUrlProvider,
-//    private val tmdbDateFormatter: TmdbDateFormatter,
     private val onItemClickListener: (movieId: Int) -> Unit,
-) : PagingDataAdapter<Movie, NowPlayingMovieViewHolder>(NowPlayingEntryComparator) {
+) : PagingDataAdapter<MovieAndGenres, NowPlayingMovieViewHolder>(NowPlayingEntryComparator) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NowPlayingMovieViewHolder {
-        val binding = ListItemNowPlayingMovieBinding.inflate(
+        val binding = FragmentNowPlayingMoviesBinding.inflate(
             LayoutInflater.from(parent.context), parent, false
         )
         return NowPlayingMovieViewHolder(binding)
@@ -26,16 +25,19 @@ class NowPlayingMoviesAdapter(
     override fun onBindViewHolder(holder: NowPlayingMovieViewHolder, position: Int) {
         val entry = getItem(position)
         entry?.let { popularEntry ->
-            holder.binding.title.text = popularEntry.title
-            holder.binding.subtitle.text = "${popularEntry.voteCount} votes \u00B7 ${popularEntry.releaseDate}"
 
-//            holder.binding.subtitle.text = "${popularEntry.voteCount} votes • ${
-//                tmdbDateFormatter.formatMediumDate(popularEntry.releaseDate)
-//            }"
+            holder.binding.title.text = popularEntry.movie.title
+            holder.binding.subtitle.text = "${popularEntry.movie.voteCount} votes \u00B7 ${popularEntry.movie.releaseDate}"
+            holder.binding.genresChipGroup.chipsContainer.removeAllViews()
 
-            holder.binding.popularityBadge.progress = popularEntry.popularityPrecentage
+            holder.binding.popularityBadge.progress = popularEntry.movie.popularityPrecentage
+            popularEntry.genres.forEach { genre ->
+                genre.name?.takeIf { genre.id != null }?.let {genreName ->
+                    holder.binding.genresChipGroup.addGenre(genreName, genre.id!!, null)
+                }
+            }
 
-            entry.posterPath?.let { posterPath ->
+            popularEntry.movie.posterPath?.let { posterPath ->
                 Glide.with(holder.itemView)
                     .load(
                         tmdbImageUrlProvider.getPosterUrl(
@@ -49,7 +51,7 @@ class NowPlayingMoviesAdapter(
 
 
             holder.binding.root.setOnClickListener {
-                onItemClickListener(entry.id)
+                onItemClickListener(entry.movie.id)
             }
         }
 
@@ -57,21 +59,21 @@ class NowPlayingMoviesAdapter(
 }
 
 class NowPlayingMovieViewHolder(
-    internal val binding: ListItemNowPlayingMovieBinding
+    internal val binding: FragmentNowPlayingMoviesBinding
 ) : RecyclerView.ViewHolder(binding.root)
 
-object NowPlayingEntryComparator : DiffUtil.ItemCallback<Movie>() {
+object NowPlayingEntryComparator : DiffUtil.ItemCallback<MovieAndGenres>() {
     override fun areItemsTheSame(
-        oldItem: Movie,
-        newItem: Movie
+        oldItem: MovieAndGenres,
+        newItem: MovieAndGenres
     ): Boolean {
         // Id is unique.
-        return oldItem.id == newItem.id
+        return oldItem.movie.id == newItem.movie.id
     }
 
     override fun areContentsTheSame(
-        oldItem: Movie,
-        newItem: Movie
+        oldItem: MovieAndGenres,
+        newItem: MovieAndGenres
     ): Boolean {
         return oldItem == newItem
     }

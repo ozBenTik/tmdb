@@ -11,7 +11,6 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -53,48 +52,77 @@ class UserDetailsFragment : Fragment() {
         launchAndRepeatWithViewLifecycle {
             viewModel.state.collect { uiState ->
 
-                uiState.message?.let { message ->
-                    Snackbar.make(requireView(), message.message, Snackbar.LENGTH_LONG)
-                        .setAction("Dismiss") {
-                            viewModel.clearMessage(message.id)
-                        }
-                        .show()
+                if (uiState != UserDetailsViewState.Empty) {
+
+                    uiState.message?.let { message ->
+                        Snackbar.make(requireView(), message.message, Snackbar.LENGTH_LONG)
+                            .setAction("Dismiss") {
+                                viewModel.clearMessage(message.id)
+                            }
+                            .show()
+                    }
+
+                    Glide.with(view)
+                        .load(
+                            uiState.userDetails?.getPhotoUrl()
+                                ?: "https://media.istockphoto.com/vectors/sunglasses-emoticon-with-big-smile-vector-id1191260149"
+                        ).into(binding.userImage)
+
+                    uiState.userDetails?.getEmail()?.let {
+                        binding.userEmailTextView.text = it
+                    }
+
+                    uiState.userDetails?.getDisplayName()?.takeIf { it.isNotEmpty() }?.let {
+                        binding.userNameTextView.text = it
+                    }
+
+                    binding.favoriteMoviesView.setLoading(uiState.favoritesRefreshing)
+
+                    if (uiState.favorites.isEmpty()) {
+                        binding.titleFavoritesTextView.text = "No Favorite Movies"
+                    } else {
+                        binding.titleFavoritesTextView.text = "Favorite Movies"
+                    }
+
+                    favoriteMoviesAdapter.submitList(uiState.favorites)
+
+
+                    binding.userLoadingView.visibility = View.GONE
+                    binding.mainLayout.visibility = View.VISIBLE
+
                 }
-
-                Glide.with(view)
-                    .load(
-                        uiState.userDetails?.getPhotoUrl()
-                            ?: "https://media.istockphoto.com/vectors/sunglasses-emoticon-with-big-smile-vector-id1191260149"
-                    ).into(binding.userImage)
-
-                binding.userEmailTextView.text = uiState.userDetails?.getEmail() ?: "Unknown"
-                binding.userNameTextView.text = uiState.userDetails?.getDisplayName() ?: "Unknown"
-                binding.favoriteMoviesView.setLoading(uiState.favoritesRefreshing)
-
-                if (uiState.favorites.isEmpty()) {
-                    binding.titleFavoritesTextView.text = "No Favorite Movies"
-                } else {
-                    binding.titleFavoritesTextView.text = "Favorite Movies"
-                }
-
-                favoriteMoviesAdapter.submitList(uiState.favorites)
             }
         }
 
-
-        binding.userNameTextView.setOnClickListener {
-            showDialog(UpdateField.UpdateName()) {
-                binding.userNameTextView.text = it
+        binding.toolbar.setOnMenuItemClickListener { menuItem ->
+            when (menuItem.itemId) {
+                com.example.core_ui.R.id.signout_action_item -> {
+                    viewModel.logout()
+                    true
+                }
+                else -> false
             }
         }
 
-        binding.userImage.setOnClickListener {
+        binding.userNameTextViewEdit.setOnClickListener {
+            showDialog(UpdateField.UpdateName()) { displayName ->
+                viewModel.updateUserProfile(displayName = displayName) { success ->
+                    if (success)
+                        binding.userNameTextView.text = displayName
+                }
+            }
+        }
 
-            showDialog(UpdateField.UpdateImage()) {
-                Glide.with(view)
-                    .load(
-                        it.toString()
-                    ).into(binding.userImage)
+        binding.userImageEdit.setOnClickListener {
+
+            showDialog(UpdateField.UpdateImage()) { imageUrl ->
+                viewModel.updateUserProfile(imageUrl = imageUrl) { success ->
+                    if (success)
+                        Glide
+                            .with(view)
+                            .load(imageUrl)
+                            .into(binding.userImage)
+                }
             }
         }
     }

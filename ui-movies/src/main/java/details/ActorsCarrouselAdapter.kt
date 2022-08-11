@@ -31,11 +31,11 @@ class ActorsCarrouselAdapter(
             holder.binding.title.text = it.name
             holder.binding.subtitle.text = it.character
 
-            entry.profile_path?.let { posterPath ->
+            entry.profile_path?.let { profile ->
                 Glide.with(holder.itemView)
                     .load(
-                        tmdbImageUrlProvider.getPosterUrl(
-                            path = posterPath,
+                        tmdbImageUrlProvider.getBackdropUrl(
+                            path = profile,
                             imageWidth = holder.itemView.width
                         )
                     )

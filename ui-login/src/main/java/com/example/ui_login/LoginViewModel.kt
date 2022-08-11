@@ -3,9 +3,8 @@ package com.example.ui_login
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.domain.users.iteractors.LoginIteractor
-import com.example.domain.users.iteractors.LogoutIteractor
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.launch
 import result.data
 import util.AppCoroutineDispatchers

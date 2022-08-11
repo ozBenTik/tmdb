@@ -3,7 +3,7 @@ import com.example.core.data.user.AuthenticatedUserInfoBasic
 import com.example.model.Movie
 import util.UiMessage
 
-data class DetailsViewState(
+data class UserDetailsViewState(
     val userDetails: AuthenticatedUserInfoBasic? = null,
     val userRefreshing: Boolean = false,
     val favorites: List<Movie> = emptyList(),
@@ -14,6 +14,6 @@ data class DetailsViewState(
         get() = favoritesRefreshing
 
     companion object {
-        val Empty = DetailsViewState()
+        val Empty = UserDetailsViewState()
     }
 }

@@ -1,11 +1,6 @@
 package com.example.core.data.user
 
-import com.google.android.gms.tasks.Task
-import com.google.firebase.auth.AuthResult
-import data.movies.datasource.MoviesRemoteDataSource
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
-import result.Result
 import javax.inject.Inject
 
 class UserRepository @Inject constructor(
@@ -14,11 +9,8 @@ class UserRepository @Inject constructor(
     fun observeFavorites(): Flow<List<Int>> =
         userRemoteDataSource.observeFavorites()
 
-    fun updateImageUrl(imageUrl: String) =
-        userRemoteDataSource.updateImageUrl(imageUrl)
-
-    fun updateDisplayName(displayName: String) =
-        userRemoteDataSource.updateDisplayName(displayName)
+    fun updateUserProfile(imageUrl: String?, displayName: String?) =
+        userRemoteDataSource.updateUserProfile(imageUrl, displayName)
 
     fun addFavorite(movieId: Int) =
         userRemoteDataSource.addFavorite(movieId)

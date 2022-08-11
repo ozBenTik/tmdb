@@ -4,12 +4,12 @@ import androidx.paging.ExperimentalPagingApi
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
+import com.example.core.data.movies.datasource.localstore.MoviesStore
 import com.example.domain.PagingInteractor
 import com.example.domain.movies.MoviesPagingSource
 import com.example.domain.movies.PaginatedMovieRemoteMediator
 import com.example.domain.movies.iteractors.UpdateNowPlayingMovies
 import com.example.model.Movie
-import data.movies.MoviesStore
 import di.NowPlaying
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
@@ -24,16 +24,19 @@ class ObservePagedNowPlayingMovies @Inject constructor(
         params: Params
     ): Flow<PagingData<Movie>> {
         return Pager(
-            config = params.pagingConfig,
-            remoteMediator = PaginatedMovieRemoteMediator(moviesStore = nowPlayingStore) { page ->
-                updateNowPlayingMovies.executeSync(UpdateNowPlayingMovies.Params(page))
-                pagingSourceFactory.invalidate()
-            },
-            pagingSourceFactory = pagingSourceFactory
-        ).flow
+                config = params.pagingConfig,
+                remoteMediator = PaginatedMovieRemoteMediator(moviesStore = nowPlayingStore) { page ->
+                    updateNowPlayingMovies.executeSync(UpdateNowPlayingMovies.Params(page))
+                    pagingSourceFactory.invalidate()
+                },
+                pagingSourceFactory = pagingSourceFactory
+            ).flow
+
     }
 
-    private val pagingSourceFactory = androidx.paging.InvalidatingPagingSourceFactory(::createPagingSource)
+    private val pagingSourceFactory = androidx.paging.InvalidatingPagingSourceFactory {
+        MoviesPagingSource(nowPlayingStore)
+    }
 
     private fun createPagingSource(): MoviesPagingSource {
         return MoviesPagingSource(nowPlayingStore)

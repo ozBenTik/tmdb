@@ -2,8 +2,8 @@ package com.example.domain.movies
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
+import com.example.core.data.movies.datasource.localstore.MoviesStore
 import com.example.model.Movie
-import data.movies.MoviesStore
 import timber.log.Timber
 import java.io.IOException
 
@@ -12,7 +12,9 @@ const val INITIAL_MOVIES_PAGE = 1
 class MoviesPagingSource(
     private val moviesStore: MoviesStore
 ) : PagingSource<Int, Movie>() {
+
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Movie> {
+
         return try {
             val pageNumber = params.key ?: INITIAL_MOVIES_PAGE
 
@@ -26,6 +28,7 @@ class MoviesPagingSource(
                 prevKey = prevKey,
                 nextKey = nextKey
             )
+
         } catch (e: IOException) {
             Timber.e(e)
             LoadResult.Error(e)
