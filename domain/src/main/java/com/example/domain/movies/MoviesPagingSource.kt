@@ -2,8 +2,8 @@ package com.example.domain.movies
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
+import com.example.core.data.movies.datasource.localstore.MoviesStore
 import com.example.model.Movie
-import data.movies.MoviesStore
 import timber.log.Timber
 import java.io.IOException
 

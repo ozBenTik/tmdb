@@ -16,7 +16,6 @@ import com.example.ui_movies.R
 import com.example.ui_movies.databinding.FragmentNowplayingBinding
 import dagger.hilt.android.AndroidEntryPoint
 import extensions.launchAndRepeatWithViewLifecycle
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import javax.inject.Inject
 

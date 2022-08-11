@@ -53,13 +53,6 @@ class MoviesRemoteDataSource @Inject constructor(
                 .toResult()
         }
 
-    suspend fun getGenres() =
-        safeApiCall {
-            moviesService.getGenres()
-                .executeWithRetry()
-                .toResult()
-        }
-
     suspend fun getDiscovery(page: Int, discoveryParams: Map<String, String>) =
         safeApiCall {
             moviesService.getDiscovery(page, discoveryParams)

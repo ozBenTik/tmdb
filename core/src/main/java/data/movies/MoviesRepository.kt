@@ -87,18 +87,6 @@ class MoviesRepository @Inject constructor(
 
     fun observeCredits() = local.creditsStore.observeEntries()
 
-    // ------------- Genres capabilities -------------------
-    suspend fun saveGenres(genres: List<Genre>) {
-        local.genresStore.insert(genres)
-    }
-
-    suspend fun getGenres() =
-        flow {
-            emit(remote.getGenres())
-        }
-
-    fun observeGenres() = local.genresStore.observeEntries()
-
     // ------------- Discover capabilities -------------------
     suspend fun saveDiscovery(page: Int, movies: List<Movie>) {
         local.discoveryStore.insert(page, movies)

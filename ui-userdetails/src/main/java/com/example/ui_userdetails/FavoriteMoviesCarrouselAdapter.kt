@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.core_ui.databinding.MovieCardBinding
 import com.example.model.Movie
 import com.example.model.util.TmdbImageUrlProvider
 import com.example.ui_userdetails.databinding.FavoriteItemBinding

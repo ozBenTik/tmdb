@@ -1,11 +1,9 @@
 package com.example.domain.movies.observers
 
-import androidx.paging.map
 import com.example.domain.SubjectInteractor
 import com.example.model.Genre
 import data.movies.MoviesRepository
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.combine
 import javax.inject.Inject
 
 class ObserveNowPlayingGenres @Inject constructor(
