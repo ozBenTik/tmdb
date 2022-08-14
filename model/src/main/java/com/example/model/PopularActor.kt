@@ -14,7 +14,5 @@ data class PopularActor(
     @SerializedName("popularity")
     val popularity: Double? = null,
     @SerializedName("known_for")
-    val knownForMovies: List<Movie> = listOf(),
-    @SerializedName("known_for")
-    val knownForTvShows: List<TVShow> = listOf()
+    val knownFor: List<ActorKnownFor> = listOf()
 )
