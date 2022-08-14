@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AutoCompleteTextView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import com.example.model.FilterKey
 import com.example.model.FilterParams
@@ -17,6 +18,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.chip.Chip
 import com.google.android.material.datepicker.MaterialDatePicker
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import extensions.launchAndRepeatWithViewLifecycle
 import kotlinx.coroutines.flow.collectLatest
@@ -70,21 +72,26 @@ class FiltersBottomShit(
             dismiss()
         }
 
+        binding.toDateTextView.text = filterParams.release_dateTo.first
+        binding.fromDateTextView.text = filterParams.release_dateFrom.first
+
         binding.toDatePicker.setOnClickListener {
             showDatePicker(
                 filterParams.release_dateTo.second,
-                binding.toDateTextView
+                binding.toDateTextView,
+                FilterKey.RELEASE_DATE_TO
             ) { mils, formatted ->
-                viewModel.addFilter(FilterKey.RELEASE_DATE_TO, mils to formatted)
+                viewModel.addFilter(FilterKey.RELEASE_DATE_TO, formatted to mils )
             }
         }
 
         binding.fromDatePicker.setOnClickListener {
             showDatePicker(
                 filterParams.release_dateFrom.second,
-                binding.fromDateTextView
+                binding.fromDateTextView,
+                FilterKey.RELEASE_DATE_FROM
             ) { mils, formatted ->
-                viewModel.addFilter(FilterKey.RELEASE_DATE_FROM, mils to formatted)
+                viewModel.addFilter(FilterKey.RELEASE_DATE_FROM, formatted to mils )
             }
         }
 
@@ -169,6 +176,7 @@ class FiltersBottomShit(
     private fun showDatePicker(
         initialValue: Long,
         presenterTextView: TextView,
+        source: FilterKey,
         onDateSelected: (mills: Long, formatted: String) -> Unit
     ) {
 
@@ -184,9 +192,18 @@ class FiltersBottomShit(
             .setSelection(calender.timeInMillis)
             .build().let { datePicker ->
 
-                datePicker.addOnPositiveButtonClickListener {
-                    calender.timeInMillis = it
-                    onDateSelected(it, formatter.format(calender.time))
+                datePicker.addOnPositiveButtonClickListener { dateValue ->
+
+                    source.takeIf { it == FilterKey.RELEASE_DATE_TO && filterParams.release_dateFrom.second > dateValue}?.run {
+                        Toast.makeText(requireContext(), "Invalid input - To cannot be before from", Toast.LENGTH_SHORT).show()
+                        presenterTextView.text = ""
+                    } ?: kotlin.run {
+                        calender.timeInMillis = dateValue
+                        formatter.format(calender.time).let {  formatted ->
+                            onDateSelected(dateValue, formatted)
+                            presenterTextView.text = formatted
+                        }
+                    }
                     datePicker.dismiss()
                 }
 

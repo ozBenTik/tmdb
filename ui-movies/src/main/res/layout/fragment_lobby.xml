@@ -36,7 +36,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <com.example.moviestmdb.core_ui.widget.MoviesCarrouselView
+                <com.example.core_ui.widget.MoviesCarrouselView
                     android:id="@+id/popularMoviesView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -44,7 +44,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <com.example.moviestmdb.core_ui.widget.MoviesCarrouselView
+                <com.example.core_ui.widget.MoviesCarrouselView
                     android:id="@+id/nowPlayingMoviesView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -54,7 +54,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/popularMoviesView" />
 
-                <com.example.moviestmdb.core_ui.widget.MoviesCarrouselView
+                <com.example.core_ui.widget.MoviesCarrouselView
                     android:id="@+id/upcomingMoviesView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -64,7 +64,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/nowPlayingMoviesView" />
 
-                <com.example.moviestmdb.core_ui.widget.MoviesCarrouselView
+                <com.example.core_ui.widget.MoviesCarrouselView
                     android:id="@+id/topRatedMoviesView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

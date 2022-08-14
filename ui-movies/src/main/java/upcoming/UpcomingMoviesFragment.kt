@@ -11,7 +11,7 @@ import androidx.navigation.ui.NavigationUI
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.core.TmdbImageManager
-import com.example.moviestmdb.core_ui.util.SpaceItemDecoration
+import com.example.core_ui.util.SpaceItemDecoration
 import com.example.ui_movies.R
 import com.example.ui_movies.databinding.FragmentUpcomingMoviesBinding
 import dagger.hilt.android.AndroidEntryPoint

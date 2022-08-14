@@ -28,7 +28,7 @@
             android:orientation="vertical"
             app:layout_constraintGuide_end="16dp" />
 
-        <com.example.moviestmdb.core_ui.widget.PopularityBadgeView
+        <com.example.core_ui.widget.PopularityBadgeView
             android:id="@+id/popularity_badge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

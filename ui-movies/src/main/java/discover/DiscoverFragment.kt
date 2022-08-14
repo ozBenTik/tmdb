@@ -1,5 +1,7 @@
 package discover
 
+import android.content.res.Configuration
+import android.icu.number.Precision.integer
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -107,8 +109,18 @@ class DiscoverFragment : Fragment() {
             }
 
         binding.list.run {
-            layoutManager = GridLayoutManager(context, 2, RecyclerView.VERTICAL, false)
+
+            layoutManager = GridLayoutManager(context, resources.getInteger(com.example.core_ui.R.integer.numOfGridItems))
             adapter = pagingAdapter
+        }
+    }
+
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+        val newOrientation: Int = newConfig.orientation
+        if (newOrientation == Configuration.ORIENTATION_LANDSCAPE) {
+            binding.list.layoutManager = GridLayoutManager(context, 2, RecyclerView.VERTICAL, false)
+
         }
     }
 }

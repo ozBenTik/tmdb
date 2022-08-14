@@ -4,6 +4,7 @@
 
     <!--A variant of primarySurface which corresponds to colorPrimaryVariant in light theme-->
     <!--and colorSurface in dark theme-->
+    <attr name="numOfGridItems" format="integer" />
     <attr name="colorPrimarySurfaceVariant" format="color" />
     <attr name="colorTransparentOnSurface" format="color"/>
     <!--Emphasis values are used in combination with each "on" color to create three available -->

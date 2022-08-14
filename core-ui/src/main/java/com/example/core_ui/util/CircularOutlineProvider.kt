@@ -1,4 +1,4 @@
-package com.example.moviestmdb.core_ui.util
+package com.example.core_ui.util
 
 import android.graphics.Outline
 import android.view.View

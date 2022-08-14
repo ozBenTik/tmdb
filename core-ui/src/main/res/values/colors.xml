@@ -46,7 +46,7 @@
     <color name="nav_bar">@color/tmdb_black_900_alpha_020</color>
 
     <color name="color_on_image_text">@color/tmdb_black_800</color>
-    <color name="color_on_image_transparent_back">#5EFFFFFF</color>
+    <color name="color_on_image_transparent_back">#C8FFFFFF</color>
 
     <color name="tmdb_popularity_bg">@color/tmdb_black_900_alpha_087</color>
     <color name="tmdb_popularity_high">@color/tmdb_green_500</color>

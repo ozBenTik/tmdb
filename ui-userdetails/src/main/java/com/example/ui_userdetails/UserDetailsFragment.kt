@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.core.TmdbImageManager
-import com.example.moviestmdb.core_ui.util.SpaceItemDecoration
+import com.example.core_ui.util.SpaceItemDecoration
 import com.example.ui_userdetails.databinding.FragmentUserDetailsBinding
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint

@@ -1,4 +1,4 @@
-package com.example.moviestmdb.core_ui.widget
+package com.example.core_ui.widget
 
 import android.content.Context
 import android.util.AttributeSet
@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import androidx.core.content.ContextCompat
 import com.example.core_ui.R
 import com.example.core_ui.databinding.PopularityBadgeViewBinding
-import com.example.moviestmdb.core_ui.util.CircularOutlineProvider
+import com.example.core_ui.util.CircularOutlineProvider
 import com.google.android.material.card.MaterialCardView
 
 class PopularityBadgeView @JvmOverloads constructor(

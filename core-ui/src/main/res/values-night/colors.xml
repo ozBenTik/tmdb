@@ -2,7 +2,7 @@
 <resources>
 
     <color name="color_on_image_text">@color/tmdb_white_50</color>
-    <color name="color_on_image_transparent_back">#5F000000</color>
+    <color name="color_on_image_transparent_back">#80000000</color>
 
     <color name="tmdb_popularity_bg">@color/tmdb_black_900_alpha_060</color>
     <color name="tmdb_popularity_high">@color/tmdb_green_300</color>
