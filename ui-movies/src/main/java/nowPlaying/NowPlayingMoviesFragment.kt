@@ -35,7 +35,7 @@ class NowPlayingMoviesFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentNowplayingBinding.inflate(inflater)
+        binding = FragmentNowplayingBinding.inflate(inflater, container, false)
 
         initAdapter()
 

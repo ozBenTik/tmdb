@@ -17,7 +17,7 @@
         <entry key="core-ui/src/main/res/font/work_sans_extrabold.xml" value="0.1638888888888889" />
         <entry key="core-ui/src/main/res/font/work_sans_medium.xml" value="0.1638888888888889" />
         <entry key="core-ui/src/main/res/font/work_sans_semibold.xml" value="0.1638888888888889" />
-        <entry key="core-ui/src/main/res/layout/actor_card.xml" value="0.720164609053498" />
+        <entry key="core-ui/src/main/res/layout/actor_card.xml" value="0.6" />
         <entry key="core-ui/src/main/res/layout/actors_carrousel_view.xml" value="0.26970977783203126" />
         <entry key="core-ui/src/main/res/layout/filter_bottom_shit.xml" value="0.26296296296296295" />
         <entry key="core-ui/src/main/res/layout/movie_card.xml" value="0.1" />
@@ -53,7 +53,8 @@
         <entry key="ui-movies/src/main/res/menu/discover_menu.xml" value="0.26296296296296295" />
         <entry key="ui-movies/src/main/res/menu/menu.xml" value="0.45754956786985257" />
         <entry key="ui-movies/src/main/res/menu/movie_menu.xml" value="0.27395833333333336" />
-        <entry key="ui-people/src/main/res/layout/fragment_people.xml" value="0.1" />
+        <entry key="ui-people/src/main/res/layout/fragment_people.xml" value="0.2996871948242188" />
+        <entry key="ui-people/src/main/res/layout/popular_actor_card.xml" value="0.32587697000508387" />
         <entry key="ui-tvshows/src/main/res/layout/fragment_tv_shows.xml" value="0.27242889404296877" />
         <entry key="ui-userdetails/src/main/res/layout/fragment_user_details.xml" value="0.16759776536312848" />
       </map>

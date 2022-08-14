@@ -13,9 +13,16 @@
         android:id="@+id/discoverFragment"
         />
 
+
+    <item
+        android:title="Actors"
+        android:icon="@drawable/ic_baseline_people_24"
+        android:id="@+id/people_nav_graph"
+        />
+
     <item
         android:title="User Details"
-        android:icon="@drawable/ic_baseline_people_24"
+        android:icon="@drawable/ic_baseline_emoji_people_24"
         android:id="@+id/user_nav_graph"
         />
 </menu>

@@ -50,4 +50,8 @@ data class ActorKnownFor(
     @SerializedName("video")
     val isVideo: Boolean = false,
 
-    )
+    ) {
+    override fun toString(): String {
+        return super.toString()
+    }
+}

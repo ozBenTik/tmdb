@@ -31,6 +31,9 @@ class PeopleLobbyViewModel @Inject constructor(
 
     private val language = MutableStateFlow("en-US")
 
+    val pagedList: Flow<PagingData<PopularActor>> =
+        pagingInteractor.flow.cachedIn(viewModelScope)
+
     init {
         pagingInteractor(ObservePagedPPeople.Params(language = language, pagingConfig = PAGING_CONFIG))
         loadData()

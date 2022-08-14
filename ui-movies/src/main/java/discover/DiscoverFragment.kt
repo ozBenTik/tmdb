@@ -44,7 +44,7 @@ class DiscoverFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentDiscoverBinding.inflate(inflater)
+        binding = FragmentDiscoverBinding.inflate(inflater, container, false)
         initFiltersCallback()
         initAdapter()
         return binding.root
