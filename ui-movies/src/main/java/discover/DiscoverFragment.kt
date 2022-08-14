@@ -1,11 +1,18 @@
 package discover
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.NavController
+import androidx.navigation.NavDeepLinkBuilder
+import androidx.navigation.NavDeepLinkRequest
+import androidx.navigation.NavDeepLinkRequest.Builder.Companion.fromUri
+import androidx.navigation.NavDestination
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView

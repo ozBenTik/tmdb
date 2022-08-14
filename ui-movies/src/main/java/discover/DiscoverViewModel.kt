@@ -15,6 +15,7 @@ import di.Discovery
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import util.AppCoroutineDispatchers
 import javax.inject.Inject
