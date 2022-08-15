@@ -1,24 +1,18 @@
-package com.example.ui_people
+package com.example.ui_people.lobby
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.bumptech.glide.Glide.init
-import com.example.domain.movies.observers.ObservePagedTopRatedMovies
 import com.example.domain.people.observers.ObservePagedPopularPeople
 import com.example.domain.users.iteractors.LogoutIteractor
-import com.example.model.FilterParams
-import com.example.model.Movie
 import com.example.model.PopularActor
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import org.intellij.lang.annotations.Language
 import util.AppCoroutineDispatchers
 import javax.inject.Inject
 

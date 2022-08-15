@@ -53,6 +53,7 @@
         <entry key="ui-movies/src/main/res/menu/discover_menu.xml" value="0.26296296296296295" />
         <entry key="ui-movies/src/main/res/menu/menu.xml" value="0.45754956786985257" />
         <entry key="ui-movies/src/main/res/menu/movie_menu.xml" value="0.27395833333333336" />
+        <entry key="ui-people/src/main/res/layout/fragment_actor_details.xml" value="0.28921356201171877" />
         <entry key="ui-people/src/main/res/layout/fragment_people.xml" value="0.2996871948242188" />
         <entry key="ui-people/src/main/res/layout/popular_actor_card.xml" value="0.32587697000508387" />
         <entry key="ui-tvshows/src/main/res/layout/fragment_tv_shows.xml" value="0.27242889404296877" />

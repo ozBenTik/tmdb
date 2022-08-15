@@ -1,4 +1,4 @@
-package com.example.ui_people
+package com.example.ui_people.lobby
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter

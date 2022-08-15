@@ -1,6 +1,5 @@
-package com.example.ui_people
+package com.example.ui_people.lobby
 
-import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,14 +7,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.core_ui.R
 import com.example.model.util.TmdbImageUrlProvider
 import com.example.ui_people.databinding.FragmentPeopleBinding
 import dagger.hilt.android.AndroidEntryPoint
 import extensions.launchAndRepeatWithViewLifecycle
 import kotlinx.coroutines.flow.collectLatest
-import java.util.Locale.filter
 import javax.inject.Inject
 
 @AndroidEntryPoint
