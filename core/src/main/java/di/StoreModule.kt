@@ -3,7 +3,7 @@ package di
 import com.example.core.data.movies.datasource.localstore.CreditsStore
 import com.example.core.data.movies.datasource.localstore.MoviesStore
 import com.example.core.data.movies.datasource.localstore.RecommendationsStore
-import com.example.core.data.people.datasource.localstore.PPeopleStore
+import com.example.core.data.people.datasource.localstore.PopularPeopleStore
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -50,5 +50,5 @@ class StoreModule {
 
     @Singleton
     @Provides
-    fun providePPeopleStore(): PPeopleStore = PPeopleStore()
+    fun providePopularPeopleStore(): PopularPeopleStore = PopularPeopleStore()
 }

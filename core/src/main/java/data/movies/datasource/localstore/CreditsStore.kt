@@ -13,7 +13,6 @@ class CreditsStore @Inject constructor() {
     // Map<movieId, actors>
     private val _movieActors = MutableSharedFlow<Map<Int, List<ActorPart>>>(replay = 1)
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     fun insert(movieId: Int, actors: List<ActorPart>) {
         _movieActors.tryEmit(mapOf(movieId to actors))
     }

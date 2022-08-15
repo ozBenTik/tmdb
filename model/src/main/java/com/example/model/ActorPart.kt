@@ -20,7 +20,7 @@ data class ActorPart(
     val name: String? = null,
 
     @SerializedName("original_name")
-    val original_name: String? = null,
+    val originalName: String? = null,
 
     @SerializedName("popularity")
     val popularity: Double? = null,
@@ -29,13 +29,13 @@ data class ActorPart(
     val profilePath: String? = null,
 
     @SerializedName("cast_id")
-    val cast_id: Int? = null,
+    val castId: Int? = null,
 
     @SerializedName("character")
     val character: String? = null,
 
     @SerializedName("credit_id")
-    val credit_id: String? = null,
+    val creditId: String? = null,
 
     @SerializedName("order")
     val order: Int? = null

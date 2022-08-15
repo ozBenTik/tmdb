@@ -13,14 +13,14 @@ class PeopleRepository @Inject constructor(
 
     //------------ Popular capabilities ------------
 
-    fun observePopularPeople() = local.pPeopleStore.observeEntries()
+    fun observePopularPeople() = local.popularPeopleStore.observeEntries()
 
     fun getPopularPeople(page: Int, language: String) =
         flow {
-            emit(remote.getPPeople(page, language))
+            emit(remote.getPopularPeople(page, language))
         }
 
     fun savePopularPeople(page: Int, people: List<PopularActor>) {
-        local.pPeopleStore.insert(page, people)
+        local.popularPeopleStore.insert(page, people)
     }
 }

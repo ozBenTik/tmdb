@@ -7,18 +7,19 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Filter
 import android.widget.TextView
+import com.example.core.util.SupportedLanguages
 import com.example.ui_movies.R
 
 class LanguageAdapter(
     context: Context,
     resource: Int,
     private val textViewResourceId: Int,
-    private val items: List<Pair<String, String>>
+    private val items: List<SupportedLanguages>
 ) :
-    ArrayAdapter<Pair<String, String>>(context, resource, items) {
+    ArrayAdapter<SupportedLanguages>(context, resource, items) {
 
-    val suggestions = mutableListOf<Pair<String, String>>()
-    val tempItems = mutableListOf<Pair<String, String>>().apply {
+    val suggestions = mutableListOf<SupportedLanguages>()
+    val tempItems = mutableListOf<SupportedLanguages>().apply {
         addAll(items)
     }
 
@@ -34,7 +35,7 @@ class LanguageAdapter(
         return view!!.apply {
             items.takeIf { it.isNotEmpty() }?.let { items ->
                 items[position].let { item ->
-                    findViewById<TextView>(textViewResourceId)?.text = item.first
+                    findViewById<TextView>(textViewResourceId)?.text = item.code
                 }
             }
         }
@@ -44,7 +45,7 @@ class LanguageAdapter(
         return object : Filter() {
 
             override fun convertResultToString(resultValue: Any?): CharSequence {
-                return (resultValue as? Pair<String?, String>)?.first ?: ""
+                return (resultValue as? SupportedLanguages)?.description ?: ""
             }
 
             override fun performFiltering(constraint: CharSequence?): FilterResults {
@@ -52,7 +53,7 @@ class LanguageAdapter(
                     constraint?.let { searchConstraint ->
                         suggestions.clear()
                         tempItems.forEach { item ->
-                            if (item.first.lowercase()
+                            if (item.code.lowercase()
                                     .contains("$searchConstraint".lowercase())
                             ) {
                                 suggestions.add(item)
@@ -67,7 +68,7 @@ class LanguageAdapter(
             override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
                 results?.takeIf { it.count > 0 }?.let {
                     clear()
-                    (results.values as? MutableList<Pair<String, String>>)?.forEach { result ->
+                    (results.values as? MutableList<SupportedLanguages>)?.forEach { result ->
                         add(result)
                         notifyDataSetChanged()
                     }

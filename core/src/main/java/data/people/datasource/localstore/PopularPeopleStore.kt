@@ -8,7 +8,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class PPeopleStore @Inject constructor() {
+class PopularPeopleStore @Inject constructor() {
 
     // Map<Page, people>
     private val _people = MutableSharedFlow<Map<Int, List<PopularActor>>>(replay = 1)

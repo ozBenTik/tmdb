@@ -10,9 +10,9 @@ class PeopleRemoteDataSource @Inject constructor(
     private val peopleService: PeopleService
 ) {
 
-    suspend fun getPPeople(page: Int, language: String) =
+    suspend fun getPopularPeople(page: Int, language: String) =
         safeApiCall {
-            peopleService.getPPeople(page, language)
+            peopleService.getPopularPeople(page, language)
                 .executeWithRetry()
                 .toResult()
         }

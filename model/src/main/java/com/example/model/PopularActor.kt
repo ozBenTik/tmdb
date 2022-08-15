@@ -15,4 +15,14 @@ data class PopularActor(
     val popularity: Double? = null,
     @SerializedName("known_for")
     val knownFor: List<ActorKnownFor> = listOf()
-)
+) {
+    val knownForTitles: String
+        get() = "${
+            StringBuilder().apply {
+                knownFor.map {
+                    append(it.name ?: it.title ?: "")
+                    append(", ")
+                }
+            }
+        }".dropLast(1)
+}

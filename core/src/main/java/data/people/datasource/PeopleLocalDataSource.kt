@@ -1,8 +1,8 @@
 package com.example.core.data.people.datasource
 
-import com.example.core.data.people.datasource.localstore.PPeopleStore
+import com.example.core.data.people.datasource.localstore.PopularPeopleStore
 import javax.inject.Inject
 
 class PeopleLocalDataSource @Inject constructor(
-    val pPeopleStore: PPeopleStore,
+    val popularPeopleStore: PopularPeopleStore,
 )
