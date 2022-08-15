@@ -16,4 +16,11 @@ class PeopleRemoteDataSource @Inject constructor(
                 .executeWithRetry()
                 .toResult()
         }
+
+    suspend fun getPersonDetails(personId: Int) =
+        safeApiCall {
+            peopleService.getPersonDetails(personId)
+                .executeWithRetry()
+                .toResult()
+        }
 }

@@ -100,11 +100,24 @@ object Libs {
 
         object Lifecycle {
             private const val version = "2.4.1"
-            const val runtime = "androidx.lifecycle:lifecycle-runtime-ktx:$version"
+                        const val runtime = "androidx.lifecycle:lifecycle-runtime-ktx:$version"
             const val compiler = "androidx.lifecycle:lifecycle-compiler:$version"
             const val viewmodel = "androidx.lifecycle:lifecycle-viewmodel-ktx:$version"
             const val process = "androidx.lifecycle:lifecycle-process:$version"
-            const val viewModelCompose = "androidx.lifecycle:lifecycle-viewmodel-compose:$version"
+            const val viewModelCompose = "androidx.lifecycle:lifecycle-viewmodel-compose:2.5.1"
+            const val activityCompose = "androidx.activity:activity-compose:1.5.1"
+        }
+
+        object Compose {
+            private const val version = "1.2.1"
+            const val ui = "androidx.compose.ui:ui:$version"
+            const val uiTooling = "androidx.compose.ui:ui-tooling:$version"
+            const val foundation = "androidx.compose.foundation:foundation:$version"
+            const val material = "androidx.compose.material:material:$version"
+            const val materialIconsCore = "androidx.compose.material:material-icons-core:$version"
+            const val materialIconsExtended = "androidx.compose.material:material-icons-extended:$version"
+            const val liveData = "androidx.compose.runtime:runtime-livedata:$version"
+
         }
     }
 

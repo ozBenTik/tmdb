@@ -78,6 +78,17 @@ class UiLibraryPlugin : Plugin<Project> {
 
             "implementation"(Libs.AndroidX.Navigation.fragment)
             "implementation"(Libs.AndroidX.Navigation.uiKtx)
+
+            // Compose
+            "implementation"(Libs.AndroidX.Compose.foundation)
+            "implementation"(Libs.AndroidX.Compose.ui)
+            "implementation"(Libs.AndroidX.Compose.liveData)
+            "implementation"(Libs.AndroidX.Compose.material)
+            "implementation"(Libs.AndroidX.Compose.materialIconsCore)
+            "implementation"(Libs.AndroidX.Compose.materialIconsExtended)
+            "implementation"(Libs.AndroidX.Compose.uiTooling)
+            "implementation"(Libs.AndroidX.Lifecycle.activityCompose)
+            "implementation"(Libs.AndroidX.Lifecycle.viewModelCompose)
         }
     }
 }

@@ -2,7 +2,6 @@ package com.example.domain.users.iteractors
 
 import com.example.core.data.user.UserRepository
 import com.example.domain.FlowInteractor
-import com.example.domain.SubjectInteractor
 import kotlinx.coroutines.flow.Flow
 import result.Result
 import util.AppCoroutineDispatchers

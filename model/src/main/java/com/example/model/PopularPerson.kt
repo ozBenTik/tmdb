@@ -2,7 +2,7 @@ package com.example.model
 
 import com.google.gson.annotations.SerializedName
 
-data class PopularActor(
+data class PopularPerson(
     @SerializedName("profile_path")
     val profilePath: String? = null,
     @SerializedName("adult")
@@ -14,7 +14,7 @@ data class PopularActor(
     @SerializedName("popularity")
     val popularity: Double? = null,
     @SerializedName("known_for")
-    val knownFor: List<ActorKnownFor> = listOf()
+    val knownFor: List<PersonKnownFor> = listOf()
 
 ) {
     val knownForTitles: String
