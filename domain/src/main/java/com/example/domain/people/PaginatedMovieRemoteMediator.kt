@@ -5,14 +5,14 @@ import androidx.paging.LoadType
 import androidx.paging.PagingState
 import androidx.paging.RemoteMediator
 import com.example.core.data.movies.datasource.localstore.MoviesStore
-import com.example.core.data.people.datasource.localstore.PPeopleStore
+import com.example.core.data.people.datasource.localstore.PopularPeopleStore
 import com.example.domain.movies.INITIAL_MOVIES_PAGE
 import com.example.model.Movie
 import com.example.model.PopularActor
 
 @OptIn(ExperimentalPagingApi::class)
-class PaginatedPPeopleRemoteMediator(
-    private val pPeopleStore: PPeopleStore,
+class PaginatedPopularPeopleRemoteMediator(
+    private val popularPeopleStore: PopularPeopleStore,
     private val fetch: suspend (page: Int) -> Unit
 ) : RemoteMediator<Int, PopularActor>() {
 
@@ -24,7 +24,7 @@ class PaginatedPPeopleRemoteMediator(
             LoadType.REFRESH -> INITIAL_MOVIES_PAGE
             LoadType.PREPEND -> return MediatorResult.Success(endOfPaginationReached = true)
             LoadType.APPEND -> {
-                val lastPage = pPeopleStore.getLastPage()
+                val lastPage = popularPeopleStore.getLastPage()
                 lastPage + 1
             }
         }

@@ -7,7 +7,7 @@ import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.bumptech.glide.Glide.init
 import com.example.domain.movies.observers.ObservePagedTopRatedMovies
-import com.example.domain.people.observers.ObservePagedPPeople
+import com.example.domain.people.observers.ObservePagedPopularPeople
 import com.example.domain.users.iteractors.LogoutIteractor
 import com.example.model.FilterParams
 import com.example.model.Movie
@@ -24,7 +24,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class PeopleLobbyViewModel @Inject constructor(
-    private val pagingInteractor: ObservePagedPPeople,
+    private val pagingInteractor: ObservePagedPopularPeople,
     private val logoutIteractor: LogoutIteractor,
     private val dispatchers: AppCoroutineDispatchers
 ) : ViewModel() {
@@ -35,7 +35,7 @@ class PeopleLobbyViewModel @Inject constructor(
         pagingInteractor.flow.cachedIn(viewModelScope)
 
     init {
-        pagingInteractor(ObservePagedPPeople.Params(language = language, pagingConfig = PAGING_CONFIG))
+        pagingInteractor(ObservePagedPopularPeople.Params(language = language, pagingConfig = PAGING_CONFIG))
         loadData()
     }
 

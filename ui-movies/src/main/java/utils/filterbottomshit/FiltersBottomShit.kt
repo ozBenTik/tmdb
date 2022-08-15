@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.AutoCompleteTextView
 import android.widget.TextView
 import androidx.fragment.app.viewModels
+import com.example.core.util.SupportedLanguages
 import com.example.model.FilterKey
 import com.example.model.FilterParams
 import com.example.ui_movies.R
@@ -92,9 +93,9 @@ class FiltersBottomShit(
             filterParams.language,
             binding.languageInput,
             listOf(
-                "" to "",
-                "Hebrew" to "he-il",
-                "English" to "en-us"
+                SupportedLanguages.Empty(),
+                SupportedLanguages.Hebrew(),
+                SupportedLanguages.English()
             )
         )
 
@@ -133,7 +134,7 @@ class FiltersBottomShit(
     private fun initLanguageField(
         initialValue: String,
         container: AutoCompleteTextView,
-        items: List<Pair<String, String>>
+        items: List<SupportedLanguages>
     ) {
         container.apply {
             setAdapter(
@@ -146,7 +147,7 @@ class FiltersBottomShit(
             )
 
             items.forEachIndexed { index, langPair ->
-                if (langPair.second == initialValue) {
+                if (langPair.description == initialValue) {
                     setSelection(index)
                     return
                 }
