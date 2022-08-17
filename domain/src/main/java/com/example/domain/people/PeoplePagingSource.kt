@@ -4,15 +4,15 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.example.core.data.people.datasource.localstore.PopularPeopleStore
 import com.example.domain.movies.INITIAL_MOVIES_PAGE
-import com.example.model.PopularPerson
+import com.example.model.Person
 import timber.log.Timber
 import java.io.IOException
 
 class PopularPeoplePagingSource(
     val popularPeopleStore: PopularPeopleStore
-) : PagingSource<Int, PopularPerson>() {
+) : PagingSource<Int, Person>() {
 
-    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, PopularPerson> {
+    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Person> {
 
         return try {
             val pageNumber = params.key ?: INITIAL_MOVIES_PAGE
@@ -34,7 +34,7 @@ class PopularPeoplePagingSource(
         }
     }
 
-    override fun getRefreshKey(state: PagingState<Int, PopularPerson>): Int? {
+    override fun getRefreshKey(state: PagingState<Int, Person>): Int? {
         return state.anchorPosition?.let {
             state.closestPageToPosition(it)?.prevKey?.plus(1)
                 ?: state.closestPageToPosition(it)?.nextKey?.minus(1)

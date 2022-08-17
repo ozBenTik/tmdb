@@ -2,7 +2,6 @@ package com.example.ui_people.lobby.composables
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
@@ -16,13 +15,13 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.example.core_ui.R
-import com.example.model.PopularPerson
+import com.example.model.Person
 import com.example.model.util.TmdbImageUrlProvider
 import com.example.moviestmdb.core_ui.util.loadPicture
 
 @Composable
 fun PersonItem(
-    person: PopularPerson,
+    person: Person,
     tmdbImageUrlProvider: TmdbImageUrlProvider,
     widthToHeight: Pair<Int, Int>
 ) {

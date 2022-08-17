@@ -2,7 +2,7 @@ package com.example.model
 
 import com.google.gson.annotations.SerializedName
 
-data class PopularPerson(
+data class Person(
     @SerializedName("profile_path")
     val profilePath: String? = null,
     @SerializedName("adult")

@@ -7,7 +7,7 @@ import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.example.domain.people.observers.ObservePagedPopularPeople
 import com.example.domain.users.iteractors.LogoutIteractor
-import com.example.model.PopularPerson
+import com.example.model.Person
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -25,7 +25,7 @@ class PeopleLobbyViewModel @Inject constructor(
 
     private val language = MutableStateFlow("en-US")
 
-    val pagedList: Flow<PagingData<PopularPerson>> =
+    val pagedList: Flow<PagingData<Person>> =
         pagingInteractor.flow.cachedIn(viewModelScope)
 
     init {
