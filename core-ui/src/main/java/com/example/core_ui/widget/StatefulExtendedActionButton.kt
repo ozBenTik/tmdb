@@ -6,7 +6,6 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.example.core_ui.databinding.ActionButtonWithStateBinding
-import com.example.core_ui.databinding.PopularityBadgeViewBinding
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 
 class StatefulExtendedActionButton @JvmOverloads constructor(
@@ -15,7 +14,9 @@ class StatefulExtendedActionButton @JvmOverloads constructor(
     defStyleAttr: Int = 0,
 ) : ExtendedFloatingActionButton(context, attrs, defStyleAttr) {
 
-    private lateinit var binding : ActionButtonWithStateBinding
+    private var binding = ActionButtonWithStateBinding.inflate(
+        LayoutInflater.from(context)
+    )
 
     private var offState = ActionState.Off()
     private var onState = ActionState.On()
@@ -23,28 +24,29 @@ class StatefulExtendedActionButton @JvmOverloads constructor(
     private var currentState: ActionState = ActionState.Off()
         set(value) {
             field = value
-            binding.root.apply {
-                icon = value.icon
-                text = value.text
-            }
+            applyState()
         }
+
+    private fun applyState() {
+    }
 
     init {
-        binding = ActionButtonWithStateBinding.inflate(LayoutInflater.from(context), super.getParent() as? ViewGroup, true)
+        applyState()
     }
 
-    fun initStates(off: ActionState.Off, on: ActionState.On) {
+    fun initView(off: ActionState.Off, on: ActionState.On) {
         this.offState = off
         this.onState = on
+        currentState = this.offState
+        binding.button.text = "p[idjvpoajv[odajv[oiajv[oaij"
     }
 
-    fun toggleView(onToggled : ((updatedState: ActionState) -> Unit)? = null) {
-        this.currentState = when(this.currentState) {
+    fun toggleView(onToggled: ((updatedState: ActionState) -> Unit)? = null) {
+        this.currentState = when (this.currentState) {
             is ActionState.On -> offState
             is ActionState.Off -> onState
-        }.also {
-            onToggled?.invoke(this.currentState)
         }
+        onToggled?.invoke(this.currentState)
     }
 
     sealed class ActionState(open val icon: Drawable?, open val text: String) {

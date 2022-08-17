@@ -46,9 +46,7 @@ class DetailsFragment : Fragment() {
         initRecommendedAdapter()
         initActorsAdapter()
 
-        binding.statefulAction.apply {
-
-            initStates(
+        binding.statefulAction.initView(
                 StatefulExtendedActionButton.ActionState.Off(
                     requireContext().getDrawable(com.example.core_ui.R.drawable.ic_baseline_remove_circle_outline_24),
                     "Remove from favorites"
@@ -58,7 +56,6 @@ class DetailsFragment : Fragment() {
                     "Add to favorites"
                 )
             )
-        }
 
         binding.scrollView.setOnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
             val totalScrollLength = binding.detailsBackdropImageView.height
