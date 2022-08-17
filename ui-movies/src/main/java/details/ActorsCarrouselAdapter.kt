@@ -7,13 +7,13 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.core_ui.databinding.ActorCardBinding
-import com.example.model.ActorPart
+import com.example.model.PersonPart
 import com.example.model.util.TmdbImageUrlProvider
 
 class ActorsCarrouselAdapter(
     private val tmdbImageUrlProvider: TmdbImageUrlProvider,
 ) :
-    ListAdapter<ActorPart, ActorCarrouselViewHolder>(ActorDiff) {
+    ListAdapter<PersonPart, ActorCarrouselViewHolder>(ActorDiff) {
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -49,17 +49,17 @@ class ActorCarrouselViewHolder(
     internal val binding: ActorCardBinding
 ) : RecyclerView.ViewHolder(binding.root)
 
-object ActorDiff : DiffUtil.ItemCallback<ActorPart>() {
+object ActorDiff : DiffUtil.ItemCallback<PersonPart>() {
     override fun areItemsTheSame(
-        oldItem: ActorPart,
-        newItem: ActorPart
+        oldItem: PersonPart,
+        newItem: PersonPart
     ): Boolean {
         return oldItem.id == newItem.id
     }
 
     override fun areContentsTheSame(
-        oldItem: ActorPart,
-        newItem: ActorPart
+        oldItem: PersonPart,
+        newItem: PersonPart
     ): Boolean {
         return oldItem == newItem
     }

@@ -51,6 +51,8 @@ class CoreUiLibraryPlugin : Plugin<Project> {
             }
 
             viewBinding.isEnabled = true
+            composeOptions.kotlinCompilerExtensionVersion = Libs.AndroidX.Compose.kotlinCompilerExtensionVersion
+            buildFeatures.compose = true
 
             packagingOptions {
                 resources {
@@ -65,8 +67,14 @@ class CoreUiLibraryPlugin : Plugin<Project> {
             "implementation"(Libs.AndroidX.coreKtx)
             "implementation"(Libs.Google.material)
 
+            "implementation"(Libs.Glide.glide)
+            "kapt"(Libs.Glide.compiler)
+
             "implementation"(Libs.AndroidX.Lifecycle.viewmodel)
             "implementation"(Libs.AndroidX.Lifecycle.runtime)
+            "implementation"(Libs.AndroidX.Fragment.fragmentKtx)
+            "implementation"(Libs.AndroidX.Room.paging)
+
 //            "implementation"(Libs.Hilt.android)
 //            "kapt"(Libs.Hilt.compiler)
 
@@ -83,6 +91,27 @@ class CoreUiLibraryPlugin : Plugin<Project> {
 
 //            "implementation"(Libs.AndroidX.Lifecycle.runtime)
 //            "implementation"(Libs.AndroidX.Fragment.fragmentKtx)
+
+            // Compose
+            "implementation"(Libs.AndroidX.Compose.layout)
+            "implementation"(Libs.AndroidX.Compose.material)
+            "implementation"(Libs.AndroidX.Compose.Material3.material3)
+            "implementation"(Libs.AndroidX.Compose.activityCompose)
+            "implementation"(Libs.AndroidX.Compose.viewModelCompose)
+            "implementation"(Libs.AndroidX.Compose.materialIconsExtended)
+            "implementation"(Libs.AndroidX.Compose.tooling)
+            "implementation"(Libs.AndroidX.Compose.uiUtil)
+            "implementation"(Libs.AndroidX.Compose.runtime)
+            "implementation"(Libs.AndroidX.Compose.runtimeLivedata)
+            "implementation"(Libs.AndroidX.Compose.viewBinding)
+            "implementation"(Libs.AndroidX.Compose.themeAdapter)
+            "implementation"(Libs.AndroidX.Compose.accompanistTheme)
+            "implementation"(Libs.AndroidX.Compose.preview)
+            "implementation"(Libs.AndroidX.Compose.paging)
+            "debugImplementation"(Libs.AndroidX.Compose.uiTestManifest)
+            "androidTestImplementation"(Libs.AndroidX.Compose.test)
+            "androidTestImplementation"(Libs.AndroidX.Compose.uiTest)
+            "androidTestImplementation"(Libs.AndroidX.Compose.manifest)
         }
     }
 }

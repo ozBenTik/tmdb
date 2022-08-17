@@ -68,16 +68,16 @@ object Libs {
 
         object Room {
             private const val version = "2.4.2"
-            const val runtime =  "androidx.room:room-runtime:$version"
-            const val compiler =  "androidx.room:room-compiler:$version"
-            const val common =  "androidx.room:room-common:$version"
-            const val roomKtx =  "androidx.room:room-ktx:$version"
-            const val paging =  "androidx.room:room-paging:$version"
+            const val runtime = "androidx.room:room-runtime:$version"
+            const val compiler = "androidx.room:room-compiler:$version"
+            const val common = "androidx.room:room-common:$version"
+            const val roomKtx = "androidx.room:room-ktx:$version"
+            const val paging = "androidx.room:room-paging:$version"
         }
 
         object Paging {
             private const val version = "3.1.1"
-            const val runtime =  "androidx.paging:paging-runtime:$version"
+            const val runtime = "androidx.paging:paging-runtime:$version"
         }
 
         object SwipeRefreshLayout {
@@ -91,8 +91,8 @@ object Libs {
             const val rules = "androidx.test:rules:$version"
 
             object Ext {
-                private const val version = "1.1.2"
-                const val junit = "androidx.test.ext:junit-ktx:$version"
+                private const val version = "4.13.2"
+                const val junit = "unit:junit:$version"
             }
 
             const val espressoCore = "androidx.test.espresso:espresso-core:3.3.0"
@@ -104,7 +104,40 @@ object Libs {
             const val compiler = "androidx.lifecycle:lifecycle-compiler:$version"
             const val viewmodel = "androidx.lifecycle:lifecycle-viewmodel-ktx:$version"
             const val process = "androidx.lifecycle:lifecycle-process:$version"
-            const val viewModelCompose = "androidx.lifecycle:lifecycle-viewmodel-compose:$version"
+        }
+
+        object Compose {
+            const val version = "1.2.1"
+            const val kotlinCompilerExtensionVersion = "1.3.0"
+
+            const val activityCompose = "androidx.activity:activity-compose:1.5.1"
+            const val viewModelCompose = "androidx.lifecycle:lifecycle-viewmodel-compose:2.5.1"
+            const val foundation = "androidx.compose.foundation:foundation:$version"
+            const val layout = "androidx.compose.foundation:foundation-layout:$version"
+            const val material = "androidx.compose.material:material:$version"
+            const val materialIconsExtended =
+                "androidx.compose.material:material-icons-extended:$version"
+            const val runtime = "androidx.compose.runtime:runtime:$version"
+            const val runtimeLivedata = "androidx.compose.runtime:runtime-livedata:$version"
+            const val tooling = "androidx.compose.ui:ui-tooling:$version"
+            const val uiUtil = "androidx.compose.ui:ui-util:${version}"
+            const val viewBinding = "androidx.compose.ui:ui-viewbinding:$version"
+            const val manifest = "androidx.compose.ui:ui-test-manifest:$version"
+            const val preview = "androidx.compose.ui:ui-tooling-preview:$version"
+            const val themeAdapter = "com.google.android.material:compose-theme-adapter:1.1.16"
+            const val accompanistTheme = "com.google.accompanist:accompanist-appcompat-theme:0.25.1"
+            const val paging = "androidx.paging:paging-compose:1.0.0-alpha16"
+
+            const val test = "androidx.compose.ui:ui-test:$version"
+            const val uiTest = "androidx.compose.ui:ui-test-junit4:$version"
+            const val uiTestManifest = "androidx.compose.ui:ui-test-manifest:$version"
+
+            object Material3 {
+                const val snapshot = ""
+                const val version = "1.0.0-alpha01"
+
+                const val material3 = "androidx.compose.material3:material3:$version"
+            }
         }
     }
 

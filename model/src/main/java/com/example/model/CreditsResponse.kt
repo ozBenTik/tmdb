@@ -6,5 +6,5 @@ data class CreditsResponse (
     @SerializedName("id")
     val id: Int,
     @SerializedName("cast")
-    val actorList: List<ActorPart>
+    val actorList: List<PersonPart>
 )

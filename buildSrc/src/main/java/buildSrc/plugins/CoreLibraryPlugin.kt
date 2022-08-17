@@ -80,16 +80,12 @@ class CoreLibraryPlugin : Plugin<Project> {
             "api"(Libs.timber)
 
             "implementation"(Libs.AndroidX.Lifecycle.runtime)
-            "implementation"(Libs.AndroidX.Fragment.fragmentKtx)
-
-            "api"(Libs.Glide.glide)
-            "kapt"(Libs.Glide.compiler)
 
             "api"(Libs.Threeten.threeten)
 
             "implementation"(Libs.AndroidX.Room.runtime)
             "implementation"(Libs.AndroidX.Room.roomKtx)
-            "implementation"(Libs.AndroidX.Room.paging)
+
             "kapt"(Libs.AndroidX.Room.compiler)
         }
     }

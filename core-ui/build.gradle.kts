@@ -1,6 +1,5 @@
 
 plugins {
-    id ("core-library-plugin")
+    id ("core-ui-library-plugin")
 }
-dependencies {
-}
+dependencies {}

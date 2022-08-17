@@ -6,7 +6,8 @@ plugins {
     id ("ui-library-plugin")
 }
 dependencies {
-    implementation(project(CORE_UI))
-    implementation(project(CORE))
+    api(project(CORE))
+    api(project(CORE_UI))
+//    implementation(project(CORE))
     implementation(project(DOMAIN))
 }

@@ -2,7 +2,7 @@ package com.example.core.data.people
 
 import com.example.core.data.people.datasource.PeopleLocalDataSource
 import com.example.core.data.people.datasource.PeopleRemoteDataSource
-import com.example.model.PopularActor
+import com.example.model.PopularPerson
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
@@ -20,7 +20,7 @@ class PeopleRepository @Inject constructor(
             emit(remote.getPopularPeople(page, language))
         }
 
-    fun savePopularPeople(page: Int, people: List<PopularActor>) {
+    fun savePopularPeople(page: Int, people: List<PopularPerson>) {
         local.popularPeopleStore.insert(page, people)
     }
 }

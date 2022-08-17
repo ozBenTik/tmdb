@@ -4,21 +4,19 @@ import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadType
 import androidx.paging.PagingState
 import androidx.paging.RemoteMediator
-import com.example.core.data.movies.datasource.localstore.MoviesStore
 import com.example.core.data.people.datasource.localstore.PopularPeopleStore
 import com.example.domain.movies.INITIAL_MOVIES_PAGE
-import com.example.model.Movie
-import com.example.model.PopularActor
+import com.example.model.PopularPerson
 
 @OptIn(ExperimentalPagingApi::class)
 class PaginatedPopularPeopleRemoteMediator(
     private val popularPeopleStore: PopularPeopleStore,
     private val fetch: suspend (page: Int) -> Unit
-) : RemoteMediator<Int, PopularActor>() {
+) : RemoteMediator<Int, PopularPerson>() {
 
     override suspend fun load(
         loadType: LoadType,
-        state: PagingState<Int, PopularActor>
+        state: PagingState<Int, PopularPerson>
     ): MediatorResult {
         val nextPage = when (loadType) {
             LoadType.REFRESH -> INITIAL_MOVIES_PAGE

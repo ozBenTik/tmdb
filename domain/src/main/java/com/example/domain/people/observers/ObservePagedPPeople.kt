@@ -6,10 +6,10 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.example.core.data.people.datasource.localstore.PopularPeopleStore
 import com.example.domain.PagingInteractor
-import com.example.domain.people.PopularPeoplePagingSource
 import com.example.domain.people.PaginatedPopularPeopleRemoteMediator
+import com.example.domain.people.PopularPeoplePagingSource
 import com.example.domain.people.iteractors.UpdatePopularPeople
-import com.example.model.PopularActor
+import com.example.model.PopularPerson
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flatMapLatest
 import javax.inject.Inject
@@ -17,10 +17,10 @@ import javax.inject.Inject
 class ObservePagedPopularPeople @Inject constructor(
     private val popularPeopleStore: PopularPeopleStore,
     private val updatePopularPeople: UpdatePopularPeople,
-): PagingInteractor<ObservePagedPopularPeople.Params, PopularActor>() {
+): PagingInteractor<ObservePagedPopularPeople.Params, PopularPerson>() {
 
     @OptIn(ExperimentalPagingApi::class)
-    override fun createObservable(params: Params): Flow<PagingData<PopularActor>> =
+    override fun createObservable(params: Params): Flow<PagingData<PopularPerson>> =
         params.language.flatMapLatest { language ->
             Pager(
                 config = params.pagingConfig,
@@ -42,6 +42,6 @@ class ObservePagedPopularPeople @Inject constructor(
     data class Params(
         val language: Flow<String>,
         override val pagingConfig: PagingConfig,
-    ) : Parameters<PopularActor>
+    ) : Parameters<PopularPerson>
 
 }

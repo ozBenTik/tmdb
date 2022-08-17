@@ -1,6 +1,6 @@
 package data.movies
 
-import com.example.model.ActorPart
+import com.example.model.PersonPart
 import com.example.model.Genre
 import com.example.model.Movie
 import data.movies.datasource.MoviesLocalDataSource
@@ -76,7 +76,7 @@ class MoviesRepository @Inject constructor(
     fun observeRecommendations() = local.recommendationsStore.observeEntries()
 
     // ------------- Credits capabilities -------------------
-    suspend fun saveCredits(movieId: Int, actors: List<ActorPart>) {
+    suspend fun saveCredits(movieId: Int, actors: List<PersonPart>) {
         local.creditsStore.insert(movieId, actors)
     }
 

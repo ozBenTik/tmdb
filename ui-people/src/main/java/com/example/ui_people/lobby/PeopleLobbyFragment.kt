@@ -4,15 +4,29 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.ComposeView
+import androidx.compose.ui.unit.dp
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.GridLayoutManager
-import com.example.core_ui.R
+import androidx.paging.PagingData
+import androidx.paging.compose.LazyPagingItems
+import androidx.paging.compose.collectAsLazyPagingItems
+import androidx.paging.compose.items
+import com.example.model.PopularPerson
 import com.example.model.util.TmdbImageUrlProvider
 import com.example.ui_people.databinding.FragmentPeopleBinding
+import com.example.ui_people.lobby.composables.PeopleScreen
+import com.example.ui_people.lobby.composables.PersonItem
 import dagger.hilt.android.AndroidEntryPoint
 import extensions.launchAndRepeatWithViewLifecycle
-import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -21,52 +35,28 @@ class PeopleLobbyFragment : Fragment() {
     private lateinit var binding: FragmentPeopleBinding
     private val viewModel: PeopleLobbyViewModel by viewModels()
 
-    private lateinit var actorsAdapter: PopularActorsAdapter
+//    private lateinit var actorsAdapter: PopularActorsAdapter
 
     @Inject
     lateinit var tmdbImageUrlProvider: TmdbImageUrlProvider
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
+        inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentPeopleBinding.inflate(inflater, container, false)
-        initActorsAdapter()
-        return binding.root
-    }
+    ): View? = ComposeView(requireContext())
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
-        binding.topAppBar.setOnMenuItemClickListener { menuItem ->
-            when (menuItem.itemId) {
-                com.example.core_ui.R.id.signout_action_item -> {
-                    viewModel.logout()
-                    true
-                }
-                else -> {
-                    false
-                }
-            }
-        }
+        super.onViewCreated(view, savedInstanceState)
 
         launchAndRepeatWithViewLifecycle {
-            viewModel.pagedList.collectLatest { pagingData ->
-                actorsAdapter.submitData(pagingData)
+            (view as ComposeView).setContent {
+                PeopleScreen(
+                    viewModel.pagedList.collectAsLazyPagingItems(),
+                    tmdbImageUrlProvider,
+                ) {
+                    viewModel.logout()
+                }
             }
-        }
-    }
-
-    private fun initActorsAdapter() {
-        actorsAdapter = PopularActorsAdapter(
-            tmdbImageUrlProvider,
-        ) {
-            // To implement
-        }
-
-        binding.actorsListView.run {
-            layoutManager = GridLayoutManager(context, resources.getInteger(R.integer.numOfGridItems))
-            adapter = actorsAdapter
         }
     }
 }
