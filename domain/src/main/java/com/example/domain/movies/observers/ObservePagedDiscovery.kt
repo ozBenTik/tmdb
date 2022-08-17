@@ -9,11 +9,13 @@ import com.example.domain.PagingInteractor
 import com.example.domain.movies.MoviesPagingSource
 import com.example.domain.movies.PaginatedMovieRemoteMediator
 import com.example.domain.movies.iteractors.UpdateDiscovery
-import com.example.model.FilterParams
+import com.example.domain.movies.iteractors.UpdateTopRatedMovies
 import com.example.model.Movie
+import com.example.model.FilterParams
 import di.Discovery
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.*
 import javax.inject.Inject
 
 @OptIn(ExperimentalPagingApi::class)

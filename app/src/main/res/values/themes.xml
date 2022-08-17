@@ -67,6 +67,7 @@
         <item name="android:datePickerStyle">@style/DatePickerStyle</item>
     </style>
 
+
     <style name="ThemeOverlay.Tmdb.Snackbar" parent="">
         <item name="colorPrimary">@color/tmdb_red_400</item>
         <item name="colorOnSurface">@color/tmdb_black_900</item>

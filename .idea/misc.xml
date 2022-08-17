@@ -10,44 +10,52 @@
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.228" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.26247288503253796" />
         <entry key="app/src/main/res/layout/fragment_main.xml" value="0.353125" />
-        <entry key="app/src/main/res/menu/menu.xml" value="0.31574074074074077" />
+        <entry key="app/src/main/res/menu/menu.xml" value="0.18404907975460122" />
         <entry key="app/src/main/res/xml/shortcuts.xml" value="0.4107778342653787" />
         <entry key="core-ui/src/main/res/font/work_sans.xml" value="0.1638888888888889" />
         <entry key="core-ui/src/main/res/font/work_sans_bold.xml" value="0.1638888888888889" />
         <entry key="core-ui/src/main/res/font/work_sans_extrabold.xml" value="0.1638888888888889" />
         <entry key="core-ui/src/main/res/font/work_sans_medium.xml" value="0.1638888888888889" />
         <entry key="core-ui/src/main/res/font/work_sans_semibold.xml" value="0.1638888888888889" />
-        <entry key="core-ui/src/main/res/layout/action_button_with_state.xml" value="0.1" />
         <entry key="core-ui/src/main/res/layout/actor_card.xml" value="0.720164609053498" />
         <entry key="core-ui/src/main/res/layout/actors_carrousel_view.xml" value="0.26970977783203126" />
+        <entry key="core-ui/src/main/res/layout/filter_bottom_shit.xml" value="0.26296296296296295" />
         <entry key="core-ui/src/main/res/layout/movie_card.xml" value="0.1" />
         <entry key="core-ui/src/main/res/layout/movies_carrousel_view.xml" value="0.1" />
         <entry key="core-ui/src/main/res/layout/popularity_badge_view.xml" value="0.1" />
         <entry key="core-ui/src/main/res/layout/recommended_card.xml" value="0.48005523681640627" />
         <entry key="core-ui/src/main/res/layout/recommended_carrousel_view.xml" value="0.1" />
+        <entry key="core-ui/src/main/res/menu/top_menu.xml" value="0.27395833333333336" />
         <entry key="ui-login/src/main/res/layout/fragment_login.xml" value="0.31416897451950687" />
-        <entry key="ui-movies/src/main/res/layout-land/filter_bottom_shit.xml" value="0.3858596801757813" />
-        <entry key="ui-movies/src/main/res/layout/discover_card.xml" value="0.2755208333333333" />
-        <entry key="ui-movies/src/main/res/layout/filter_bottom_shit.xml" value="0.1" />
-        <entry key="ui-movies/src/main/res/layout/fragment_details.xml" value="0.24684906005859372" />
-        <entry key="ui-movies/src/main/res/layout/fragment_discover.xml" value="0.3115707397460938" />
+        <entry key="ui-movies/src/main/res/drawable/dates_background.xml" value="0.1275" />
+        <entry key="ui-movies/src/main/res/drawable/ic_baseline_filter_alt_24.xml" value="0.173" />
+        <entry key="ui-movies/src/main/res/drawable/popup_background.xml" value="0.197" />
+        <entry key="ui-movies/src/main/res/layout/discovery_card.xml" value="0.1" />
+        <entry key="ui-movies/src/main/res/layout/filter_bottom_shit.xml" value="0.32587000423447227" />
+        <entry key="ui-movies/src/main/res/layout/filter_bottom_shit_temp.xml" value="0.1" />
+        <entry key="ui-movies/src/main/res/layout/fragment_details.xml" value="0.1" />
+        <entry key="ui-movies/src/main/res/layout/fragment_details_oz.xml" value="0.1" />
+        <entry key="ui-movies/src/main/res/layout/fragment_discover.xml" value="0.31271209716796877" />
         <entry key="ui-movies/src/main/res/layout/fragment_lobby.xml" value="0.1" />
         <entry key="ui-movies/src/main/res/layout/fragment_now_playing_movies.xml" value="0.1398148148148148" />
-        <entry key="ui-movies/src/main/res/layout/fragment_nowplaying.xml" value="0.2037037037037037" />
+        <entry key="ui-movies/src/main/res/layout/fragment_nowplaying.xml" value="0.14166666666666666" />
         <entry key="ui-movies/src/main/res/layout/fragment_popular_movies.xml" value="0.1" />
         <entry key="ui-movies/src/main/res/layout/fragment_top_rated_movies.xml" value="0.1398148148148148" />
         <entry key="ui-movies/src/main/res/layout/fragment_toprated_movies.xml" value="0.1" />
         <entry key="ui-movies/src/main/res/layout/fragment_upcoming_movies.xml" value="0.43982238769531257" />
+        <entry key="ui-movies/src/main/res/layout/item_nowplaying_movie.xml" value="0.1" />
+        <entry key="ui-movies/src/main/res/layout/language_list_item.xml" value="0.1" />
         <entry key="ui-movies/src/main/res/layout/list_item_now_playing_movie.xml" value="0.1398148148148148" />
         <entry key="ui-movies/src/main/res/layout/list_item_popular_movie.xml" value="0.1" />
         <entry key="ui-movies/src/main/res/layout/list_item_top_rated_movie.xml" value="0.1" />
         <entry key="ui-movies/src/main/res/layout/list_item_upcoming_movie.xml" value="0.1398148148148148" />
+        <entry key="ui-movies/src/main/res/layout/oz.xml" value="0.1" />
+        <entry key="ui-movies/src/main/res/menu/discover_menu.xml" value="0.26296296296296295" />
         <entry key="ui-movies/src/main/res/menu/menu.xml" value="0.45754956786985257" />
+        <entry key="ui-movies/src/main/res/menu/movie_menu.xml" value="0.27395833333333336" />
         <entry key="ui-people/src/main/res/layout/fragment_people.xml" value="0.1" />
         <entry key="ui-tvshows/src/main/res/layout/fragment_tv_shows.xml" value="0.27242889404296877" />
-        <entry key="ui-userdetails/src/main/res/layout-land/fragment_user_details.xml" value="0.46868101607921514" />
-        <entry key="ui-userdetails/src/main/res/layout/favorite_item.xml" value="0.2037037037037037" />
-        <entry key="ui-userdetails/src/main/res/layout/fragment_user_details.xml" value="0.20087336244541484" />
+        <entry key="ui-userdetails/src/main/res/layout/fragment_user_details.xml" value="0.16759776536312848" />
       </map>
     </option>
   </component>
@@ -61,7 +69,7 @@
   <component name="VisualizationToolProject">
     <option name="state">
       <ProjectState>
-        <option name="scale" value="0.20087336244541484" />
+        <option name="scale" value="0.1" />
       </ProjectState>
     </option>
   </component>
