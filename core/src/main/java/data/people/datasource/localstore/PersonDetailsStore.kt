@@ -1,6 +1,7 @@
 package com.example.core.data.people.datasource.localstore
 
-import com.example.model.Person
+import com.example.model.PersonDetails
+import com.example.model.PopularPerson
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
@@ -12,13 +13,13 @@ import javax.inject.Singleton
 class PersonDetailsStore @Inject constructor() {
 
     // Map<Page, PersonResponse>
-    private val _person = MutableSharedFlow<Map<Int, Person>>(replay = 1)
+    private val _person = MutableSharedFlow<Map<Int, PersonDetails>>(replay = 1)
 
-    fun insert(personId: Int, person: Person) {
+    fun insert(personId: Int, person: PersonDetails) {
         _person.tryEmit(mapOf(personId to person))
     }
 
-    fun observeEntries(): SharedFlow<Map<Int, Person>> = _person.asSharedFlow()
+    fun observeEntries(): SharedFlow<Map<Int, PersonDetails>> = _person.asSharedFlow()
 
     @OptIn(ExperimentalCoroutinesApi::class)
     fun deleteAll() {

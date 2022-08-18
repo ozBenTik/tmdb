@@ -2,7 +2,8 @@ package com.example.core.data.people
 
 import com.example.core.data.people.datasource.PeopleLocalDataSource
 import com.example.core.data.people.datasource.PeopleRemoteDataSource
-import com.example.model.Person
+import com.example.model.PersonDetails
+import com.example.model.PopularPerson
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
@@ -13,16 +14,17 @@ class PeopleRepository @Inject constructor(
 
     //------------ Popular capabilities ------------
 
-    fun observePopularPeople() = local.popularPeopleStore.observeEntries()
-
     fun getPopularPeople(page: Int, language: String) =
         flow {
             emit(remote.getPopularPeople(page, language))
         }
 
-    fun savePopularPeople(page: Int, people: List<Person>) {
+    fun savePopularPeople(page: Int, people: List<PopularPerson>) {
         local.popularPeopleStore.insert(page, people)
     }
+
+    fun getCachedPersonById(personId: Int) =
+        local.popularPeopleStore.getPersonById(personId)
 
     //------------ Person capabilities ------------
 
@@ -33,6 +35,6 @@ class PeopleRepository @Inject constructor(
             emit(remote.getPersonDetails(personId))
         }
 
-    fun savePersonDetails(personId: Int, personDetails: Person) =
+    fun savePersonDetails(personId: Int, personDetails: PersonDetails) =
         local.personDetailsStore.insert(personId, personDetails)
 }

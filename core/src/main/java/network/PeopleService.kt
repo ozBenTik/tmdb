@@ -1,6 +1,6 @@
 package com.example.core.network
 
-import com.example.model.Person
+import com.example.model.PersonDetails
 import com.example.model.PopularPeopleResponse
 import retrofit2.Call
 import retrofit2.http.GET
@@ -17,6 +17,6 @@ interface PeopleService {
     @GET("person/popular")
     fun getPersonDetails(
         @Query("person_id") actorId: Int
-    ): Call<Person>
+    ): Call<PersonDetails>
 
 }

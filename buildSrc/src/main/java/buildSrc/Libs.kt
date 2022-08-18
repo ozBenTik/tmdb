@@ -112,6 +112,7 @@ object Libs {
 
             const val activityCompose = "androidx.activity:activity-compose:1.5.1"
             const val viewModelCompose = "androidx.lifecycle:lifecycle-viewmodel-compose:2.5.1"
+
             const val foundation = "androidx.compose.foundation:foundation:$version"
             const val layout = "androidx.compose.foundation:foundation-layout:$version"
             const val material = "androidx.compose.material:material:$version"
@@ -124,6 +125,7 @@ object Libs {
             const val viewBinding = "androidx.compose.ui:ui-viewbinding:$version"
             const val manifest = "androidx.compose.ui:ui-test-manifest:$version"
             const val preview = "androidx.compose.ui:ui-tooling-preview:$version"
+
             const val themeAdapter = "com.google.android.material:compose-theme-adapter:1.1.16"
             const val accompanistTheme = "com.google.accompanist:accompanist-appcompat-theme:0.25.1"
             const val paging = "androidx.paging:paging-compose:1.0.0-alpha16"

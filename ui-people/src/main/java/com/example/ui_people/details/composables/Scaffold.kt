@@ -1,11 +1,8 @@
-package com.example.ui_people.lobby.composables
+package com.example.ui_people.details.composables
 
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ExitToApp
@@ -14,22 +11,21 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import androidx.paging.compose.LazyPagingItems
 import com.example.core_ui.R
-import com.example.model.Person
 import com.example.model.util.TmdbImageUrlProvider
 import com.example.moviestmdb.core_ui.widget.composables.TmdbAppBar
+import com.example.ui_people.details.PersonDetailsState
 
 @Composable
-fun PeopleScreen(
-    pagingData: LazyPagingItems<Person>,
+fun PersonScreen(
+    uiState: PersonDetailsState,
     tmdbImageUrlProvider: TmdbImageUrlProvider,
     onToggleLogout: () -> Unit,
 ) {
     Scaffold(
         topBar = {
             TmdbAppBar(
-                title = { Text(text = "Popular People") },
+                title = { Text(text = "Person Details") },
                 actions = {
                     Icon(
                         imageVector = Icons.Outlined.ExitToApp,
@@ -48,30 +44,10 @@ fun PeopleScreen(
             )
         },
         content = {
-            PeopleGrid(
-                pagingData,
+            PersonDetailsView(
+                uiState,
                 tmdbImageUrlProvider
             )
         },
     )
-}
-
-
-@Composable
-fun PeopleGrid(lazyPeopleItems: LazyPagingItems<Person>, tmdbImageUrlProvider: TmdbImageUrlProvider) {
-
-    LazyVerticalGrid(
-        columns = GridCells.Adaptive(minSize = 120.dp),
-        contentPadding = PaddingValues(2.dp)
-    ) {
-        items(itemContent = { index ->
-            lazyPeopleItems[index]?.let { person ->
-                PersonItem(
-                    person = person,
-                    tmdbImageUrlProvider = tmdbImageUrlProvider,
-                    120 to 200
-                )
-            }
-        }, count = lazyPeopleItems.itemCount)
-    }
 }

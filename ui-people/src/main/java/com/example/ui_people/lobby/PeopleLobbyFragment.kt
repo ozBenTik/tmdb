@@ -7,8 +7,10 @@ import android.view.ViewGroup
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.example.model.util.TmdbImageUrlProvider
+import com.example.ui_people.R
 import com.example.ui_people.lobby.composables.PeopleScreen
 import dagger.hilt.android.AndroidEntryPoint
 import extensions.launchAndRepeatWithViewLifecycle
@@ -35,6 +37,12 @@ class PeopleLobbyFragment : Fragment() {
                 PeopleScreen(
                     viewModel.pagedList.collectAsLazyPagingItems(),
                     tmdbImageUrlProvider,
+                    { id ->
+                        val args = Bundle().apply {
+                            putInt("person_id", id)
+                        }
+                        findNavController().navigate(R.id.navigation_person_fragment, args)
+                    }
                 ) {
                     viewModel.logout()
                 }

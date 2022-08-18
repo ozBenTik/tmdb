@@ -8,6 +8,9 @@
     <fragment
         android:id="@+id/navigation_people_fragment"
         android:name="com.example.ui_people.lobby.PeopleLobbyFragment"
-        android:label="fragment_people"
-        tools:layout="@layout/fragment_people" />
+        android:label="fragment_people"/>
+    <fragment
+        android:id="@+id/navigation_person_fragment"
+        android:name="com.example.ui_people.details.PersonDetailsFragment"
+        android:label="PersonDetailsFragment"/>
 </navigation>

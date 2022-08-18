@@ -5,18 +5,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.compose.ui.platform.ComposeView
-import androidx.core.content.ContentProviderCompat
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.model.util.TmdbImageUrlProvider
-import com.example.ui_people.databinding.FragmentPeopleBinding
-import com.example.ui_people.lobby.PeopleLobbyViewModel
+import com.example.ui_people.details.composables.PersonScreen
 import dagger.hilt.android.AndroidEntryPoint
+import extensions.launchAndRepeatWithViewLifecycle
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class PersonDetailsFragment @Inject constructor(): Fragment() {
+class PersonDetailsFragment @Inject constructor() : Fragment() {
 
     private val viewModel: PersonDetailsViewModel by viewModels()
 
@@ -29,6 +27,20 @@ class PersonDetailsFragment @Inject constructor(): Fragment() {
     ): View? = ComposeView(requireContext())
 
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-
+        launchAndRepeatWithViewLifecycle {
+            viewModel.state.collect { uiState ->
+                (view as ComposeView).setContent {
+                    PersonScreen(
+                        uiState,
+                        tmdbImageUrlProvider,
+                    ) {
+                        viewModel.logout()
+                    }
+                }
+            }
+        }
+    }
 }

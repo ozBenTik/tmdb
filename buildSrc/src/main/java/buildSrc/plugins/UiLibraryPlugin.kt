@@ -81,6 +81,7 @@ class UiLibraryPlugin : Plugin<Project> {
             "implementation"(Libs.AndroidX.Navigation.fragment)
             "implementation"(Libs.AndroidX.Navigation.uiKtx)
 
+            // Glide
             "implementation"(Libs.Glide.glide)
             "kapt"(Libs.Glide.compiler)
 

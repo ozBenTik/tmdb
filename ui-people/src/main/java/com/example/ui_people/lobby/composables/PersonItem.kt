@@ -1,7 +1,7 @@
 package com.example.ui_people.lobby.composables
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
@@ -11,31 +11,36 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.example.core_ui.R
-import com.example.model.Person
+import com.example.model.PopularPerson
 import com.example.model.util.TmdbImageUrlProvider
-import com.example.moviestmdb.core_ui.util.loadPicture
+import com.example.moviestmdb.core_ui.widget.composables.TmdbImageView
 
 @Composable
 fun PersonItem(
-    person: Person,
+    onPersonSelected: (id: Int) -> Unit,
+    person: PopularPerson,
     tmdbImageUrlProvider: TmdbImageUrlProvider,
     widthToHeight: Pair<Int, Int>
 ) {
+
     Card(
         elevation = 8.dp,
         modifier = Modifier
             .height(widthToHeight.second.dp)
             .padding(4.dp)
+            .clickable { onPersonSelected(person.id) }
     ) {
-        personImage(
-            tmdbImageUrlProvider,
-            person.profilePath ?: "",
-            widthToHeight.first
-        )
+
+        person.profilePath?.let {
+            TmdbImageView(
+                tmdbImageUrlProvider.getBackdropUrl(it, widthToHeight.first),
+                "${person.name} Image"
+            )
+        }
+
         Box(
             modifier = Modifier.fillMaxWidth(),
             contentAlignment = Alignment.BottomCenter
@@ -61,25 +66,6 @@ fun PersonItem(
             }
         }
     }
-}
-
-@Composable
-fun personImage(
-    tmdbImageUrlProvider: TmdbImageUrlProvider,
-    url: String,
-    width: Int
-) {
-    loadPicture(
-        url = tmdbImageUrlProvider.getBackdropUrl(url, width),
-        placeholder = painterResource(id = com.example.core_ui.R.drawable.anon)
-    )?.let { pointer ->
-        Image(
-            painter = pointer,
-            contentDescription = "person image",
-            modifier = Modifier.fillMaxWidth()
-        )
-    }
-
 }
 
 @Composable

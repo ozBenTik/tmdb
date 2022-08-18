@@ -40,6 +40,8 @@ fun loadPicture(url: String, placeholder: Painter? = null): Painter? {
             .apply(options)
             .into(result)
     } catch (e: Exception) {
+
+        e
         // Can't use LocalContext in Compose Preview
     }
     return state

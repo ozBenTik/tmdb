@@ -1,9 +1,8 @@
 package com.example.domain.people.iteractors
 
 import com.example.core.data.people.PeopleRepository
-import com.example.core.data.people.datasource.localstore.PersonDetailsStore
 import com.example.domain.FlowInteractor
-import com.example.model.Person
+import com.example.model.PersonDetails
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.onEach
 import result.Result
@@ -13,11 +12,10 @@ import javax.inject.Inject
 
 class UpdatePersonDetails @Inject constructor(
     private val peopleRepository: PeopleRepository,
-    private val popularPeopleStore: PersonDetailsStore,
     val dispatchers: AppCoroutineDispatchers
-) : FlowInteractor<UpdatePersonDetails.Params, Person>(dispatchers.io) {
+) : FlowInteractor<UpdatePersonDetails.Params, PersonDetails>(dispatchers.io) {
 
-    override suspend fun doWork(params: Params): Flow<Result<Person>> {
+    override suspend fun doWork(params: Params): Flow<Result<PersonDetails>> {
         return peopleRepository.getPersonDetails(params.personId)
             .onEach { result ->
                 when (result) {

@@ -88,7 +88,8 @@ fun <T> Response<T>.toResultUnit(): Result<Unit> = try {
 }
 
 fun <T> Response<T>.toResult(): Result<T> = try {
-    if (isSuccessful) {Result.Success(data = bodyOrThrow())
+    if (isSuccessful) {
+        Result.Success(data = bodyOrThrow())
     } else {
         Result.Error(toException())
     }
