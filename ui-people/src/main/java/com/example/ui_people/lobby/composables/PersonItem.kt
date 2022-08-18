@@ -36,8 +36,9 @@ fun PersonItem(
 
         person.profilePath?.let {
             TmdbImageView(
-                tmdbImageUrlProvider.getBackdropUrl(it, widthToHeight.first),
-                "${person.name} Image"
+                modifier = Modifier.fillMaxWidth(),
+                url = tmdbImageUrlProvider.getBackdropUrl(it, widthToHeight.first),
+                contentDescription = "${person.name} Image"
             )
         }
 

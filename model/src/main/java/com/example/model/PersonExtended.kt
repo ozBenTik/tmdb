@@ -1,6 +1,6 @@
 package com.example.model
 
 data class PersonExtended(
-    val popular: PopularPerson? = null,
-    val personalDetails: PersonDetails? = null
+    val popular: PopularPerson = PopularPerson.Empty,
+    val personal: PersonDetails = PersonDetails.Empty
 )

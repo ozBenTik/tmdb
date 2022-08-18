@@ -16,13 +16,17 @@ data class PopularPerson(
     @SerializedName("name")
     val name: String = "",
 
-
     @SerializedName("popularity")
     val popularity: Double? = null,
+
     @SerializedName("known_for")
     val knownFor: List<PersonKnownFor> = listOf()
 
 ) {
+    companion object {
+        val Empty = PopularPerson()
+    }
+
     val knownForTitles: String
         get() = "${
             StringBuilder().apply {
@@ -32,4 +36,5 @@ data class PopularPerson(
                 }
             }
         }".dropLast(1)
+
 }

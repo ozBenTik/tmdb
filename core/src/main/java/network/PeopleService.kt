@@ -4,6 +4,7 @@ import com.example.model.PersonDetails
 import com.example.model.PopularPeopleResponse
 import retrofit2.Call
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface PeopleService {
@@ -14,9 +15,9 @@ interface PeopleService {
         @Query("language") language: String
     ): Call<PopularPeopleResponse>
 
-    @GET("person/popular")
+    @GET("person/{person_id}")
     fun getPersonDetails(
-        @Query("person_id") actorId: Int
+        @Path("person_id") personId: Int
     ): Call<PersonDetails>
 
 }
