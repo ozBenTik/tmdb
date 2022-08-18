@@ -2,7 +2,7 @@ package com.example.model
 
 import com.google.gson.annotations.SerializedName
 
-data class PersonPart(
+data class PersonMoviePart(
 
     @SerializedName("adult")
     val adult: Boolean = false,

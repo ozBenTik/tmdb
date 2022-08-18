@@ -3,6 +3,7 @@ package com.example.core.data.people
 import com.example.core.data.people.datasource.PeopleLocalDataSource
 import com.example.core.data.people.datasource.PeopleRemoteDataSource
 import com.example.model.PersonDetails
+import com.example.model.PersonCredits
 import com.example.model.PopularPerson
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
@@ -37,4 +38,21 @@ class PeopleRepository @Inject constructor(
 
     fun savePersonDetails(personId: Int, personDetails: PersonDetails) =
         local.personDetailsStore.insert(personId, personDetails)
+
+    //------------ Person Credits ------------
+
+    fun observePersonCredits() = local.personCreditsStore.observeEntries()
+
+    fun getPersonMovieCredits(personId: Int) =
+        flow {
+            emit(remote.getPersonMovieCredits(personId))
+        }
+
+    fun getPersonTVCredits(personId: Int) =
+        flow {
+            emit(remote.getPersonTVCredits(personId))
+        }
+
+    fun savePersonCredits(personId: Int, personCredits: List<PersonCredits>) =
+        local.personCreditsStore.insert(personId, personCredits)
 }

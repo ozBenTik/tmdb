@@ -20,7 +20,7 @@ data class PopularPerson(
     val popularity: Double? = null,
 
     @SerializedName("known_for")
-    val knownFor: List<PersonKnownFor> = listOf()
+    val knownFor: List<PersonCredits> = listOf()
 
 ) {
     companion object {

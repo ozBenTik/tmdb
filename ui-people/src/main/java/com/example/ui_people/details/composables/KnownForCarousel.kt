@@ -7,43 +7,60 @@ import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.example.core_ui.R
-import com.example.model.PersonKnownFor
+import com.example.model.PersonCredits
 import com.example.model.util.TmdbImageUrlProvider
 import com.example.moviestmdb.core_ui.widget.composables.TmdbImageView
 
 @Composable
-fun KnownForCarousel(knownFor: List<PersonKnownFor>, tmdbImageUrlProvider: TmdbImageUrlProvider) {
-//    val knownForRem = remember { knownFor }
+fun KnownForCarousel(
+    height: Int,
+    credits: List<PersonCredits>,
+    tmdbImageUrlProvider: TmdbImageUrlProvider
+) {
 
-    knownFor.takeIf { it.isNotEmpty() }?.run {
-        LazyRow(
-            contentPadding = PaddingValues(horizontal = 2.dp, vertical = 2.dp)
+    credits.takeIf { it.isNotEmpty() }?.run {
+
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(height.dp)
         ) {
-            items(
-                count = knownFor.size,
-                itemContent = { index ->
-                    knownFor[index].let { movie ->
-                        KnownForItem(
-                            imageWidth = 450,
-                            url = movie.posterPath,
-                            name = movie.name ?: movie.title,
-                            tmdbImageUrlProvider = tmdbImageUrlProvider
-                        )
-                    }
-                }
+            Text(
+                "Known For",
+                style = MaterialTheme.typography.h6,
+                modifier = Modifier.padding(start = 8.dp, bottom = 4.dp, top = 8.dp),
             )
+
+            LazyRow(
+                contentPadding = PaddingValues(horizontal = 2.dp, vertical = 2.dp)
+            ) {
+                items(
+                    count = credits.size,
+                    itemContent = { index ->
+                        credits[index].let { credit ->
+                            CreditItem(
+                                imageWidth = 450,
+                                url = credit.posterPath ?: credit.backdropPath,
+                                name = credit.name ?: credit.title,
+                                tmdbImageUrlProvider = tmdbImageUrlProvider
+                            )
+                        }
+                    }
+                )
+            }
         }
     }
 }
 
 @Composable
-fun KnownForItem(
+fun CreditItem(
     imageWidth: Int,
     cardWidth: Int = 150,
     url: String?,
@@ -51,27 +68,37 @@ fun KnownForItem(
     tmdbImageUrlProvider: TmdbImageUrlProvider,
 ) {
     Card(
-        Modifier.padding(all = 3.dp).width(cardWidth.dp),
+        Modifier
+            .padding(all = 3.dp)
+            .width(cardWidth.dp),
         elevation = 8.dp
     ) {
-        Column(
-
+        Row(
+            Modifier.height(300.dp),
+            verticalAlignment = Alignment.Bottom
         ) {
-            if (url != null)
-                TmdbImageView(
-                    modifier = Modifier.background(Color.Red),
-                    url = tmdbImageUrlProvider.getPosterUrl(url, imageWidth),
-                    contentDescription = "Known For movie ${name.takeIf { !it.isNullOrBlank() }}",
-                    placeHolder = painterResource(id = R.drawable.movie_place_holder)
-                )
+            Column(
+                verticalArrangement = Arrangement.Bottom
+            ) {
+                if (url != null)
+                    TmdbImageView(
+                        modifier = Modifier.background(Color.Red),
+                        url = tmdbImageUrlProvider.getPosterUrl(url, imageWidth),
+                        contentDescription = "Known For  ${name.takeIf { !it.isNullOrBlank() }}",
+                        placeHolder = painterResource(id = R.drawable.movie_place_holder)
+                    )
 
-            Text(
-                text = name!!,
-                modifier = Modifier.width(cardWidth.dp).padding(2.dp).height(350.dp),
-                style = MaterialTheme.typography.subtitle2,
-                overflow = TextOverflow.Visible,
-                maxLines = 2
-            )
+                Text(
+                    text = name!!,
+                    modifier = Modifier
+                        .width(cardWidth.dp)
+                        .padding(2.dp)
+                        .height(350.dp),
+                    style = MaterialTheme.typography.subtitle2,
+                    overflow = TextOverflow.Visible,
+                    maxLines = 2
+                )
+            }
         }
     }
 }

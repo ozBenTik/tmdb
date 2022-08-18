@@ -2,7 +2,7 @@ package com.example.model
 
 import com.google.gson.annotations.SerializedName
 
-data class PersonKnownFor(
+data class PersonCredits(
 
     // tv / movie
     @SerializedName("media_type")

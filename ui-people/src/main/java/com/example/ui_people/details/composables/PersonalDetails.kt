@@ -84,11 +84,5 @@ fun PersonalDetails(details: PersonExtended, tmdbImageUrlProvider: TmdbImageUrlP
                 }
             }
         }
-        Text(
-            "Known For",
-            style = MaterialTheme.typography.h6,
-            modifier = Modifier.padding(start = 8.dp, bottom = 4.dp, top = 8.dp),
-        )
-        KnownForCarousel(details.popular.knownFor, tmdbImageUrlProvider)
     }
 }

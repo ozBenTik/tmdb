@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.domain.movies.iteractors.UpdateCredits
 import com.example.domain.movies.iteractors.UpdateRecommendations
-import com.example.domain.movies.observers.ObserveCredits
+import com.example.domain.movies.observers.ObserveMovieCredits
 import com.example.domain.movies.observers.ObserveMovieDetails
 import com.example.domain.movies.observers.ObserveRecommendations
 import com.example.domain.users.iteractors.AddFavorite
@@ -29,7 +29,7 @@ class DetailsViewModel @Inject constructor(
     private val updateRecommendations: UpdateRecommendations,
     private val updateCredits: UpdateCredits,
     private val observeMovieDetails: ObserveMovieDetails,
-    private val observeCredits: ObserveCredits,
+    private val observeCredits: ObserveMovieCredits,
     private val addFavorite: AddFavorite,
     private val removeFavorite: RemoveFavorite,
     private val observeRecommendations: ObserveRecommendations,
@@ -72,7 +72,7 @@ class DetailsViewModel @Inject constructor(
 
     init {
         observeMovieDetails(ObserveMovieDetails.Params(movieId))
-        observeCredits(ObserveCredits.Params(movieId))
+        observeCredits(ObserveMovieCredits.Params(movieId))
         observeRecommendations(ObserveRecommendations.Params(movieId))
         refresh(movieId)
     }

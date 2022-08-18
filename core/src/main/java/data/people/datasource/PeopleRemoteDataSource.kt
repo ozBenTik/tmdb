@@ -23,4 +23,19 @@ class PeopleRemoteDataSource @Inject constructor(
                 .executeWithRetry()
                 .toResult()
         }
+
+
+    suspend fun getPersonMovieCredits(personId: Int) =
+        safeApiCall {
+            peopleService.getPersonMovieCredits(personId)
+                .executeWithRetry()
+                .toResult()
+        }
+
+    suspend fun getPersonTVCredits(personId: Int) =
+        safeApiCall {
+            peopleService.getPersonTVCredits(personId)
+                .executeWithRetry()
+                .toResult()
+        }
 }

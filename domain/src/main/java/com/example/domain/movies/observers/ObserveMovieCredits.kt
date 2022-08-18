@@ -1,17 +1,17 @@
 package com.example.domain.movies.observers
 
 import com.example.domain.SubjectInteractor
-import com.example.model.PersonPart
+import com.example.model.PersonMoviePart
 import data.movies.MoviesRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
-class ObserveCredits @Inject constructor(
+class ObserveMovieCredits @Inject constructor(
     private val moviesRepository: MoviesRepository
-) : SubjectInteractor<ObserveCredits.Params, List<PersonPart>>() {
+) : SubjectInteractor<ObserveMovieCredits.Params, List<PersonMoviePart>>() {
 
-    override fun createObservable(params: Params): Flow<List<PersonPart>> {
+    override fun createObservable(params: Params): Flow<List<PersonMoviePart>> {
         return moviesRepository.observeCredits()
             .map { it[params.movieId] ?: emptyList() }
     }

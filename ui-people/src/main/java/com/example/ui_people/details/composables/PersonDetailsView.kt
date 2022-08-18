@@ -1,6 +1,9 @@
 package com.example.ui_people.details.composables
 
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import com.example.model.util.TmdbImageUrlProvider
 import com.example.moviestmdb.core_ui.widget.composables.TmdbCenteredProgressBar
 import com.example.moviestmdb.core_ui.widget.composables.TmdbSnackbar
@@ -16,8 +19,21 @@ fun PersonDetailsView(
             it.refreshing -> TmdbCenteredProgressBar()
             it.message != null -> TmdbSnackbar(it.message.message)
             else -> {
-                PersonalDetails(uiState.details, tmdbImageUrlProvider)
+                PageContent(uiState, tmdbImageUrlProvider)
             }
         }
     }
 }
+
+@Composable
+fun PageContent(uiState: PersonDetailsState, tmdbImageUrlProvider: TmdbImageUrlProvider) =
+    Column(
+        Modifier.fillMaxWidth()
+    ) {
+        PersonalDetails(uiState.details, tmdbImageUrlProvider)
+        KnownForCarousel(
+            500,
+            credits = uiState.credits,
+            tmdbImageUrlProvider = tmdbImageUrlProvider
+        )
+    }
