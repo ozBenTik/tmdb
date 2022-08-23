@@ -1,6 +1,6 @@
 package com.example.domain.movies.iteractors
 import com.example.domain.FlowInteractor
-import com.example.model.Movie
+import com.example.model.movie.Movie
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import result.Result

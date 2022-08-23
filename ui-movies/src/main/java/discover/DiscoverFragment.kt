@@ -10,7 +10,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.core.TmdbImageManager
-import com.example.model.FilterParams
+import com.example.model.movie.FilterParams
 import com.example.ui_movies.R
 import com.example.ui_movies.databinding.FragmentDiscoverBinding
 import dagger.hilt.android.AndroidEntryPoint

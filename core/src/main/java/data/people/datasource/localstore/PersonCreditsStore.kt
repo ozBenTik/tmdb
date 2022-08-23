@@ -1,6 +1,6 @@
 package com.example.core.data.people.datasource.localstore
 
-import com.example.model.PersonCredits
+import com.example.model.person.PersonCreditsResponse
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
@@ -12,23 +12,23 @@ import javax.inject.Singleton
 class PersonCreditsStore @Inject constructor() {
 
     // Map<personId, List<PersonKnownFor>>
-    private val _knownFor = MutableSharedFlow<Map<Int, List<PersonCredits>>>(replay = 1)
+    private val _credits = MutableSharedFlow<Map<Int, PersonCreditsResponse>>(replay = 1)
 
-    fun insert(personId: Int, knownFor: List<PersonCredits>) {
-        if (_knownFor.replayCache.isEmpty()) {
-            _knownFor.tryEmit(mapOf(personId to knownFor))
+    fun insert(personId: Int, credits: PersonCreditsResponse) {
+        if (_credits.replayCache.isEmpty()) {
+            _credits.tryEmit(mapOf(personId to credits))
         } else {
-            val map = _knownFor.replayCache.first().toMutableMap()
-            map[personId] = knownFor
-            _knownFor.tryEmit(map)
+            val map = _credits.replayCache.first().toMutableMap()
+            map[personId] = credits
+            _credits.tryEmit(map)
         }
     }
 
-    fun observeEntries(): SharedFlow<Map<Int, List<PersonCredits>>> = _knownFor.asSharedFlow()
+    fun observeEntries(): SharedFlow<Map<Int, PersonCreditsResponse>> = _credits.asSharedFlow()
 
     @OptIn(ExperimentalCoroutinesApi::class)
     fun deleteAll() {
-        _knownFor.resetReplayCache()
+        _credits.resetReplayCache()
     }
 
 }

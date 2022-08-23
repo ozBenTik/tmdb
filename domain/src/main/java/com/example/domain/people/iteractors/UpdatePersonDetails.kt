@@ -2,7 +2,7 @@ package com.example.domain.people.iteractors
 
 import com.example.core.data.people.PeopleRepository
 import com.example.domain.FlowInteractor
-import com.example.model.PersonDetails
+import com.example.model.person.PersonDetails
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.onEach
 import result.Result

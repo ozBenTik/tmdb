@@ -1,4 +1,4 @@
-package com.example.model
+package com.example.model.person
 
 import com.google.gson.annotations.SerializedName
 
@@ -20,7 +20,7 @@ data class PopularPerson(
     val popularity: Double? = null,
 
     @SerializedName("known_for")
-    val knownFor: List<PersonCredits> = listOf()
+    val knownFor: List<PersonCombinedCredit> = listOf()
 
 ) {
     companion object {

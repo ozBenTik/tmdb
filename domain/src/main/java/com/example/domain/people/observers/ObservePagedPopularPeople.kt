@@ -9,8 +9,7 @@ import com.example.domain.PagingInteractor
 import com.example.domain.people.PaginatedPopularPeopleRemoteMediator
 import com.example.domain.people.PopularPeoplePagingSource
 import com.example.domain.people.iteractors.UpdatePopularPeople
-import com.example.model.PersonDetails
-import com.example.model.PopularPerson
+import com.example.model.person.PopularPerson
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flatMapLatest
 import javax.inject.Inject

@@ -1,6 +1,6 @@
 package com.example.core.data.movies.datasource.localstore
 
-import com.example.model.Genre
+import com.example.model.movie.Genre
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.asSharedFlow

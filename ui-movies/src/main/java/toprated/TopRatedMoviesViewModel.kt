@@ -7,7 +7,7 @@ import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.example.domain.movies.observers.ObservePagedTopRatedMovies
 import com.example.domain.users.iteractors.LogoutIteractor
-import com.example.model.Movie
+import com.example.model.movie.Movie
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch

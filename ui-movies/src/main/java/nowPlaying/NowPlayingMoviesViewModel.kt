@@ -7,7 +7,7 @@ import com.example.domain.movies.iteractors.UpdateGenres
 import com.example.domain.movies.observers.ObserveGenres
 import com.example.domain.movies.observers.ObservePagedNowPlayingMovies
 import com.example.domain.users.iteractors.LogoutIteractor
-import com.example.model.MovieAndGenres
+import com.example.model.movie.MovieAndGenres
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.*

@@ -20,7 +20,6 @@ fun DetailItem(
     keyStyle: TextStyle = MaterialTheme.typography.subtitle1,
     valueColorRes: TextStyle = MaterialTheme.typography.body1,
     modifier: Modifier = Modifier,
-    spaceBetween: Int = 0,
     maxLines: Int = 1
 ) {
     if (key == null || value == null ) return
@@ -31,7 +30,7 @@ fun DetailItem(
         item {
             Row(Modifier) {
                 Text(
-                    modifier = modifier.width(150.dp),
+                    modifier = modifier.width(130.dp),
                     text = key,
                     maxLines = maxLines,
                     style = keyStyle,

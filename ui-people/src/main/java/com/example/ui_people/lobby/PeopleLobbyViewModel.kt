@@ -7,8 +7,7 @@ import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.example.domain.people.observers.ObservePagedPopularPeople
 import com.example.domain.users.iteractors.LogoutIteractor
-import com.example.model.PersonDetails
-import com.example.model.PopularPerson
+import com.example.model.person.PopularPerson
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow

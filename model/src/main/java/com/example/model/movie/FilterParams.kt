@@ -1,6 +1,6 @@
-package com.example.model
+package com.example.model.movie
 
-import com.example.model.FilterKey.*
+import com.example.model.movie.FilterKey.*
 
 enum class FilterKey {
     LANGUAGE,

@@ -8,8 +8,8 @@ import androidx.paging.cachedIn
 import com.example.core.data.movies.datasource.localstore.MoviesStore
 import com.example.domain.movies.observers.ObservePagedDiscovery
 import com.example.domain.users.iteractors.LogoutIteractor
-import com.example.model.FilterParams
-import com.example.model.Movie
+import com.example.model.movie.FilterParams
+import com.example.model.movie.Movie
 import dagger.hilt.android.lifecycle.HiltViewModel
 import di.Discovery
 import kotlinx.coroutines.flow.Flow

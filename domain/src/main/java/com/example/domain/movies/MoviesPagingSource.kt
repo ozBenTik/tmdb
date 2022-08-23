@@ -3,7 +3,7 @@ package com.example.domain.movies
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.example.core.data.movies.datasource.localstore.MoviesStore
-import com.example.model.Movie
+import com.example.model.movie.Movie
 import timber.log.Timber
 import java.io.IOException
 

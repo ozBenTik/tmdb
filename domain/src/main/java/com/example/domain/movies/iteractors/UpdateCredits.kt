@@ -1,6 +1,6 @@
 package com.example.domain.movies.iteractors
 import com.example.domain.FlowInteractor
-import com.example.model.CreditsResponse
+import com.example.model.movie.MovieCreditsResponse
 import data.movies.MoviesRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.onEach
@@ -12,9 +12,9 @@ import javax.inject.Inject
 class UpdateCredits @Inject constructor(
     private val moviesRepository: MoviesRepository,
     dispatchers: AppCoroutineDispatchers,
-) : FlowInteractor<UpdateCredits.Params, CreditsResponse>(dispatchers.io) {
+) : FlowInteractor<UpdateCredits.Params, MovieCreditsResponse>(dispatchers.io) {
 
-    override suspend fun doWork(params: Params): Flow<Result<CreditsResponse>> {
+    override suspend fun doWork(params: Params): Flow<Result<MovieCreditsResponse>> {
         return moviesRepository.getCredits(params.movieId)
             .onEach { result ->
                 when (result) {

@@ -1,6 +1,6 @@
 package details
-import com.example.model.PersonMoviePart
-import com.example.model.Movie
+import com.example.model.person.PersonMovieCast
+import com.example.model.movie.Movie
 import util.UiMessage
 
 data class DetailsViewState(
@@ -8,7 +8,7 @@ data class DetailsViewState(
     val movieRefreshing: Boolean = false,
     val recommendations: List<Movie> = emptyList(),
     val recommendationsRefreshing: Boolean = false,
-    val actors: List<PersonMoviePart> = emptyList(),
+    val actors: List<PersonMovieCast> = emptyList(),
     val actorsRefreshing: Boolean = false,
     val message: UiMessage? = null
 ) {

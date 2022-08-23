@@ -1,8 +1,8 @@
 package com.example.core.network
 
-import com.example.model.PersonDetails
-import com.example.model.PersonCreditsResponse
-import com.example.model.PopularPeopleResponse
+import com.example.model.person.PersonCreditsResponse
+import com.example.model.person.PersonDetails
+import com.example.model.person.PopularPeopleResponse
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -22,14 +22,14 @@ interface PeopleService {
     ): Call<PersonDetails>
 
 
-    @GET("person/{person_id}/movie_credits")
-    fun getPersonMovieCredits(
+    @GET("person/{person_id}/combined_credits")
+    fun getPersonCombinedCredits(
         @Path("person_id") personId: Int
     ): Call<PersonCreditsResponse>
-
-    @GET("person/{person_id}/tv_credits")
-    fun getPersonTVCredits(
-        @Path("person_id") personId: Int
-    ): Call<PersonCreditsResponse>
+//
+//    @GET("person/{person_id}/tv_credits")
+//    fun getPersonTVCredits(
+//        @Path("person_id") personId: Int
+//    ): Call<PersonCreditsResponse>
 
 }

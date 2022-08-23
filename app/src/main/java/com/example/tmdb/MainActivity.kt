@@ -41,7 +41,8 @@ class MainActivity : AppCompatActivity() {
 
             navController.addOnDestinationChangedListener { controller, destination, arguments ->
                 if (destination.id == com.example.ui_movies.R.id.navigation_details_fragment ||
-                    destination.id == com.example.ui_login.R.id.navigation_login_fragment
+                    destination.id == com.example.ui_login.R.id.navigation_login_fragment ||
+                    destination.id == com.example.ui_people.R.id.navigation_person_fragment
                 ) {
                     binding.bottomNavigation.visibility = View.GONE
                 } else {

@@ -1,12 +1,9 @@
 package com.example.core.data.people.datasource.localstore
-import androidx.lifecycle.Transformations.map
-import com.example.model.PersonDetails
-import com.example.model.PopularPerson
+import com.example.model.person.PopularPerson
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
-import okhttp3.Cache.Companion.key
 import javax.inject.Inject
 import javax.inject.Singleton
 

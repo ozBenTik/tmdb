@@ -1,8 +1,8 @@
 package data.movies
 
-import com.example.model.PersonMoviePart
-import com.example.model.Genre
-import com.example.model.Movie
+import com.example.model.person.PersonMovieCast
+import com.example.model.movie.Genre
+import com.example.model.movie.Movie
 import data.movies.datasource.MoviesLocalDataSource
 import data.movies.datasource.MoviesRemoteDataSource
 import kotlinx.coroutines.flow.flow
@@ -76,7 +76,7 @@ class MoviesRepository @Inject constructor(
     fun observeRecommendations() = local.recommendationsStore.observeEntries()
 
     // ------------- Credits capabilities -------------------
-    suspend fun saveCredits(movieId: Int, actors: List<PersonMoviePart>) {
+    suspend fun saveCredits(movieId: Int, actors: List<PersonMovieCast>) {
         local.creditsStore.insert(movieId, actors)
     }
 

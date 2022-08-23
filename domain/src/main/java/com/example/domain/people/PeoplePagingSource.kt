@@ -4,8 +4,7 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.example.core.data.people.datasource.localstore.PopularPeopleStore
 import com.example.domain.movies.INITIAL_MOVIES_PAGE
-import com.example.model.PersonDetails
-import com.example.model.PopularPerson
+import com.example.model.person.PopularPerson
 import timber.log.Timber
 import java.io.IOException
 

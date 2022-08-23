@@ -9,7 +9,7 @@ import com.example.domain.PagingInteractor
 import com.example.domain.movies.MoviesPagingSource
 import com.example.domain.movies.PaginatedMovieRemoteMediator
 import com.example.domain.movies.iteractors.UpdateUpcomingMovies
-import com.example.model.Movie
+import com.example.model.movie.Movie
 import di.Upcoming
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject

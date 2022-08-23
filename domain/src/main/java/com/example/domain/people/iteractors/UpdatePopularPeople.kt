@@ -3,7 +3,7 @@ package com.example.domain.people.iteractors
 import com.example.core.data.people.PeopleRepository
 import com.example.core.data.people.datasource.localstore.PopularPeopleStore
 import com.example.domain.FlowInteractor
-import com.example.model.PopularPeopleResponse
+import com.example.model.person.PopularPeopleResponse
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.onEach
 import result.Result

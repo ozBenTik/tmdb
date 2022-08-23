@@ -2,9 +2,9 @@ package utils.filterbottomshit
 
 import androidx.lifecycle.ViewModel
 import com.example.domain.movies.iteractors.UpdateGenres
-import com.example.model.FilterKey
-import com.example.model.FilterParams
-import com.example.model.Genre
+import com.example.model.movie.FilterKey
+import com.example.model.movie.FilterParams
+import com.example.model.movie.Genre
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import result.data

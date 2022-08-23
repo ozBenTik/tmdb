@@ -2,7 +2,7 @@ package com.example.domain.users.observers
 
 import com.example.core.data.user.UserRepository
 import com.example.domain.SubjectInteractor
-import com.example.model.Movie
+import com.example.model.movie.Movie
 import data.movies.MoviesRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine

@@ -1,8 +1,6 @@
 package com.example.core.data.people.datasource.localstore
 
-import com.example.core.data.movies.datasource.localstore.MoviesStore
-import com.example.model.Movie
-import com.example.model.PersonDetails
+import com.example.model.person.PersonDetails
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow

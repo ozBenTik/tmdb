@@ -1,7 +1,7 @@
 package com.example.domain.movies.observers
 
 import com.example.domain.SubjectInteractor
-import com.example.model.Movie
+import com.example.model.movie.Movie
 import data.movies.MoviesRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map

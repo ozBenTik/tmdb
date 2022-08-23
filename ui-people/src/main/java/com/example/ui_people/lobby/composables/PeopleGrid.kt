@@ -6,7 +6,7 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.dp
 import androidx.paging.compose.LazyPagingItems
-import com.example.model.PopularPerson
+import com.example.model.person.PopularPerson
 import com.example.model.util.TmdbImageUrlProvider
 
 

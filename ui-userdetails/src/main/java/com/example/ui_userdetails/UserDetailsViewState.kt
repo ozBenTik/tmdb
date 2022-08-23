@@ -1,6 +1,6 @@
 package com.example.ui_userdetails
 import com.example.core.data.user.AuthenticatedUserInfoBasic
-import com.example.model.Movie
+import com.example.model.movie.Movie
 import util.UiMessage
 
 data class UserDetailsViewState(

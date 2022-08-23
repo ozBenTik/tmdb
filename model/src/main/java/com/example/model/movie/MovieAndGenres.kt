@@ -1,4 +1,4 @@
-package com.example.model
+package com.example.model.movie
 
 data class MovieAndGenres(
     val movie: Movie,

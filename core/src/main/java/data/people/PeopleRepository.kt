@@ -2,9 +2,9 @@ package com.example.core.data.people
 
 import com.example.core.data.people.datasource.PeopleLocalDataSource
 import com.example.core.data.people.datasource.PeopleRemoteDataSource
-import com.example.model.PersonDetails
-import com.example.model.PersonCredits
-import com.example.model.PopularPerson
+import com.example.model.person.PersonDetails
+import com.example.model.person.PersonCreditsResponse
+import com.example.model.person.PopularPerson
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
@@ -43,16 +43,16 @@ class PeopleRepository @Inject constructor(
 
     fun observePersonCredits() = local.personCreditsStore.observeEntries()
 
-    fun getPersonMovieCredits(personId: Int) =
+    fun getPersonCombinedCredits(personId: Int) =
         flow {
-            emit(remote.getPersonMovieCredits(personId))
+            emit(remote.getPersonCombinedCredits(personId))
         }
 
-    fun getPersonTVCredits(personId: Int) =
-        flow {
-            emit(remote.getPersonTVCredits(personId))
-        }
+//    fun getPersonTVCredits(personId: Int) =
+//        flow {
+//            emit(remote.getPersonTVCredits(personId))
+//        }
 
-    fun savePersonCredits(personId: Int, personCredits: List<PersonCredits>) =
+    fun savePersonCredits(personId: Int, personCredits: PersonCreditsResponse) =
         local.personCreditsStore.insert(personId, personCredits)
 }

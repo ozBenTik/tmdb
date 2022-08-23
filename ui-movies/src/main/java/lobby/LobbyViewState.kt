@@ -1,5 +1,5 @@
 package lobby
-import com.example.model.Movie
+import com.example.model.movie.Movie
 import util.UiMessage
 
 data class LobbyViewState(

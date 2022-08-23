@@ -1,7 +1,7 @@
 package com.example.domain.movies.observers
 
 import com.example.domain.SubjectInteractor
-import com.example.model.Genre
+import com.example.model.movie.Genre
 import data.movies.MoviesRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject

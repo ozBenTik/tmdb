@@ -9,8 +9,9 @@ import android.widget.AutoCompleteTextView
 import android.widget.TextView
 import androidx.fragment.app.viewModels
 import com.example.core.util.SupportedLanguages
-import com.example.model.FilterKey
-import com.example.model.FilterParams
+import com.example.model.movie.FilterKey
+import com.example.model.movie.FilterParams
+import com.example.moviestmdb.core_ui.util.parseDateToString
 import com.example.ui_movies.R
 import com.example.ui_movies.databinding.FilterBottomShitBinding
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -172,12 +173,12 @@ class FiltersBottomShit(
         presenterTextView: TextView,
         onDateSelected: (mills: Long, formatted: String) -> Unit
     ) {
+        presenterTextView.text = parseDateToString(initialValue)
 
-        val formatter = SimpleDateFormat("dd-MM-yyyy")
-        val calender = Calendar.getInstance()
-        calender.timeInMillis =
-            initialValue.takeIf { it > 0 } ?: MaterialDatePicker.todayInUtcMilliseconds()
-        presenterTextView.text = formatter.format(calender.time)
+        val calender = Calendar.getInstance().apply {
+            timeInMillis =
+                initialValue.takeIf { it > 0 } ?: MaterialDatePicker.todayInUtcMilliseconds()
+        }
 
         MaterialDatePicker.Builder.datePicker()
             .setTheme(com.example.core_ui.R.style.DatePickerStyle)
@@ -187,7 +188,7 @@ class FiltersBottomShit(
 
                 datePicker.addOnPositiveButtonClickListener {
                     calender.timeInMillis = it
-                    onDateSelected(it, formatter.format(calender.time))
+                    onDateSelected(it, parseDateToString(calender.timeInMillis))
                     datePicker.dismiss()
                 }
 

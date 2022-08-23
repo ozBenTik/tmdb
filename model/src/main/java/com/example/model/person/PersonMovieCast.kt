@@ -1,8 +1,8 @@
-package com.example.model
+package com.example.model.person
 
 import com.google.gson.annotations.SerializedName
 
-data class PersonMoviePart(
+data class PersonMovieCast(
 
     @SerializedName("adult")
     val adult: Boolean = false,
