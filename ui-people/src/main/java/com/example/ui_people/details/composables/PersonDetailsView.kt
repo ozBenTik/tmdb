@@ -32,7 +32,7 @@ fun PersonDetailsView(
 }
 
 @Composable
-fun PageContent(uiState: PersonDetailsState, tmdbImageUrlProvider: TmdbImageUrlProvider, 5: (checkedState: Boolean) -> Unit) =
+fun PageContent(uiState: PersonDetailsState, tmdbImageUrlProvider: TmdbImageUrlProvider) =
     Column(
         Modifier.fillMaxWidth()
     ) {

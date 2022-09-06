@@ -31,3 +31,13 @@ annotation class Discovery
 @Qualifier
 @MustBeDocumented
 annotation class ApplicationScope
+
+@Retention(AnnotationRetention.RUNTIME)
+@Qualifier
+@MustBeDocumented
+annotation class OnAir
+
+@Retention(AnnotationRetention.RUNTIME)
+@Qualifier
+@MustBeDocumented
+annotation class AiringToday

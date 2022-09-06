@@ -8,7 +8,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI.setupWithNavController
 import com.example.core.data.user.UserRemoteDataSource
 import com.google.firebase.auth.FirebaseAuth
-import com.oz.tmdb.databinding.ActivityMainBinding
+import com.example.tmdb.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import javax.inject.Inject
