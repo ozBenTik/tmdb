@@ -5,7 +5,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.example.domain.movies.observers.ObservePagedUpcomingMovies
+import com.example.domain.movies.observers.paged.ObservePagedUpcomingMovies
 import com.example.domain.users.iteractors.LogoutIteractor
 import com.example.model.movie.Movie
 import dagger.hilt.android.lifecycle.HiltViewModel

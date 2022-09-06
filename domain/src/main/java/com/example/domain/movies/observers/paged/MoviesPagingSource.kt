@@ -1,4 +1,4 @@
-package com.example.domain.movies
+package com.example.domain.movies.observers.paged
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState

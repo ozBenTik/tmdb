@@ -5,7 +5,7 @@ import androidx.paging.LoadType
 import androidx.paging.PagingState
 import androidx.paging.RemoteMediator
 import com.example.core.data.people.datasource.localstore.PopularPeopleStore
-import com.example.domain.movies.INITIAL_MOVIES_PAGE
+import com.example.domain.movies.observers.paged.INITIAL_MOVIES_PAGE
 import com.example.model.person.PopularPerson
 
 @OptIn(ExperimentalPagingApi::class)

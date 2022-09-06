@@ -1,4 +1,4 @@
-package com.example.domain.movies.observers
+package com.example.domain.movies.observers.paged
 
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.Pager
@@ -6,8 +6,6 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.example.core.data.movies.datasource.localstore.MoviesStore
 import com.example.domain.PagingInteractor
-import com.example.domain.movies.MoviesPagingSource
-import com.example.domain.movies.PaginatedMovieRemoteMediator
 import com.example.domain.movies.iteractors.UpdateNowPlayingMovies
 import com.example.model.movie.Movie
 import di.NowPlaying

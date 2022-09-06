@@ -1,9 +1,9 @@
-package com.example.domain.tvshows
+package com.example.domain.tvshows.observers.paged
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.example.core.data.tvshows.datasource.localstore.TvShowsStore
-import com.example.domain.movies.INITIAL_MOVIES_PAGE
+import com.example.domain.movies.observers.paged.INITIAL_MOVIES_PAGE
 import com.example.model.tvshow.TvShow
 import timber.log.Timber
 import java.io.IOException

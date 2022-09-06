@@ -6,7 +6,7 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.example.core.data.movies.datasource.localstore.MoviesStore
-import com.example.domain.movies.observers.ObservePagedDiscovery
+import com.example.domain.movies.observers.paged.ObservePagedDiscovery
 import com.example.domain.users.iteractors.LogoutIteractor
 import com.example.model.movie.FilterParams
 import com.example.model.movie.Movie

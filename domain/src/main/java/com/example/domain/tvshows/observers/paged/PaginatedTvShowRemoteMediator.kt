@@ -1,12 +1,11 @@
-package com.example.domain.tvshows
+package com.example.domain.tvshows.observers.paged
 
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadType
 import androidx.paging.PagingState
 import androidx.paging.RemoteMediator
 import com.example.core.data.tvshows.datasource.localstore.TvShowsStore
-import com.example.domain.movies.INITIAL_MOVIES_PAGE
-import com.example.model.movie.Movie
+import com.example.domain.movies.observers.paged.INITIAL_MOVIES_PAGE
 import com.example.model.tvshow.TvShow
 import javax.inject.Inject
 

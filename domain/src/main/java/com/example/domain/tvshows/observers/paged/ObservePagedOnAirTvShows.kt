@@ -1,4 +1,4 @@
-package com.example.domain.tvshows.observers
+package com.example.domain.tvshows.observers.paged
 
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.Pager
@@ -6,8 +6,6 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.example.core.data.tvshows.datasource.localstore.TvShowsStore
 import com.example.domain.PagingInteractor
-import com.example.domain.tvshows.PaginatedTvShowRemoteMediator
-import com.example.domain.tvshows.TvShowsPagingSource
 import com.example.domain.tvshows.interactors.UpdateOnAirTvShows
 import com.example.model.tvshow.TvShow
 import di.OnAir

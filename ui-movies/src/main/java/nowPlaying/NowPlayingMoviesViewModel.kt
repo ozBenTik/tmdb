@@ -5,7 +5,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.*
 import com.example.domain.movies.iteractors.UpdateGenres
 import com.example.domain.movies.observers.ObserveGenres
-import com.example.domain.movies.observers.ObservePagedNowPlayingMovies
+import com.example.domain.movies.observers.paged.ObservePagedNowPlayingMovies
 import com.example.domain.users.iteractors.LogoutIteractor
 import com.example.model.movie.MovieAndGenres
 import dagger.hilt.android.lifecycle.HiltViewModel
