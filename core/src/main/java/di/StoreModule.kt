@@ -4,6 +4,7 @@ import com.example.core.data.movies.datasource.localstore.CreditsStore
 import com.example.core.data.movies.datasource.localstore.MoviesStore
 import com.example.core.data.movies.datasource.localstore.RecommendationsStore
 import com.example.core.data.people.datasource.localstore.PopularPeopleStore
+import com.example.core.data.tvshows.datasource.localstore.TvShowsStore
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -16,23 +17,23 @@ class StoreModule {
 
     @Singleton
     @Provides
-    @Popular
-    fun providePopularStore(): MoviesStore = MoviesStore()
+    @PopularMovies
+    fun providePopularMoviesStore(): MoviesStore = MoviesStore()
 
     @Singleton
     @Provides
-    @NowPlaying
-    fun provideNowPlayingStore(): MoviesStore = MoviesStore()
+    @NowPlayingMovies
+    fun provideNowPlayingMoviesStore(): MoviesStore = MoviesStore()
 
     @Singleton
     @Provides
-    @Upcoming
-    fun provideUpcomingStore(): MoviesStore = MoviesStore()
+    @UpcomingMovies
+    fun provideUpcomingMoviesStore(): MoviesStore = MoviesStore()
 
     @Singleton
     @Provides
-    @TopRated
-    fun provideTopRatedStore(): MoviesStore = MoviesStore()
+    @TopRatedMovies
+    fun provideTopRatedMoviesStore(): MoviesStore = MoviesStore()
 
     @Singleton
     @Provides
@@ -47,8 +48,23 @@ class StoreModule {
     @Provides
     fun provideActorsStore(): CreditsStore = CreditsStore()
 
+    @Singleton
+    @Provides
+    @PopularTvShows
+    fun providePopularTvShowsStore() : TvShowsStore = TvShowsStore()
 
     @Singleton
     @Provides
-    fun providePopularPeopleStore(): PopularPeopleStore = PopularPeopleStore()
+    @TopRatedTvShows
+    fun provideTopRatedTvShowsStore() : TvShowsStore = TvShowsStore()
+
+    @Singleton
+    @Provides
+    @AiringTodayTvShows
+    fun provideAiringTodayTvShowsStore() : TvShowsStore = TvShowsStore()
+
+    @Singleton
+    @Provides
+    @OnAirTvShows
+    fun provideOnAirTvShowsStore() : TvShowsStore = TvShowsStore()
 }

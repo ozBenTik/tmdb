@@ -3,7 +3,7 @@ import com.example.core.data.movies.datasource.localstore.MoviesStore
 import com.example.domain.FlowInteractor
 import com.example.model.movie.MovieResponse
 import data.movies.MoviesRepository
-import di.NowPlaying
+import di.NowPlayingMovies
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.onEach
 import result.Result
@@ -13,7 +13,7 @@ import javax.inject.Inject
 
 class UpdateNowPlayingMovies @Inject constructor(
     private val moviesRepository: MoviesRepository,
-    @NowPlaying val nowPlayingStore: MoviesStore,
+    @NowPlayingMovies val nowPlayingStore: MoviesStore,
     dispatchers: AppCoroutineDispatchers,
 ) : FlowInteractor<UpdateNowPlayingMovies.Params, MovieResponse>(dispatchers.io) {
 

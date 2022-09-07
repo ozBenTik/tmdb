@@ -11,7 +11,7 @@ import javax.inject.Inject
 
 const val INITIAL_TVSHOWS_PAGE = 1
 
-class TvShowsPagingSource @Inject constructor(
+class TvShowsPagingSource(
     private val tvShoesStore: TvShowsStore
 )  : PagingSource<Int, TvShow>() {
 

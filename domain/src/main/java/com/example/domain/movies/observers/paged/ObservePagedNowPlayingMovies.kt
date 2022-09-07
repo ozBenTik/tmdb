@@ -8,13 +8,13 @@ import com.example.core.data.movies.datasource.localstore.MoviesStore
 import com.example.domain.PagingInteractor
 import com.example.domain.movies.iteractors.UpdateNowPlayingMovies
 import com.example.model.movie.Movie
-import di.NowPlaying
+import di.NowPlayingMovies
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 @OptIn(ExperimentalPagingApi::class)
 class ObservePagedNowPlayingMovies @Inject constructor(
-    @NowPlaying private val nowPlayingStore: MoviesStore,
+    @NowPlayingMovies private val nowPlayingStore: MoviesStore,
     private val updateNowPlayingMovies: UpdateNowPlayingMovies,
 ) : PagingInteractor<ObservePagedNowPlayingMovies.Params, Movie>() {
 

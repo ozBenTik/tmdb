@@ -8,12 +8,13 @@ import com.example.core.data.tvshows.datasource.localstore.TvShowsStore
 import com.example.domain.PagingInteractor
 import com.example.domain.tvshows.interactors.UpdatePopularTvShows
 import com.example.model.tvshow.TvShow
-import di.Popular
+import di.PopularMovies
+import di.PopularTvShows
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class ObservePagedPopularTvShows @Inject constructor(
-    @Popular private val popularStore: TvShowsStore,
+    @PopularTvShows private val popularStore: TvShowsStore,
     private val updatePopularTvShows: UpdatePopularTvShows,
 ): PagingInteractor<ObservePagedPopularTvShows.Params, TvShow>() {
 

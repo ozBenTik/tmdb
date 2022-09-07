@@ -11,7 +11,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.example.model.util.TmdbImageUrlProvider
 import com.example.ui_people.R
-import com.example.ui_people.lobby.composables.PeopleScreen
+import com.example.ui_people.lobby.widgets.PeopleScreen
 import dagger.hilt.android.AndroidEntryPoint
 import extensions.launchAndRepeatWithViewLifecycle
 import javax.inject.Inject

@@ -28,7 +28,7 @@ inline fun AppCompatActivity.launchAndRepeatWithViewLifecycle(
     crossinline block: suspend CoroutineScope.() -> Unit
 ) {
     lifecycleScope.launch {
-        lifecycle.repeatOnLifecycle(minActiveState) {
+        repeatOnLifecycle(minActiveState) {
             block()
         }
     }

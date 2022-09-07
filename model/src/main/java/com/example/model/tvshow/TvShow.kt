@@ -26,7 +26,7 @@ data class TvShow(
     @SerializedName("vote_count")
     val voteCount: Int = 0,
     @SerializedName("name")
-    val name: String? = null,
+    val name: String = "",
     @SerializedName("original_name")
     val originalName: String? = null,
 )

@@ -1,4 +1,4 @@
-package com.example.ui_people.lobby.composables
+package com.example.ui_people.lobby.widgets
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -11,6 +11,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.example.core_ui.R
@@ -38,7 +39,8 @@ fun PersonItem(
             TmdbImageView(
                 modifier = Modifier.fillMaxWidth(),
                 url = tmdbImageUrlProvider.getBackdropUrl(it, widthToHeight.first),
-                contentDescription = "${person.name} Image"
+                contentDescription = "${person.name} Image",
+                placeHolder = painterResource(id = R.drawable.person_place_holder)
             )
         }
 

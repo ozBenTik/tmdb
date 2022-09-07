@@ -13,6 +13,11 @@
         android:id="@+id/discoverFragment"
         />
 
+    <item
+        android:title="Tv Shows"
+        android:icon="@drawable/ic_baseline_tv_24"
+        android:id="@+id/tv_nav_graph"
+        />
 
     <item
         android:title="Actors"

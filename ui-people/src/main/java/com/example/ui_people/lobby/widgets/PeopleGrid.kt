@@ -1,4 +1,4 @@
-package com.example.ui_people.lobby.composables
+package com.example.ui_people.lobby.widgets
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -26,7 +26,7 @@ fun PeopleGrid(
                     onPersonSelected = onPersonSelected,
                     person = person,
                     tmdbImageUrlProvider = tmdbImageUrlProvider,
-                    120 to 200
+                    120 to 200,
                 )
             }
         }, count = lazyPeopleItems.itemCount)

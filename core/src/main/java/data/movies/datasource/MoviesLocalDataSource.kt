@@ -8,10 +8,10 @@ import di.*
 import javax.inject.Inject
 
 class MoviesLocalDataSource @Inject constructor(
-    @Popular val popularStore: MoviesStore,
-    @TopRated val topRatedStore: MoviesStore,
-    @Upcoming val upcomingStore: MoviesStore,
-    @NowPlaying val nowPlayingStore: MoviesStore,
+    @PopularMovies val popularStore: MoviesStore,
+    @TopRatedMovies val topRatedStore: MoviesStore,
+    @UpcomingMovies val upcomingStore: MoviesStore,
+    @NowPlayingMovies val nowPlayingStore: MoviesStore,
     @Discovery val discoveryStore: MoviesStore,
     val recommendationsStore: RecommendationsStore,
     val creditsStore: CreditsStore,

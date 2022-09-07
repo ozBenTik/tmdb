@@ -5,7 +5,8 @@ import com.example.core.data.tvshows.datasource.localstore.TvShowsStore
 import com.example.domain.FlowInteractor
 import com.example.domain.movies.iteractors.UpdateNowPlayingMovies
 import com.example.model.tvshow.TvShowResponse
-import di.Popular
+import di.PopularMovies
+import di.PopularTvShows
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.onEach
 import result.Result
@@ -13,9 +14,9 @@ import timber.log.Timber
 import util.AppCoroutineDispatchers
 import javax.inject.Inject
 
-class UpdatePopularTvShows@Inject constructor(
+class UpdatePopularTvShows @Inject constructor(
     private val tvShowsRepository: TvShowsRepository,
-    @Popular val popularTvShowsStore: TvShowsStore,
+    @PopularTvShows val popularTvShowsStore: TvShowsStore,
     dispatchers: AppCoroutineDispatchers,
 ) : FlowInteractor<UpdatePopularTvShows.Params, TvShowResponse>(dispatchers.io) {
 

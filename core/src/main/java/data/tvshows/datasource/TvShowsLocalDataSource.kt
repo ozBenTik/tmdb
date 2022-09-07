@@ -1,15 +1,12 @@
 package com.example.core.data.tvshows.datasource
 
 import com.example.core.data.tvshows.datasource.localstore.TvShowsStore
-import di.AiringToday
-import di.OnAir
-import di.Popular
-import di.TopRated
+import di.*
 import javax.inject.Inject
 
 class TvShowsLocalDataSource @Inject constructor(
-    @Popular val popularTvShows: TvShowsStore,
-    @TopRated val topRatedTvShows: TvShowsStore,
-    @OnAir val onTheAirTvShows: TvShowsStore,
-    @AiringToday val airingTodayTvShows: TvShowsStore
+    @PopularTvShows val popularTvShows: TvShowsStore,
+    @TopRatedTvShows val topRatedTvShows: TvShowsStore,
+    @OnAirTvShows val onTheAirTvShows: TvShowsStore,
+    @AiringTodayTvShows val airingTodayTvShows: TvShowsStore
 )

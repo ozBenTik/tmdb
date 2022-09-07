@@ -2,6 +2,7 @@ package com.example.moviestmdb.core_ui.widget.composables
 
 import androidx.compose.foundation.Image
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
@@ -13,7 +14,7 @@ fun TmdbImageView(
     modifier: Modifier,
     url: String,
     contentDescription: String,
-    placeHolder: Painter = painterResource(id = R.drawable.person_place_holder)
+    placeHolder: Painter
 ) {
     loadPicture(
         url = url,
@@ -22,7 +23,8 @@ fun TmdbImageView(
         Image(
             painter = pointer,
             contentDescription = contentDescription,
-            modifier = modifier
+            modifier = modifier,
+            alignment = Alignment.Center
         )
     }
 }

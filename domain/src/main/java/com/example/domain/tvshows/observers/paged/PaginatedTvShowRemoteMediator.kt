@@ -10,7 +10,7 @@ import com.example.model.tvshow.TvShow
 import javax.inject.Inject
 
 @OptIn(ExperimentalPagingApi::class)
-class PaginatedTvShowRemoteMediator @Inject constructor(
+class PaginatedTvShowRemoteMediator(
     private val tvShowStore: TvShowsStore,
     private val fetch: suspend (page: Int) -> Unit
 ) : RemoteMediator<Int, TvShow>() {

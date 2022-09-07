@@ -1,8 +1,12 @@
-package com.example.ui_people.lobby.composables
+package com.example.ui_tvshows.lobby.widgets
 
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Icon
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
@@ -13,23 +17,22 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import androidx.paging.compose.LazyPagingItems
 import com.example.core_ui.R
-import com.example.model.person.PopularPerson
 import com.example.model.util.TmdbImageUrlProvider
 import com.example.moviestmdb.core_ui.widget.composables.TmdbAppBar
+import com.example.ui_tvshows.lobby.TvLobbyState
 
 @Composable
-fun PeopleScreen(
-    pagingData: LazyPagingItems<PopularPerson>,
+fun TvShowsLobbyScreen(
+    uiState: TvLobbyState,
     tmdbImageUrlProvider: TmdbImageUrlProvider,
-    onPersonSelected: (id: Int) -> Unit,
+    onTvShowSelected: (id: Int) -> Unit,
     onToggleLogout: () -> Unit,
 ) {
     Scaffold(
         topBar = {
             TmdbAppBar(
-                title = { Text(text = "Popular People") },
+                title = { Text(text = "Tv Shows") },
                 actions = {
                     Icon(
                         imageVector = Icons.Outlined.ExitToApp,
@@ -48,11 +51,16 @@ fun PeopleScreen(
             )
         },
         content = {
-            PeopleGrid(
-                pagingData,
-                tmdbImageUrlProvider,
-                onPersonSelected
-            )
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .verticalScroll(rememberScrollState())
+            ) {
+                TvShowSection(title = "Popular", tvShows = uiState.popularTvShows, imageProvider = tmdbImageUrlProvider)
+                TvShowSection(title = "Top Rated", tvShows = uiState.topRatedTvShows, imageProvider = tmdbImageUrlProvider)
+                TvShowSection(title = "Airing Today", tvShows = uiState.airingTodayTvShows, imageProvider = tmdbImageUrlProvider)
+                TvShowSection(title = "On Air", tvShows = uiState.onAirTvShows, imageProvider = tmdbImageUrlProvider)
+            }
         },
     )
 }

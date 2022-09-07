@@ -86,6 +86,8 @@ class UiLibraryPlugin : Plugin<Project> {
             "kapt"(Libs.Glide.compiler)
 
             // Compose
+            "implementation"
+
             "implementation"(Libs.AndroidX.Compose.layout)
             "implementation"(Libs.AndroidX.Compose.material)
             "implementation"(Libs.AndroidX.Compose.Material3.material3)
@@ -101,6 +103,7 @@ class UiLibraryPlugin : Plugin<Project> {
             "implementation"(Libs.AndroidX.Compose.accompanistTheme)
             "implementation"(Libs.AndroidX.Compose.preview)
             "implementation"(Libs.AndroidX.Compose.paging)
+            "implementation"(Libs.AndroidX.Compose.swipeToRefresh)
             "debugImplementation"(Libs.AndroidX.Compose.uiTestManifest)
             "androidTestImplementation"(Libs.AndroidX.Compose.test)
             "androidTestImplementation"(Libs.AndroidX.Compose.uiTest)

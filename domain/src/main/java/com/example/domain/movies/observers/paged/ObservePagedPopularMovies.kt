@@ -8,13 +8,13 @@ import com.example.core.data.movies.datasource.localstore.MoviesStore
 import com.example.domain.PagingInteractor
 import com.example.domain.movies.iteractors.UpdatePopularMovies
 import com.example.model.movie.Movie
-import di.Popular
+import di.PopularMovies
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 @OptIn(ExperimentalPagingApi::class)
 class ObservePagedPopularMovies @Inject constructor(
-    @Popular private val popularStore: MoviesStore,
+    @PopularMovies private val popularStore: MoviesStore,
     private val updatePopularMovies: UpdatePopularMovies,
 ) : PagingInteractor<ObservePagedPopularMovies.Params, Movie>() {
 

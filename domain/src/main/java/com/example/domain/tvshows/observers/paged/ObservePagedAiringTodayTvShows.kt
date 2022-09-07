@@ -8,12 +8,12 @@ import com.example.core.data.tvshows.datasource.localstore.TvShowsStore
 import com.example.domain.PagingInteractor
 import com.example.domain.tvshows.interactors.UpdateAiringTodayTvShows
 import com.example.model.tvshow.TvShow
-import di.AiringToday
+import di.AiringTodayTvShows
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class ObservePagedAiringTodayTvShows @Inject constructor(
-    @AiringToday private val airingTodayStore: TvShowsStore,
+    @AiringTodayTvShows private val airingTodayStore: TvShowsStore,
     private val updateAiringTodayTvShows: UpdateAiringTodayTvShows,
 ): PagingInteractor<ObservePagedAiringTodayTvShows.Params, TvShow>() {
 

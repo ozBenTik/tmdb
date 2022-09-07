@@ -9,8 +9,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.min
+import com.example.core_ui.R
 import com.example.model.person.PersonExtended
 import com.example.model.util.TmdbImageUrlProvider
 import com.example.moviestmdb.core_ui.widget.composables.TmdbImageView
@@ -34,7 +36,8 @@ fun PersonalDetails(details: PersonExtended, creditsCount: Int, tmdbImageUrlProv
                     TmdbImageView(
                         modifier = Modifier,
                         url = tmdbImageUrlProvider.getBackdropUrl(it, 220),
-                        contentDescription = "${details.personal?.name ?: "Actor Name"} Image"
+                        contentDescription = "${ details.personal.name } Image",
+                        placeHolder = painterResource(id = R.drawable.person_place_holder)
                     )
                 }
                 Column(

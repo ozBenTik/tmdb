@@ -1,14 +1,14 @@
 package com.example.core.data.tvshows.datasource.localstore
 
-import com.example.model.movie.Movie
 import com.example.model.tvshow.TvShow
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
-import okhttp3.Cache.Companion.key
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class TvShowsStore @Inject constructor() {
     private val _tvShows  = MutableSharedFlow<Map<Int, List<TvShow>>>(replay = 1)
 

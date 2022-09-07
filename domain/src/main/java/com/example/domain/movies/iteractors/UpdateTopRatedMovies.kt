@@ -3,7 +3,7 @@ import com.example.core.data.movies.datasource.localstore.MoviesStore
 import com.example.domain.FlowInteractor
 import com.example.model.movie.MovieResponse
 import data.movies.MoviesRepository
-import di.TopRated
+import di.TopRatedMovies
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.onEach
 import result.Result
@@ -13,7 +13,7 @@ import javax.inject.Inject
 
 class UpdateTopRatedMovies @Inject constructor(
     private val moviesRepository: MoviesRepository,
-    @TopRated val topRatedStore: MoviesStore,
+    @TopRatedMovies val topRatedStore: MoviesStore,
     dispatchers: AppCoroutineDispatchers,
 ) : FlowInteractor<UpdateTopRatedMovies.Params, MovieResponse>(dispatchers.io) {
 

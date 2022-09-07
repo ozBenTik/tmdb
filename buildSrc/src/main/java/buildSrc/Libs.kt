@@ -127,7 +127,8 @@ object Libs {
             const val preview = "androidx.compose.ui:ui-tooling-preview:$version"
 
             const val themeAdapter = "com.google.android.material:compose-theme-adapter:1.1.16"
-            const val accompanistTheme = "com.google.accompanist:accompanist-appcompat-theme:0.25.1"
+            const val accompanistTheme = "com.google.accompanist:accompanist-appcompat-theme:0.26.2-beta"
+            const val swipeToRefresh = "com.google.accompanist:accompanist-swiperefresh:0.26.2-beta"
             const val paging = "androidx.paging:paging-compose:1.0.0-alpha16"
 
             const val test = "androidx.compose.ui:ui-test:$version"

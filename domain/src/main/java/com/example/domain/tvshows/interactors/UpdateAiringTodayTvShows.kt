@@ -5,7 +5,7 @@ import com.example.core.data.tvshows.datasource.localstore.TvShowsStore
 import com.example.domain.FlowInteractor
 import com.example.domain.movies.iteractors.UpdateNowPlayingMovies
 import com.example.model.tvshow.TvShowResponse
-import di.AiringToday
+import di.AiringTodayTvShows
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.onEach
 import result.Result
@@ -15,7 +15,7 @@ import javax.inject.Inject
 
 class UpdateAiringTodayTvShows@Inject constructor(
     private val tvShowsRepository: TvShowsRepository,
-    @AiringToday val airingTodayTvShowsStore: TvShowsStore,
+    @AiringTodayTvShows val airingTodayTvShowsStore: TvShowsStore,
     dispatchers: AppCoroutineDispatchers,
 ) : FlowInteractor<UpdateAiringTodayTvShows.Params, TvShowResponse>(dispatchers.io) {
 
