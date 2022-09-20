@@ -1,7 +1,7 @@
 package network
 
-import com.example.model.movie.MovieCreditsResponse
 import com.example.model.movie.GenreResponse
+import com.example.model.movie.MovieCreditsResponse
 import com.example.model.movie.MovieResponse
 import retrofit2.Call
 import retrofit2.http.GET

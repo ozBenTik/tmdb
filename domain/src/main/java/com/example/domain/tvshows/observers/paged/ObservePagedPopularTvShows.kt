@@ -8,7 +8,6 @@ import com.example.core.data.tvshows.datasource.localstore.TvShowsStore
 import com.example.domain.PagingInteractor
 import com.example.domain.tvshows.interactors.UpdatePopularTvShows
 import com.example.model.tvshow.TvShow
-import di.PopularMovies
 import di.PopularTvShows
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject

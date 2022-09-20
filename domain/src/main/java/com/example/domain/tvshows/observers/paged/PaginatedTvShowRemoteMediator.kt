@@ -7,7 +7,6 @@ import androidx.paging.RemoteMediator
 import com.example.core.data.tvshows.datasource.localstore.TvShowsStore
 import com.example.domain.movies.observers.paged.INITIAL_MOVIES_PAGE
 import com.example.model.tvshow.TvShow
-import javax.inject.Inject
 
 @OptIn(ExperimentalPagingApi::class)
 class PaginatedTvShowRemoteMediator(

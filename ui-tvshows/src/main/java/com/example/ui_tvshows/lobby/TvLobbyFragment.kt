@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.model.util.TmdbImageUrlProvider
 import com.example.ui_tvshows.lobby.widgets.TvShowsLobbyScreen
 import com.google.accompanist.swiperefresh.SwipeRefresh

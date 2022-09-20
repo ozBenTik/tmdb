@@ -1,6 +1,6 @@
 package details
-import com.example.model.person.PersonMovieCast
 import com.example.model.movie.Movie
+import com.example.model.person.PersonMovieCast
 import util.UiMessage
 
 data class DetailsViewState(

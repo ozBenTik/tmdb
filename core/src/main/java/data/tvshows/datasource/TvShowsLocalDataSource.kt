@@ -1,7 +1,10 @@
 package com.example.core.data.tvshows.datasource
 
 import com.example.core.data.tvshows.datasource.localstore.TvShowsStore
-import di.*
+import di.AiringTodayTvShows
+import di.OnAirTvShows
+import di.PopularTvShows
+import di.TopRatedTvShows
 import javax.inject.Inject
 
 class TvShowsLocalDataSource @Inject constructor(

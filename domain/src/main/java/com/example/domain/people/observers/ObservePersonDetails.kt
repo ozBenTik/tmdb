@@ -3,7 +3,8 @@ package com.example.domain.people.observers
 import com.example.core.data.people.PeopleRepository
 import com.example.domain.SubjectInteractor
 import com.example.model.person.PersonExtended
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class ObservePersonDetails @Inject constructor(

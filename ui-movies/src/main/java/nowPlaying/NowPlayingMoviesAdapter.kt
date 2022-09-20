@@ -31,9 +31,11 @@ class NowPlayingMoviesAdapter(
             holder.binding.genresChipGroup.chipsContainer.removeAllViews()
 
             holder.binding.popularityBadge.progress = popularEntry.movie.popularityPrecentage
-            popularEntry.genres.forEach { genre ->
-                genre.name?.takeIf { genre.id != null }?.let {genreName ->
-                    holder.binding.genresChipGroup.addGenre(genreName, genre.id!!, null)
+
+            holder.binding.genresChipGroup.chipsContainer.removeAllViews()
+            popularEntry.movie.genreList.forEach { genreId ->
+                popularEntry.genres.firstOrNull { it.id == genreId }?.let { genre->
+                    holder.binding.genresChipGroup.addGenre( genre.name!!, genre.id!!, null)
                 }
             }
 

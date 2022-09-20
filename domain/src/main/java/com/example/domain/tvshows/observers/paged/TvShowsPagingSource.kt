@@ -7,7 +7,6 @@ import com.example.domain.movies.observers.paged.INITIAL_MOVIES_PAGE
 import com.example.model.tvshow.TvShow
 import timber.log.Timber
 import java.io.IOException
-import javax.inject.Inject
 
 const val INITIAL_TVSHOWS_PAGE = 1
 

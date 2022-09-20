@@ -1,6 +1,5 @@
 package com.example.ui_people.details.composables
 
-import android.content.Context
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
@@ -8,10 +7,8 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.min
 import com.example.core_ui.R
 import com.example.model.person.PersonExtended
 import com.example.model.util.TmdbImageUrlProvider

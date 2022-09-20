@@ -5,7 +5,6 @@ import com.example.core.data.tvshows.datasource.localstore.TvShowsStore
 import com.example.domain.FlowInteractor
 import com.example.domain.movies.iteractors.UpdateNowPlayingMovies
 import com.example.model.tvshow.TvShowResponse
-import di.TopRatedMovies
 import di.TopRatedTvShows
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.onEach

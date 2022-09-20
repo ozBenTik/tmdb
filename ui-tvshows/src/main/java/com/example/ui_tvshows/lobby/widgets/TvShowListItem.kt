@@ -2,6 +2,7 @@ package com.example.ui_tvshows.lobby.widgets
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Card
 import androidx.compose.material.Text
@@ -33,7 +34,7 @@ fun TvShowListItem(
         ) {
             tvShow.backdropPath?.let {
                 TmdbImageView(
-                    modifier = Modifier,
+                    modifier = Modifier.height(150.dp),
                     url = imageProvider.getBackdropUrl(it, 1000),
                     contentDescription = "${tvShow.name} tv show Image",
                     placeHolder = painterResource(id = R.drawable.ic_image_black_36dp)

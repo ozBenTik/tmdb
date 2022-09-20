@@ -3,7 +3,6 @@ package di
 import com.example.core.data.movies.datasource.localstore.CreditsStore
 import com.example.core.data.movies.datasource.localstore.MoviesStore
 import com.example.core.data.movies.datasource.localstore.RecommendationsStore
-import com.example.core.data.people.datasource.localstore.PopularPeopleStore
 import com.example.core.data.tvshows.datasource.localstore.TvShowsStore
 import dagger.Module
 import dagger.Provides

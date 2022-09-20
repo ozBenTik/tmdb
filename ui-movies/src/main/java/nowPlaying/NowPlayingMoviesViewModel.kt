@@ -12,6 +12,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import util.AppCoroutineDispatchers
 import javax.inject.Inject
 
@@ -38,23 +39,25 @@ class NowPlayingMoviesViewModel @Inject constructor(
     @OptIn(ExperimentalCoroutinesApi::class)
     val pagedList: Flow<PagingData<MovieAndGenres>> =
         filterGenres.flatMapLatest { pair ->
-        pagedNowPlaying.flow.map { pagingData ->
-        if (pair.first.isEmpty()) {
-            pagingData
-        } else {
-            pagingData.filter { movie ->
-                movie.genreList.any { x -> x in pair.first }
+            Timber.e("$pair")
+            pagedNowPlaying.flow.map { pagingData ->
+                if (pair.first.isEmpty()) {
+                    pagingData
+                } else {
+                    Timber.e("$pair")
+                    pagingData.filter { movie ->
+                        movie.genreList.any { x -> x in pair.first }
+                    }
+                }
+            }.map { pagingData ->
+                pagingData.map {
+                    MovieAndGenres(
+                        movie = it,
+                        genres = pair.second
+                    )
+                }
             }
-        }
-        }.map { pagingData ->
-            pagingData.map {
-                MovieAndGenres(
-                    movie = it,
-                    genres = pair.second
-                )
-            }
-        }
-    }.cachedIn(viewModelScope)
+        }.cachedIn(viewModelScope)
 
     init {
         observeGenres(ObserveGenres.Params())
