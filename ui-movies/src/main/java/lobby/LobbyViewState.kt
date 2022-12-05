@@ -1,4 +1,5 @@
 package lobby
+
 import com.example.model.movie.Movie
 import util.UiMessage
 
@@ -14,7 +15,8 @@ data class LobbyViewState(
     val message: UiMessage? = null
 ) {
     val refreshing: Boolean
-        get() = popularRefreshing || topRatedRefreshing || nowPlayingRefreshing || upcomingRefreshing
+        get() = popularRefreshing || topRatedRefreshing ||
+                nowPlayingRefreshing || upcomingRefreshing
 
     companion object {
         val Empty = LobbyViewState()

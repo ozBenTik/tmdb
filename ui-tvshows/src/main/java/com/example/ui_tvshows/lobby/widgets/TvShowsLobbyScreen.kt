@@ -16,14 +16,13 @@ import androidx.compose.material.icons.outlined.ExitToApp
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.example.model.util.TmdbImageUrlProvider
 import com.example.moviestmdb.core_ui.widget.composables.TmdbAppBar
 import com.example.ui_tvshows.lobby.TvLobbyState
 
 @Composable
 fun TvShowsLobbyScreen(
     uiState: TvLobbyState,
-    tmdbImageUrlProvider: TmdbImageUrlProvider,
+    provideFitImageUrl: (image: String) -> String,
     onTvShowSelected: (id: Int) -> Unit,
     onToggleLogout: () -> Unit,
 ) {
@@ -50,10 +49,30 @@ fun TvShowsLobbyScreen(
                     .fillMaxSize()
                     .verticalScroll(rememberScrollState())
             ) {
-                TvShowSection(title = "Popular", tvShows = uiState.popularTvShows, imageProvider = tmdbImageUrlProvider)
-                TvShowSection(title = "Top Rated", tvShows = uiState.topRatedTvShows, imageProvider = tmdbImageUrlProvider)
-                TvShowSection(title = "Airing Today", tvShows = uiState.airingTodayTvShows, imageProvider = tmdbImageUrlProvider)
-                TvShowSection(title = "On Air", tvShows = uiState.onAirTvShows, imageProvider = tmdbImageUrlProvider)
+                TvShowSection(
+                    title = "Popular",
+                    tvShows = uiState.popularTvShows,
+                    provideFitImageUrl = provideFitImageUrl,
+                    onTvShowSelected = onTvShowSelected
+                )
+                TvShowSection(
+                    title = "Top Rated",
+                    tvShows = uiState.topRatedTvShows,
+                    provideFitImageUrl = provideFitImageUrl,
+                    onTvShowSelected = onTvShowSelected
+                )
+                TvShowSection(
+                    title = "Airing Today",
+                    tvShows = uiState.airingTodayTvShows,
+                    provideFitImageUrl = provideFitImageUrl,
+                    onTvShowSelected = onTvShowSelected
+                )
+                TvShowSection(
+                    title = "On Air",
+                    tvShows = uiState.onAirTvShows,
+                    provideFitImageUrl = provideFitImageUrl,
+                    onTvShowSelected = onTvShowSelected
+                )
             }
         },
     )

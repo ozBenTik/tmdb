@@ -4,6 +4,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Icon
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
@@ -24,32 +25,34 @@ fun PersonScreen(
     tmdbImageUrlProvider: TmdbImageUrlProvider,
     onToggleLogout: () -> Unit,
 ) {
-    Scaffold(
-        topBar = {
-            TmdbAppBar(
-                title = { Text(text = "Person Details") },
-                actions = {
-                    Icon(
-                        imageVector = Icons.Outlined.ExitToApp,
-                        tint = Color(
-                            LocalContext
-                                .current
-                                .getColor(R.color.color_on_surface_emphasis_high)
-                        ),
-                        modifier = Modifier
-                            .clickable(onClick = onToggleLogout)
-                            .padding(horizontal = 12.dp, vertical = 16.dp)
-                            .height(24.dp),
-                        contentDescription = "log out"
-                    )
-                }
-            )
-        },
-        content = {
-            PersonDetailsView(
-                uiState,
-                tmdbImageUrlProvider
-            )
-        },
-    )
+    MaterialTheme {
+        Scaffold(
+            topBar = {
+                TmdbAppBar(
+                    title = { Text(text = "Person Details") },
+                    actions = {
+                        Icon(
+                            imageVector = Icons.Outlined.ExitToApp,
+                            tint = Color(
+                                LocalContext
+                                    .current
+                                    .getColor(R.color.color_on_surface_emphasis_high)
+                            ),
+                            modifier = Modifier
+                                .clickable(onClick = onToggleLogout)
+                                .padding(horizontal = 12.dp, vertical = 16.dp)
+                                .height(24.dp),
+                            contentDescription = "log out"
+                        )
+                    }
+                )
+            },
+            content = {
+                PersonDetailsView(
+                    uiState,
+                    tmdbImageUrlProvider
+                )
+            },
+        )
+    }
 }

@@ -1,12 +1,16 @@
 package com.example.ui_people.details.composables
 
 import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.Card
 import androidx.compose.material.Divider
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -35,9 +39,7 @@ val PersonCredit.convertedDate
     get() = parseStringToCalender(
         date = (this as? PersonCombinedCredit)?.let { castCredit ->
             castCredit.firstAirDate ?: castCredit.releaseDate
-        } ?: (this as? PersonCrewCredit)?.let { crewCredit ->
-            crewCredit.releaseDate
-        },
+        } ?: (this as? PersonCrewCredit)?.releaseDate,
         formatter = SimpleDateFormat("YYYY-MM-DD")
     )
 
@@ -101,7 +103,7 @@ fun PersonCreditsResponse.yearsToCredits() =
 fun KnownForTable(credits: PersonCreditsResponse) {
 
     var currentDepartment = ""
-    var currentYear = ""
+    var currentYear = remember { mutableStateOf("") }
 
     Card() {
         LazyColumn(
@@ -117,24 +119,16 @@ fun KnownForTable(credits: PersonCreditsResponse) {
                     data[index].let {
                         when {
                             it.second is CreditDepartmentTitle -> {
-//                                currentDepartment = it.second.departmentJob
                                 DepartmentTitleView(it.second as CreditDepartmentTitle)
                             }
-                            it.first == currentYear/* && it.second.departmentJob == currentDepartment*/ -> CreditItem(
-                                false,
-                                data[index].first,
-                                data[index].second
-                            )
-//                            it.first != currentYear /*&& it.second.departmentJob == currentDepartment*/ -> {
-//                                currentYear = it.first
-//                                CreditItem(
-//                                    true,
-//                                    data[index].first,
-//                                    data[index].second
-//                                )
-//                            }
+                            it.first == currentYear.value ->
+                                CreditItem(
+                                    false,
+                                    data[index].first,
+                                    data[index].second
+                                )
                             else -> {
-                                currentYear = it.first
+                                currentYear.value = it.first
                                 CreditItem(
                                     true,
                                     data[index].first,
@@ -156,7 +150,11 @@ fun DepartmentTitleView(creditDepartmentTitle: CreditDepartmentTitle) {
         contentAlignment = Alignment.Center
     ) {
         Divider()
-        Text(text = creditDepartmentTitle.department, fontWeight = FontWeight.Bold)
+        Text(
+            text = creditDepartmentTitle.department,
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier.background(MaterialTheme.colors.background)
+        )
     }
 }
 
@@ -168,8 +166,15 @@ fun CreditItem(presentYear: Boolean, year: String?, credit: PersonCredit) {
         Row(
             verticalAlignment = Alignment.Top,
         ) {
+            val yearText = "${year ?: '-'}"
             if (presentYear) {
-                Text(text = "${year ?: '-'}")
+                Text(text = yearText)
+            } else {
+                Text(
+                    text = yearText,
+                    color = Color.Transparent,
+                    modifier = Modifier.background(Color.Transparent)
+                )
             }
             Row(
                 verticalAlignment = Alignment.Top,

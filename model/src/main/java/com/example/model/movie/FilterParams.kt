@@ -1,5 +1,6 @@
 package com.example.model.movie
 
+import com.example.model.Genre
 import com.example.model.movie.FilterKey.*
 
 enum class FilterKey {

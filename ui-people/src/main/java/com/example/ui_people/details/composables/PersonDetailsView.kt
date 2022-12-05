@@ -61,7 +61,6 @@ fun PageContent(uiState: PersonDetailsState, tmdbImageUrlProvider: TmdbImageUrlP
                 )
                 Text("Titles")
             }
-
         }
 
         if (!checkedState.value) {
@@ -74,5 +73,4 @@ fun PageContent(uiState: PersonDetailsState, tmdbImageUrlProvider: TmdbImageUrlP
                 tmdbImageUrlProvider = tmdbImageUrlProvider
             )
         }
-
     }

@@ -1,5 +1,6 @@
 package com.example.core.network
 
+import com.example.model.tvshow.TvShowDetails
 import com.example.model.tvshow.TvShowResponse
 import retrofit2.Call
 import retrofit2.http.GET
@@ -18,4 +19,7 @@ interface TvShowsService {
 
     @GET("tv/top_rated")
     fun getTopRated(@Query("page") page: Int): Call<TvShowResponse>
+
+    @GET("tv")
+    fun getDetails(@Query("tv_id") id: Int): Call<TvShowDetails>
 }

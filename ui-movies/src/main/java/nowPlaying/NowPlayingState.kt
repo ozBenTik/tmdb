@@ -1,7 +1,7 @@
 package nowPlaying
 
 import androidx.paging.PagingData
-import com.example.model.movie.Genre
+import com.example.model.Genre
 import com.example.model.movie.Movie
 import util.UiMessage
 

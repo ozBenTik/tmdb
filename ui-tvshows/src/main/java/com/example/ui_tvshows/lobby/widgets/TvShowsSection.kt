@@ -12,12 +12,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.model.tvshow.TvShow
-import com.example.model.util.TmdbImageUrlProvider
 
 @Composable
 fun TvShowSection(
-    title: String, tvShows: List<TvShow>,
-    imageProvider: TmdbImageUrlProvider
+    title: String,
+    tvShows: List<TvShow>,
+    onTvShowSelected: (id: Int)-> Unit,
+    provideFitImageUrl: (url: String) -> String
 ) {
     Column(
         modifier = Modifier
@@ -36,7 +37,8 @@ fun TvShowSection(
                 itemContent = { item ->
                     TvShowListItem(
                         tvShow = item,
-                        imageProvider = imageProvider
+                        provideFitImageUrl = { item.backdropPath?.run { provideFitImageUrl(it) }},
+                        onTvShowSelected = { onTvShowSelected(item.id) }
                     )
                 }
             )
